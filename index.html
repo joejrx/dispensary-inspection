@@ -129,7 +129,22 @@ function renderInspection(cfg) {
     container.appendChild(sectionDiv);
   });
 }
+function renderPositiveExperiences(cfg) {
+  const container = document.getElementById('positive-experiences');
 
+  const title = document.createElement('h2');
+  title.innerText = 'Positive Experiences Observed (+10 max)';
+  container.appendChild(title);
+
+  const addBtn = document.createElement('button');
+  addBtn.innerText = 'Add Positive Experience';
+  addBtn.onclick = () => addPositiveExperience(cfg);
+  container.appendChild(addBtn);
+}
+  renderInspection(cfg);
+renderPositiveExperiences(cfg);
+updateScore(cfg);
+``
 function updateScore(cfg) {
   let score = 0;
 
