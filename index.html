@@ -1,18 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dispensary Visit Inspection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 16px;
+    }
+    h1 {
+      margin-bottom: 12px;
+    }
+    .card {
+      background: white;
+      padding: 16px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Dispensary Visit Inspection</h1>
+
+<div class="card">
+  <strong>Status:</strong>
+  <span id="status">Loading inspection config…</span>
+</div>
+
 <script>
   fetch('config.json')
     .then(r => {
-      if (!r.ok) {
-        throw new Error('HTTP ' + r.status);
-      }
-      return r.json();
-    })
-    .then(cfg => {
       document.getElementById('status').innerText =
-        'Loaded: ' + cfg.inspectionMeta.inspectionName;
+        'HTTP ' + r.status + ' – ' + r.headers.get('content-type');
+      return r.text();
     })
-    .catch(err => {
-      document.getElementById('status').innerText =
-        'Config load error: ' + err.message;
-      console.error(err);
+    .then(t => {
+      console.log('RAW CONFIG START >>>');
+      console.log(t.slice(0, 200));
+      console.log('<<< RAW CONFIG END');
+    })
+    .catch(e => {
+      document.getElementById('status').innerText = e.toString();
     });
 </script>
+
+
+</body>
+</html>
