@@ -59,11 +59,7 @@ fetch('config.json')
 
     renderInspection(cfg);
     updateScore(cfg);
-    answers[q.id] = 'yes';
-updateScore(cfg);
-    answers[q.id] = 'no';
-updateScore(cfg);
-  })
+    })
   .catch(err => {
     document.getElementById('status').innerText =
       'Config load error: ' + err.message;
