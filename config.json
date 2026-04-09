@@ -66,7 +66,7 @@
       "id": "merchandising",
       "title": "Merchandising & Visual Standards",
       "questions": [
-        { "id": "budbarStandard", "label": "Budbar Out & Up to Standard?" },
+        { "id": "budbarStandard", "label": "Budbar Out & Up to Standard?" }
 ]
     }
   ],
