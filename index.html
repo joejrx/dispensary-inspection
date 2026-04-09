@@ -58,6 +58,31 @@ fetch('config.json')
 
     renderInspection(cfg);
     renderPositiveExperiencesTitle();
+    function renderSinglePositiveExperienceField() {
+  const container = document.getElementById('positive-experiences');
+
+  const nameLabel = document.createElement('div');
+  nameLabel.innerText = 'Team Member Name';
+  nameLabel.style.fontWeight = 'bold';
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.style.width = '100%';
+  nameInput.style.marginBottom = '8px';
+
+  const notesLabel = document.createElement('div');
+  notesLabel.innerText = 'What was observed?';
+  notesLabel.style.fontWeight = 'bold';
+
+  const notesInput = document.createElement('textarea');
+  notesInput.placeholder = 'Describe the positive behavior you observed';
+  notesInput.style.width = '100%';
+
+  container.appendChild(nameLabel);
+  container.appendChild(nameInput);
+  container.appendChild(notesLabel);
+  container.appendChild(notesInput);
+}
     function renderPositiveExperiencesTitle() {
   const container = document.getElementById('positive-experiences');
 
