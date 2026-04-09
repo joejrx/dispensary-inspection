@@ -57,6 +57,22 @@ fetch('config.json')
       'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
     renderInspection(cfg);
+    function renderPositiveExperiencesTitle() {
+  const container = document.getElementById('positive-experiences');
+
+  const title = document.createElement('h2');
+  title.innerText = 'Positive Experiences Observed';
+
+  const subtitle = document.createElement('div');
+  subtitle.style.fontSize = '14px';
+  subtitle.style.color = '#555';
+  subtitle.style.marginBottom = '8px';
+  subtitle.innerText = 'Optional – recognizes team members going above and beyond (+10 max)';
+
+  container.appendChild(title);
+  container.appendChild(subtitle);
+}
+
     updateScore(cfg);
   })
   .catch(err => {
