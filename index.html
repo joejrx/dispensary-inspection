@@ -40,6 +40,8 @@ textarea {
 ``
 
 <script>
+let answers = {};
+
 fetch('config.json')
   .then(r => {
     if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -50,6 +52,7 @@ fetch('config.json')
       'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
     renderInspection(cfg);
+    updateScore(cfg);
   })
   .catch(err => {
     document.getElementById('status').innerText =
@@ -70,7 +73,7 @@ function renderInspection(cfg) {
 
     section.questions.forEach(q => {
       const row = document.createElement('div');
-      row.style.marginBottom = '10px';
+      row.style.marginBottom = '12px';
 
       const label = document.createElement('div');
       label.innerText = q.label;
@@ -91,8 +94,17 @@ function renderInspection(cfg) {
       notes.style.display = 'none';
       notes.style.width = '100%';
 
-      no.addEventListener('change', () => notes.style.display = 'block');
-      yes.addEventListener('change', () => notes.style.display = 'none');
+      yes.addEventListener('change', () => {
+        notes.style.display = 'none';
+        answers[q.id] = 'yes';
+        updateScore(cfg);
+      });
+
+      no.addEventListener('change', () => {
+        notes.style.display = 'block';
+        answers[q.id] = 'no';
+        updateScore(cfg);
+      });
 
       row.appendChild(label);
       row.appendChild(yes);
@@ -106,6 +118,16 @@ function renderInspection(cfg) {
 
     container.appendChild(sectionDiv);
   });
+}
+
+function updateScore(cfg) {
+  let score = 0;
+
+  Object.values(answers).forEach(val => {
+    if (val === 'yes') score += cfg.logic.scorePerYes;
+  });
+
+  document.getElementById('score').innerText = score;
 }
 </script>
 
