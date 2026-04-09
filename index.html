@@ -32,19 +32,22 @@
 <script>
   fetch('config.json')
     .then(r => {
+      if (!r.ok) {
+        throw new Error('HTTP ' + r.status);
+      }
+      return r.json();
+    })
+    .then(cfg => {
       document.getElementById('status').innerText =
-        'HTTP ' + r.status + ' – ' + r.headers.get('content-type');
-      return r.text();
+        'Loaded: ' + cfg.inspectionMeta.inspectionName;
     })
-    .then(t => {
-      console.log('RAW CONFIG START >>>');
-      console.log(t.slice(0, 200));
-      console.log('<<< RAW CONFIG END');
-    })
-    .catch(e => {
-      document.getElementById('status').innerText = e.toString();
+    .catch(err => {
+      document.getElementById('status').innerText =
+        'Config load error: ' + err.message;
+      console.error(err);
     });
 </script>
+
 
 
 </body>
