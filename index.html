@@ -31,22 +31,73 @@
 </div>
 
 <script>
-  fetch('config.json')
-    .then(r => {
-      if (!r.ok) {
-        throw new Error('HTTP ' + r.status);
-      }
-      return r.json();
-    })
-    .then(cfg => {
-      document.getElementById('status').innerText =
-        'Loaded: ' + cfg.inspectionMeta.inspectionName;
-    })
-    .catch(err => {
-      document.getElementById('status').innerText =
-        'Config load error: ' + err.message;
-      console.error(err);
+fetch('config.json')
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(cfg => {
+    document.getElementById('status').innerText =
+      'Loaded: ' + cfg.inspectionMeta.inspectionName;
+
+    renderInspection(cfg);
+  })
+  .catch(err => {
+    document.getElementById('status').innerText =
+      'Config load error: ' + err.message;
+    console.error(err);
+  });
+
+function renderInspection(cfg) {
+  const container = document.getElementById('inspection');
+
+  cfg.sections.forEach(section => {
+    const sectionDiv = document.createElement('div');
+    sectionDiv.className = 'section';
+
+    const h2 = document.createElement('h2');
+    h2.innerText = section.title;
+    sectionDiv.appendChild(h2);
+
+    section.questions.forEach(q => {
+      const row = document.createElement('div');
+      row.style.marginBottom = '10px';
+
+      const label = document.createElement('div');
+      label.innerText = q.label;
+      label.style.fontWeight = 'bold';
+
+      const yes = document.createElement('input');
+      yes.type = 'radio';
+      yes.name = q.id;
+      yes.value = 'yes';
+
+      const no = document.createElement('input');
+      no.type = 'radio';
+      no.name = q.id;
+      no.value = 'no';
+
+      const notes = document.createElement('textarea');
+      notes.placeholder = 'Notes (required if No)';
+      notes.style.display = 'none';
+      notes.style.width = '100%';
+
+      no.addEventListener('change', () => notes.style.display = 'block');
+      yes.addEventListener('change', () => notes.style.display = 'none');
+
+      row.appendChild(label);
+      row.appendChild(yes);
+      row.appendChild(document.createTextNode(' Yes '));
+      row.appendChild(no);
+      row.appendChild(document.createTextNode(' No'));
+      row.appendChild(notes);
+
+      sectionDiv.appendChild(row);
     });
+
+    container.appendChild(sectionDiv);
+  });
+}
 </script>
 
 
