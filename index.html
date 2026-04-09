@@ -59,10 +59,15 @@ fetch('config.json')
     renderInspection(cfg);
     renderPositiveExperiencesTitle();
     renderSinglePositiveExperienceField();
-        updateScore(cfg);
+    updateScore(cfg);
   })
- 
-     function renderPositiveExperiencesTitle() {
+  .catch(err => {
+    document.getElementById('status').innerText =
+      'Config load error: ' + err.message;
+    console.error(err);
+  });
+
+function renderPositiveExperiencesTitle() {
   const container = document.getElementById('positive-experiences');
 
   const title = document.createElement('h2');
@@ -72,19 +77,12 @@ fetch('config.json')
   subtitle.style.fontSize = '14px';
   subtitle.style.color = '#555';
   subtitle.style.marginBottom = '8px';
-  subtitle.innerText = 'Optional – recognizes team members going above and beyond (+10 max)';
+  subtitle.innerText =
+    'Optional – recognizes team members going above and beyond (+10 max)';
 
   container.appendChild(title);
   container.appendChild(subtitle);
 }
-
-    updateScore(cfg);
-  })
-  .catch(err => {
-    document.getElementById('status').innerText =
-      'Config load error: ' + err.message;
-    console.error(err);
-  });
 
 function renderInspection(cfg) {
   const container = document.getElementById('inspection');
@@ -145,6 +143,7 @@ function renderInspection(cfg) {
     container.appendChild(sectionDiv);
   });
 }
+
 function renderSinglePositiveExperienceField() {
   const container = document.getElementById('positive-experiences');
 
@@ -170,6 +169,7 @@ function renderSinglePositiveExperienceField() {
   container.appendChild(notesLabel);
   container.appendChild(notesInput);
 }
+
 function updateScore(cfg) {
   let score = 0;
 
