@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dispensary Visit Inspection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 16px;
+    }
+    h1 {
+      margin-bottom: 12px;
+    }
+    .card {
+      background: white;
+      padding: 16px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Dispensary Visit Inspection</h1>
+
+<div class="card">
+  <strong>Status:</strong>
+  <span id="status">Loading inspection config…</span>
+</div>
+
+<script>
+  fetch('config.json')
+    .then(r => r.json())
+    .then(cfg => {
+      document.getElementById('status').innerText =
+        'Loaded: ' + cfg.inspectionMeta.inspectionName;
+    })
+    .catch(() => {
+      document.getElementById('status').innerText =
+        'Config missing or invalid.';
+    });
+</script>
+
+</body>
+</html>
