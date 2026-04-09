@@ -31,16 +31,21 @@
 
 <script>
   fetch('config.json')
-    .then(r => r.json())
-    .then(cfg => {
+    .then(r => {
       document.getElementById('status').innerText =
-        'Loaded: ' + cfg.inspectionMeta.inspectionName;
+        'HTTP ' + r.status + ' – ' + r.headers.get('content-type');
+      return r.text();
     })
-    .catch(() => {
-      document.getElementById('status').innerText =
-        'Config missing or invalid.';
+    .then(t => {
+      console.log('RAW CONFIG START >>>');
+      console.log(t.slice(0, 200));
+      console.log('<<< RAW CONFIG END');
+    })
+    .catch(e => {
+      document.getElementById('status').innerText = e.toString();
     });
 </script>
+
 
 </body>
 </html>
