@@ -105,6 +105,17 @@ function renderPositiveExperiences() {
     .getElementById('addPositiveBtn')
     .addEventListener('click', addPositiveExperience);
 }
+function addPositiveExperience() {
+  if (positiveExperiences.length >= 5) {
+    alert('Maximum of 5 positive experiences allowed.');
+    return;
+  }
+
+  const entry = { name: '', notes: '' };
+  positiveExperiences.push(entry);
+
+  renderPositiveExperienceEntries();
+}
 
 function renderInspection(cfg) {
   const container = document.getElementById('inspection');
