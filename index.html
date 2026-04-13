@@ -149,6 +149,12 @@ function renderInspection(cfg) {
         answers[q.id] = 'no';
         updateScore(cfg);
       });
+const storeSelect = document.getElementById('storeSelect');
+
+storeSelect.addEventListener('change', () => {
+  selectedStore = storeSelect.value;
+  updateScore(currentConfig);
+});
 
       row.appendChild(label);
       row.appendChild(yes);
