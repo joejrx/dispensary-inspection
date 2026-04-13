@@ -242,23 +242,28 @@ function renderSinglePositiveExperienceField() {
 function updateScore(cfg) {
   const warning = document.getElementById('storeWarning');
 
-  // 🚫 No store selected → no scoring
   if (!selectedStore) {
     document.getElementById('score').innerText = 0;
-    warning.style.display = 'block';
+    if (warning) warning.style.display = 'block';
     return;
   }
 
-  // ✅ Store selected → normal scoring
-  warning.style.display = 'none';
+  if (warning) warning.style.display = 'none';
 
-  let score = 0;
-
-  Object.values(answers).forEach(val => {
-    if (val === 'yes') score += cfg.logic.scorePerYes;
+  let baseScore = 0;
+  Object.values(answers).forEach(v => {
+    if (v === 'yes') baseScore += cfg.logic.scorePerYes;
   });
 
-  document.getElementById('score').innerText = score;
+  // ✅ Bonus logic
+  let bonus = positiveExperiences.filter(
+    p => p.notes.trim() !== ''
+  ).length * 2;
+
+  bonus = Math.min(bonus, 10);
+
+  document.getElementById('score').innerText = baseScore + bonus;
+  document.getElementById('bonus').innerText = bonus;
 }
 </script>
 
