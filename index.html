@@ -116,7 +116,37 @@ function addPositiveExperience() {
 
   renderPositiveExperienceEntries();
 }
+function renderPositiveExperienceEntries() {
+  const list = document.getElementById('positiveList');
+  list.innerHTML = '';
 
+  positiveExperiences.forEach((entry, index) => {
+    const div = document.createElement('div');
+    div.style.marginTop = '12px';
+
+    div.innerHTML = `
+      <div style="font-weight:bold">Team Member Name</div>
+      <input type="text" style="width:100%;margin-bottom:6px"
+        value="${entry.name}">
+      <div style="font-weight:bold">What was observed?</div>
+      <textarea style="width:100%">${entry.notes}</textarea>
+    `;
+
+    const inputs = div.querySelectorAll('input, textarea');
+    inputs[0].addEventListener('input', e => {
+      entry.name = e.target.value;
+      updateScore(currentConfig);
+    });
+    inputs[1].addEventListener('input', e => {
+      entry.notes = e.target.value;
+      updateScore(currentConfig);
+    });
+
+    list.appendChild(div);
+  });
+
+  updateScore(currentConfig);
+}
 function renderInspection(cfg) {
   const container = document.getElementById('inspection');
 
