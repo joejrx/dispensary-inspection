@@ -79,8 +79,8 @@ fetch('config.json')
       'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
     renderInspection(cfg);
-    renderPositiveExperiencesTitle();
-    renderSinglePositiveExperienceField();
+   renderPositiveExperiences();
+
     updateScore(cfg);
   })
   .catch(err => {
