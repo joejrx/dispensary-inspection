@@ -67,12 +67,13 @@ textarea {
   let selectedStore = '';
 let answers = {};
 
+let currentConfig;
+
 fetch('config.json')
-  .then(r => {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
+  .then(r => r.json())
   .then(cfg => {
+    currentConfig = cfg;
+
     document.getElementById('status').innerText =
       'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
