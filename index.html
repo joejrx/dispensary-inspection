@@ -198,6 +198,18 @@ function renderSinglePositiveExperienceField() {
 }
 
 function updateScore(cfg) {
+  const warning = document.getElementById('storeWarning');
+
+  // 🚫 No store selected → no scoring
+  if (!selectedStore) {
+    document.getElementById('score').innerText = 0;
+    warning.style.display = 'block';
+    return;
+  }
+
+  // ✅ Store selected → normal scoring
+  warning.style.display = 'none';
+
   let score = 0;
 
   Object.values(answers).forEach(val => {
