@@ -89,21 +89,21 @@ fetch('config.json')
     console.error(err);
   });
 
-function renderPositiveExperiencesTitle() {
+function renderPositiveExperiences() {
   const container = document.getElementById('positive-experiences');
 
-  const title = document.createElement('h2');
-  title.innerText = 'Positive Experiences Observed';
+  container.innerHTML = `
+    <h2>Positive Experiences Observed</h2>
+    <div style="font-size:14px;color:#555;margin-bottom:8px">
+      Optional – recognizes team members going above and beyond (+10 max)
+    </div>
+    <button id="addPositiveBtn">Add Positive Experience</button>
+    <div id="positiveList"></div>
+  `;
 
-  const subtitle = document.createElement('div');
-  subtitle.style.fontSize = '14px';
-  subtitle.style.color = '#555';
-  subtitle.style.marginBottom = '8px';
-  subtitle.innerText =
-    'Optional – recognizes team members going above and beyond (+10 max)';
-
-  container.appendChild(title);
-  container.appendChild(subtitle);
+  document
+    .getElementById('addPositiveBtn')
+    .addEventListener('click', addPositiveExperience);
 }
 
 function renderInspection(cfg) {
