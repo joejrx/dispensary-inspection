@@ -314,7 +314,20 @@ function calculateBonusScore() {
 
   return Math.min(bonus, 10);
 }
-``
+function lockInspection() {
+  // Disable all inputs
+  document
+    .querySelectorAll('input, textarea, select, button')
+    .forEach(el => {
+      if (el.id !== 'submitInspection') {
+        el.disabled = true;
+      }
+    });
+
+  // Update status
+  document.getElementById('status').innerText = 'Inspection submitted';
+}
+
 </script>
 
 
