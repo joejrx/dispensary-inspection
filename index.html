@@ -272,6 +272,33 @@ function updateScore(cfg) {
   document.getElementById('score').innerText = baseScore + bonus;
   document.getElementById('bonus').innerText = bonus;
 }
+  function submitInspection() {
+  // 1️⃣ Validate store
+  if (!selectedStore) {
+    alert('Please select a store before submitting.');
+    return;
+  }
+
+  // 2️⃣ Build payload
+  const payload = {
+    store: selectedStore,
+    date: new Date().toISOString(),
+    baseScore: calculateBaseScore(),
+    bonusScore: calculateBonusScore(),
+    totalScore: calculateBaseScore() + calculateBonusScore(),
+    answers: answers,
+    positiveExperiences: positiveExperiences.filter(
+      p => p.name.trim() !== '' || p.notes.trim() !== ''
+    )
+  };
+
+  // 3️⃣ Lock the inspection
+  lockInspection();
+
+  // 4️⃣ Confirm to user (for now)
+  console.log('SUBMITTED INSPECTION:', payload);
+  alert('Inspection submitted successfully.');
+}
 </script>
 
 
