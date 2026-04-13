@@ -299,6 +299,22 @@ function updateScore(cfg) {
   console.log('SUBMITTED INSPECTION:', payload);
   alert('Inspection submitted successfully.');
 }
+  function calculateBaseScore() {
+  let score = 0;
+  Object.values(answers).forEach(v => {
+    if (v === 'yes') score += currentConfig.logic.scorePerYes;
+  });
+  return score;
+}
+
+function calculateBonusScore() {
+  let bonus = positiveExperiences.filter(
+    p => p.name.trim() !== '' && p.notes.trim() !== ''
+  ).length * 2;
+
+  return Math.min(bonus, 10);
+}
+``
 </script>
 
 
