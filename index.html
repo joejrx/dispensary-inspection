@@ -105,7 +105,9 @@ function renderPositiveExperiences() {
     <button id="addPositiveBtn">Add Positive Experience</button>
     <div id="positiveList"></div>
   `;
-
+document
+  .getElementById('submitInspection')
+  .addEventListener('click', submitInspection);
   document
     .getElementById('addPositiveBtn')
     .addEventListener('click', addPositiveExperience);
