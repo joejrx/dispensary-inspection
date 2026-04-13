@@ -198,7 +198,9 @@ function renderInspection(cfg) {
         updateScore(cfg);
       });
 const storeSelect = document.getElementById('storeSelect');
-
+document
+  .getElementById('submitInspection')
+  .addEventListener('click', submitInspection);
 storeSelect.addEventListener('change', () => {
   selectedStore = storeSelect.value;
   updateScore(currentConfig);
