@@ -252,6 +252,9 @@ document.getElementById('storeManagers').addEventListener('input', e => {
       document.getElementById('personVisiting').addEventListener('input', e => {
   personVisiting = e.target.value;
 });
+      document.getElementById('visitDate').addEventListener('change', e => {
+  visitDate = e.target.value;
+});
       row.appendChild(label);
       row.appendChild(yes);
       row.appendChild(document.createTextNode(' Yes '));
