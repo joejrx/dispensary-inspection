@@ -47,15 +47,21 @@ textarea {
 <div class="section">
   <h2>Store Being Visited</h2>
 
-  <label for="storeSelect" style="font-weight:bold">
-    Select Dispensary
-  </label>
-  <div id="reviewScreen" class="section" style="display:none;"></div>
+ <label for="storeSelect" style="font-weight:bold">
+  Select Dispensary
+</label>
+
+<!-- inspection + positive experiences are above this -->
+
 <div class="section">
-  <button id="submitInspection" style="font-size:16px; padding:10px 14px;">
-    Submit Inspection
+  <button
+    id="submitInspection"
+    style="font-size:16px; padding:10px 14px; width:100%;">
+    Review & Submit Inspection
   </button>
 </div>
+
+<div id="reviewScreen" class="section" style="display:none;"></div>
   <select id="storeSelect" style="width:100%; margin-top:6px">
     <option value="">— Select a location —</option>
   <option value="East Liverpool">East Liverpool</option>
