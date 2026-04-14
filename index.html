@@ -336,6 +336,11 @@ function showReviewScreen() {
   if (!issuesHtml) {
     issuesHtml = '<li>No issues noted.</li>';
   }
+function exitReviewScreen() {
+  document.getElementById('reviewScreen').style.display = 'none';
+  document.getElementById('inspection').style.display = 'block';
+  document.getElementById('positive-experiences').style.display = 'block';
+}
 
   // Build positive experiences list
   let positivesHtml = '';
