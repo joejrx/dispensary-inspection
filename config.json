@@ -51,20 +51,29 @@
         { "id": "knowsPromos", "label": "Team Members Know Promos?" },
         { "id": "smiling", "label": "Smiling?" }
       ]
+    }
+   {
+  "id": "inventory",
+  "title": "Inventory",
+  "questions": [
+    {
+      "id": "inventoryDiscrepancies",
+      "label": "No discrepancies observed?"
     },
     {
-      "id": "inventory",
-      "title": "Inventory",
-      "questions": [
-       {
-  "id": "inventoryDiscrepancies",
-  "label": "No discrepancies observed?"
-}
-        { "id": "inventoryOrganized", "label": "Visually Organized?" },
-        { "id": "inventoryCompliant", "label": "Visually Compliant?" },
-        { "id": "quarantineBin", "label": "Quarantine Bin Accurate and to Standard?" }
-      ]
+      "id": "inventoryOrganized",
+      "label": "Visually Organized?"
     },
+    {
+      "id": "inventoryCompliant",
+      "label": "Visually Compliant?"
+    },
+    {
+      "id": "quarantineBin",
+      "label": "Quarantine Bin Accurate and to Standard?"
+    }
+  ]
+}
     {
       "id": "merchandising",
       "title": "Merchandising & Visual Standards",
