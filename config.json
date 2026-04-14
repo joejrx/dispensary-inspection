@@ -52,7 +52,7 @@
         { "id": "smiling", "label": "Smiling?" }
       ]
     }
-   {
+{
   "id": "inventory",
   "title": "Inventory",
   "questions": [
@@ -73,14 +73,29 @@
       "label": "Quarantine Bin Accurate and to Standard?"
     }
   ]
-}
+},
+{
+  "id": "merchandising",
+  "title": "Merchandising & Visual Standards",
+  "questions": [
     {
-      "id": "merchandising",
-      "title": "Merchandising & Visual Standards",
-      "questions": [
-        { "id": "budbarStandard", "label": "Budbar Out & Up to Standard?" }
-]
+      "id": "budbarStandard",
+      "label": "Budbar Out & Up to Standard?"
+    },
+    {
+      "id": "tvsCompliant",
+      "label": "TV’s On and Compliant?"
+    },
+    {
+      "id": "marketingCurrent",
+      "label": "Marketing Product Current and Orderly?"
+    },
+    {
+      "id": "promoVisuals",
+      "label": "Promo Visuals / Flyers in Place?"
     }
+  ]
+}
   ],
 
   "bonusSection": {
