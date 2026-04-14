@@ -302,7 +302,89 @@ function lockInspection() {
   // Update status
   document.getElementById('status').innerText = 'Inspection submitted';
 }
+function showReviewScreen() {
+  if (!selectedStore) {
+    alert('Please select a store before submitting.');
+    return;
+  }
 
+  const review = document.getElementById('reviewScreen');
+  review.style.display = 'block';
+
+  // Hide main content while reviewing
+  document.getElementById('inspection').style.display = 'none';
+  document.getElementById('positive-experiences').style.display = 'none';
+
+  const baseScore = calculateBaseScore();
+  const bonusScore = calculateBonusScore();
+  const totalScore = baseScore + bonusScore;
+
+  // Build list of issues (No answers)
+  let issuesHtml = '';
+  currentConfig.sections.forEach(section => {
+    section.questions.forEach(q => {
+      if (answers[q.id] === 'no') {
+        issuesHtml += `
+          <li>
+            <strong>${q.label}</strong>
+          </li>
+        `;
+      }
+    });
+  });
+
+  if (!issuesHtml) {
+    issuesHtml = '<li>No issues noted.</li>';
+  }
+
+  // Build positive experiences list
+  let positivesHtml = '';
+  positiveExperiences.forEach(p => {
+    if (p.name.trim() || p.notes.trim()) {
+      positivesHtml += `
+        <li>
+          <strong>${p.name || 'Team Member'}:</strong>
+          ${p.notes}
+        </li>
+      `;
+    }
+  });
+
+  if (!positivesHtml) {
+    positivesHtml = '<li>No positive experiences recorded.</li>';
+  }
+
+  review.innerHTML = `
+    <h2>Final Review</h2>
+
+    <p><strong>Store:</strong> ${selectedStore}</p>
+
+    <p>
+      <strong>Score:</strong>
+      ${baseScore} base + ${bonusScore} bonus = 
+      <strong>${totalScore}</strong>
+    </p>
+
+    <h3>Issues / Opportunities</h3>
+    <ul>${issuesHtml}</ul>
+
+    <h3>Positive Experiences</h3>
+    <ul>${positivesHtml}</ul>
+
+    <div style="margin-top:16px">
+      <button id="confirmSubmit">Confirm & Submit</button>
+      <button id="goBackEdit" style="margin-left:8px">Go Back & Edit</button>
+    </div>
+  `;
+
+  document
+    .getElementById('confirmSubmit')
+    .addEventListener('click', submitInspection);
+
+  document
+    .getElementById('goBackEdit')
+    .addEventListener('click', exitReviewScreen);
+}
 </script>
 
 
