@@ -348,22 +348,22 @@ function updateScore(cfg) {
   }
 
   // 2️⃣ Build payload
- const avgRating = calculateAverageRating();
+const avgRating = calculateAverageRating();
 
 const payload = {
-  // ✅ Header info
+  // ✅ Header
   store: selectedStore,
   storeManagers: storeManagers,
   personVisiting: personVisiting,
   visitDate: visitDate,
 
   // ✅ Compliance scoring
-  complianceScore: calculateBaseScore(), // 0–100
+  complianceScore: calculateBaseScore(),   // 0–100
   bonusScore: calculateBonusScore(),
   totalScore: calculateBaseScore() + calculateBonusScore(),
 
   // ✅ Performance scoring (NEW)
-  performanceRating: avgRating,          // 1–5 (average)
+  performanceRating: avgRating,             // 1–5 average
   ratedQuestionCount: Object.values(ratings)
     .filter(v => typeof v === 'number').length,
 
