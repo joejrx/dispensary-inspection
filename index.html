@@ -494,6 +494,31 @@ function showReviewScreen() {
   document.getElementById('goBackEdit').addEventListener('click', exitReviewScreen);
 }
 
+function showReviewScreen() {
+  // ✅ Required header validation
+  if (!selectedStore) {
+    alert('Please select a store before reviewing.');
+    return;
+  }
+  if (!storeManagers.trim()) {
+    alert('Please enter the Store Manager(s).');
+    return;
+  }
+  if (!personVisiting.trim()) {
+    alert('Please enter the Person Visiting.');
+    return;
+  }
+  if (!visitDate) {
+    alert('Please select the Date of Visit.');
+    return;
+  }
+
+  // ✅ Require 1–5 rating for every question
+  if (!allQuestionsHaveRatings()) {
+    alert('Please select a 1–5 score for every question before reviewing.');
+    return;
+  }
+
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
 
@@ -537,6 +562,8 @@ function showReviewScreen() {
     </div>
 
     <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+    <p><strong>Positive Experience Bonus:</strong> +${bonusScore}</p>
+    <p><strong>Total:</strong> <strong>${totalScore}</strong></p>
 
     <h3>Issues / Opportunities</h3>
     <ul>${issuesHtml}</ul>
