@@ -340,6 +340,12 @@ function updateScore(cfg) {
   document.getElementById('score').innerText = baseScore + bonus;
   document.getElementById('bonus').innerText = bonus;
 }
+  function calculateAverageRating() {
+  const values = Object.values(ratings).filter(v => typeof v === 'number');
+  if (values.length === 0) return null;
+  const total = values.reduce((sum, v) => sum + v, 0);
+  return Number((total / values.length).toFixed(1));
+}
   function submitInspection() {
   // 1️⃣ Validate store
   if (!selectedStore) {
