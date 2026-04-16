@@ -198,6 +198,7 @@ function renderPositiveExperienceEntries() {
 }
 function renderInspection(cfg) {
   const container = document.getElementById('inspection');
+  container.innerHTML = '';
 
   cfg.sections.forEach(section => {
     const sectionDiv = document.createElement('div');
@@ -209,7 +210,7 @@ function renderInspection(cfg) {
 
     section.questions.forEach(q => {
       const row = document.createElement('div');
-      row.style.marginBottom = '12px';
+      row.style.marginBottom = '16px';
 
       const label = document.createElement('div');
       label.innerText = q.label;
@@ -226,31 +227,10 @@ function renderInspection(cfg) {
       no.value = 'no';
 
       const notes = document.createElement('textarea');
-      notes.placeholder = 'Notes (required if No)';
+      notes.placeholder = 'Notes';
       notes.style.display = 'none';
       notes.style.width = '100%';
-const ratingLabel = document.createElement('div');
-ratingLabel.innerText = 'Score (1–5)';
-ratingLabel.style.fontWeight = 'bold';
-ratingLabel.style.marginTop = '6px';
 
-const ratingSelect = document.createElement('select');
-ratingSelect.style.width = '100%';
-ratingSelect.style.marginTop = '4px';
-
-ratingSelect.innerHTML = `
-  <option value="">Select score</option>
-  <option value="1">1 – Unacceptable</option>
-  <option value="2">2 – Needs Improvement</option>
-  <option value="3">3 – Meets Expectations</option>
-  <option value="4">4 – Exceeds Expectations</option>
-  <option value="5">5 – Outstanding</option>
-`;
-
-ratingSelect.addEventListener('change', e => {
-  ratings[q.id] = e.target.value ? Number(e.target.value) : null;
-});
-``
       yes.addEventListener('change', () => {
         notes.style.display = 'none';
         answers[q.id] = 'yes';
@@ -262,32 +242,38 @@ ratingSelect.addEventListener('change', e => {
         answers[q.id] = 'no';
         updateScore(cfg);
       });
-const storeSelect = document.getElementById('storeSelect');
-document
-  .getElementById('submitInspection')
-  .addEventListener('click', showReviewScreen);
-storeSelect.addEventListener('change', () => {
-  selectedStore = storeSelect.value;
-  updateScore(currentConfig);
-});
-document.getElementById('storeManagers').addEventListener('input', e => {
-  storeManagers = e.target.value;
-});
-      document.getElementById('personVisiting').addEventListener('input', e => {
-  personVisiting = e.target.value;
-});
-      document.getElementById('visitDate').addEventListener('change', e => {
-  visitDate = e.target.value;
-});
+
+      const ratingLabel = document.createElement('div');
+      ratingLabel.innerText = 'Score (1–5)';
+      ratingLabel.style.fontWeight = 'bold';
+      ratingLabel.style.marginTop = '6px';
+
+      const ratingSelect = document.createElement('select');
+      ratingSelect.style.width = '100%';
+      ratingSelect.style.marginTop = '4px';
+
+      ratingSelect.innerHTML = `
+        <option value="">Select score</option>
+        <option value="1">1 – Unacceptable</option>
+        <option value="2">2 – Needs Improvement</option>
+        <option value="3">3 – Meets Expectations</option>
+        <option value="4">4 – Exceeds Expectations</option>
+        <option value="5">5 – Outstanding</option>
+      `;
+
+      ratingSelect.addEventListener('change', e => {
+        ratings[q.id] = e.target.value ? Number(e.target.value) : null;
+      });
+
       row.appendChild(label);
       row.appendChild(yes);
       row.appendChild(document.createTextNode(' Yes '));
       row.appendChild(no);
       row.appendChild(document.createTextNode(' No'));
       row.appendChild(notes);
-row.appendChild(ratingLabel);
-row.appendChild(ratingSelect);
-``
+      row.appendChild(ratingLabel);
+      row.appendChild(ratingSelect);
+
       sectionDiv.appendChild(row);
     });
 
