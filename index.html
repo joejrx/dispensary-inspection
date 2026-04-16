@@ -348,17 +348,34 @@ function updateScore(cfg) {
   }
 
   // 2️⃣ Build payload
-  const payload = {
-    store: selectedStore,
-    date: new Date().toISOString(),
-    baseScore: calculateBaseScore(),
-    bonusScore: calculateBonusScore(),
-    totalScore: calculateBaseScore() + calculateBonusScore(),
-    answers: answers,
-    positiveExperiences: positiveExperiences.filter(
-      p => p.name.trim() !== '' || p.notes.trim() !== ''
-    )
-  };
+ const avgRating = calculateAverageRating();
+
+const payload = {
+  // ✅ Header info
+  store: selectedStore,
+  storeManagers: storeManagers,
+  personVisiting: personVisiting,
+  visitDate: visitDate,
+
+  // ✅ Compliance scoring
+  complianceScore: calculateBaseScore(), // 0–100
+  bonusScore: calculateBonusScore(),
+  totalScore: calculateBaseScore() + calculateBonusScore(),
+
+  // ✅ Performance scoring (NEW)
+  performanceRating: avgRating,          // 1–5 (average)
+  ratedQuestionCount: Object.values(ratings)
+    .filter(v => typeof v === 'number').length,
+
+  // ✅ Detail
+  answers: answers,
+  ratings: ratings,
+  positiveExperiences: positiveExperiences.filter(
+    p => p.name.trim() !== '' || p.notes.trim() !== ''
+  ),
+
+  submittedAt: new Date().toISOString()
+};
 
   // 3️⃣ Lock the inspection
   lockInspection();
