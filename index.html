@@ -410,7 +410,12 @@ function exitReviewScreen() {
   review.innerHTML = `
     <h2>Final Review</h2>
 
-    <p><strong>Store:</strong> ${selectedStore}</p>
+    <div style="margin-bottom:16px">
+  <p><strong>Store:</strong> ${selectedStore}</p>
+  <p><strong>Store Manager(s):</strong> ${storeManagers || '—'}</p>
+  <p><strong>Person Visiting:</strong> ${personVisiting || '—'}</p>
+  <p><strong>Date of Visit:</strong> ${visitDate || '—'}</p>
+</div>
 
     <p>
       <strong>Score:</strong>
