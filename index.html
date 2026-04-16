@@ -395,6 +395,16 @@ function lockInspection() {
   // Update status
   document.getElementById('status').innerText = 'Inspection submitted';
 }
+function allQuestionsHaveRatings() {
+  for (const section of currentConfig.sections) {
+    for (const q of section.questions) {
+      if (typeof ratings[q.id] !== 'number') {
+        return false;
+      }
+    }
+  }
+  return true;
+}
 
 function showReviewScreen() {
   // ✅ Required header validation
