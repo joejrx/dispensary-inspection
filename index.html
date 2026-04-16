@@ -229,7 +229,28 @@ function renderInspection(cfg) {
       notes.placeholder = 'Notes (required if No)';
       notes.style.display = 'none';
       notes.style.width = '100%';
+const ratingLabel = document.createElement('div');
+ratingLabel.innerText = 'Score (1–5)';
+ratingLabel.style.fontWeight = 'bold';
+ratingLabel.style.marginTop = '6px';
 
+const ratingSelect = document.createElement('select');
+ratingSelect.style.width = '100%';
+ratingSelect.style.marginTop = '4px';
+
+ratingSelect.innerHTML = `
+  <option value="">Select score</option>
+  <option value="1">1 – Unacceptable</option>
+  <option value="2">2 – Needs Improvement</option>
+  <option value="3">3 – Meets Expectations</option>
+  <option value="4">4 – Exceeds Expectations</option>
+  <option value="5">5 – Outstanding</option>
+`;
+
+ratingSelect.addEventListener('change', e => {
+  ratings[q.id] = e.target.value ? Number(e.target.value) : null;
+});
+``
       yes.addEventListener('change', () => {
         notes.style.display = 'none';
         answers[q.id] = 'yes';
