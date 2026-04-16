@@ -396,9 +396,90 @@ function lockInspection() {
   document.getElementById('status').innerText = 'Inspection submitted';
 }
 
+function showReviewScreen() {
+  // ✅ Required header validation
+  if (!selectedStore) {
+    alert('Please select a store before reviewing.');
+    return;
+  }
+  if (!storeManagers.trim()) {
+    alert('Please enter the Store Manager(s).');
+    return;
+  }
+  if (!personVisiting.trim()) {
+    alert('Please enter the Person Visiting.');
+    return;
+  }
+  if (!visitDate) {
+    alert('Please select the Date of Visit.');
+    return;
+  }
 
- 
+  const review = document.getElementById('reviewScreen');
+  review.style.display = 'block';
 
+  document.getElementById('inspection').style.display = 'none';
+  document.getElementById('positive-experiences').style.display = 'none';
+
+  const baseScore = calculateBaseScore();
+  const bonusScore = calculateBonusScore();
+  const totalScore = baseScore + bonusScore;
+
+  let issuesHtml = '';
+  currentConfig.sections.forEach(section => {
+    section.questions.forEach(q => {
+      if (answers[q.id] === 'no') {
+        issuesHtml += `<li><strong>${q.label}</strong></li>`;
+      }
+    });
+  });
+  if (!issuesHtml) {
+    issuesHtml = '<li>No issues noted.</li>';
+  }
+
+  let positivesHtml = '';
+  positiveExperiences.forEach(p => {
+    if (p.name.trim() || p.notes.trim()) {
+      positivesHtml += `<li><strong>${p.name || 'Team Member'}:</strong> ${p.notes}</li>`;
+    }
+  });
+  if (!positivesHtml) {
+    positivesHtml = '<li>No positive experiences recorded.</li>';
+  }
+
+  review.innerHTML = `
+    <h2>Final Review</h2>
+
+    <div style="margin-bottom:16px">
+      <p><strong>Store:</strong> ${selectedStore}</p>
+      <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
+      <p><strong>Person Visiting:</strong> ${personVisiting}</p>
+      <p><strong>Date of Visit:</strong> ${visitDate}</p>
+    </div>
+
+    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+
+    <h3>Issues / Opportunities</h3>
+    <ul>${issuesHtml}</ul>
+
+    <h3>Positive Experiences</h3>
+    <ul>${positivesHtml}</ul>
+
+    <div style="margin-top:16px">
+      <button id="confirmSubmit">Confirm & Submit</button>
+      <button id="goBackEdit" style="margin-left:8px">Go Back & Edit</button>
+    </div>
+  `;
+
+  document.getElementById('confirmSubmit').addEventListener('click', submitInspection);
+  document.getElementById('goBackEdit').addEventListener('click', exitReviewScreen);
+}
+
+function exitReviewScreen() {
+  document.getElementById('reviewScreen').style.display = 'none';
+  document.getElementById('inspection').style.display = 'block';
+  document.getElementById('positive-experiences').style.display = 'block';
+}
 </script>
 
 
