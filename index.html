@@ -111,11 +111,28 @@ textarea {
   let storeManagers = '';
   let personVisiting = '';
   let visitDate = '';
-
 let answers = {};
-  
 let ratings = {};
+// ✅ Header field listeners (REGISTER ONCE)
 
+document.getElementById('storeSelect').addEventListener('change', e => {
+  selectedStore = e.target.value;
+  updateScore(currentConfig);
+});
+
+document.getElementById('storeManagers').addEventListener('input', e => {
+  storeManagers = e.target.value;
+});
+
+document.getElementById('personVisiting').addEventListener('input', e => {
+  personVisiting = e.target.value;
+});
+
+document.getElementById('visitDate').addEventListener('change', e => {
+  visitDate = e.target.value;
+});
+
+document.getElementById('submitInspection').addEventListener('click', showReviewScreen);
 
 let currentConfig;
 
