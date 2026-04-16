@@ -133,7 +133,7 @@ let ratings = {};
 
 document.getElementById('storeSelect').addEventListener('change', e => {
   selectedStore = e.target.value;
-  updateScore(currentConfig);
+  if (currentConfig) updateScore(currentConfig);
 });
 
 document.getElementById('storeManagers').addEventListener('input', e => {
