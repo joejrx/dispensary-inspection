@@ -350,27 +350,7 @@ function lockInspection() {
   // Update status
   document.getElementById('status').innerText = 'Inspection submitted';
 }
-function showReviewScreen() {
- // ✅ Required header validation before review
-if (!selectedStore) {
-  alert('Please select a store before reviewing.');
-  return;
-}
-
-if (!storeManagers.trim()) {
-  alert('Please enter the Store Manager(s) before reviewing.');
-  return;
-}
-
-if (!personVisiting.trim()) {
-  alert('Please enter the Person Visiting before reviewing.');
-  return;
-}
-
-if (!visitDate) {
-  alert('Please select the Date of Visit before reviewing.');
-  return;
-}
+storeManagers.trim
 
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
