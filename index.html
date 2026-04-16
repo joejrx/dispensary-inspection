@@ -381,70 +381,7 @@ function lockInspection() {
 }
 
 
-    });
-  });
-
-  if (!issuesHtml) {
-    issuesHtml = '<li>No issues noted.</li>';
-  }
-function exitReviewScreen() {
-  document.getElementById('reviewScreen').style.display = 'none';
-  document.getElementById('inspection').style.display = 'block';
-  document.getElementById('positive-experiences').style.display = 'block';
-}
-
-  // Build positive experiences list
-  let positivesHtml = '';
-  positiveExperiences.forEach(p => {
-    if (p.name.trim() || p.notes.trim()) {
-      positivesHtml += `
-        <li>
-          <strong>${p.name || 'Team Member'}:</strong>
-          ${p.notes}
-        </li>
-      `;
-    }
-  });
-
-  if (!positivesHtml) {
-    positivesHtml = '<li>No positive experiences recorded.</li>';
-  }
-
-  review.innerHTML = `
-    <h2>Final Review</h2>
-
-    <div style="margin-bottom:16px">
-  <p><strong>Store:</strong> ${selectedStore}</p>
-  <p><strong>Store Manager(s):</strong> ${storeManagers || '—'}</p>
-  <p><strong>Person Visiting:</strong> ${personVisiting || '—'}</p>
-  <p><strong>Date of Visit:</strong> ${visitDate || '—'}</p>
-</div>
-
-    <p>
-      <strong>Score:</strong>
-      ${baseScore} base + ${bonusScore} bonus = 
-      <strong>${totalScore}</strong>
-    </p>
-
-    <h3>Issues / Opportunities</h3>
-    <ul>${issuesHtml}</ul>
-
-    <h3>Positive Experiences</h3>
-    <ul>${positivesHtml}</ul>
-
-    <div style="margin-top:16px">
-      <button id="confirmSubmit">Confirm & Submit</button>
-      <button id="goBackEdit" style="margin-left:8px">Go Back & Edit</button>
-    </div>
-  `;
-
-  document
-    .getElementById('confirmSubmit')
-    .addEventListener('click', submitInspection);
-
-  document
-    .getElementById('goBackEdit')
-    .addEventListener('click', exitReviewScreen);
+ 
 function showReviewScreen() {
   // ✅ Required header validation
   if (!selectedStore) {
