@@ -474,7 +474,8 @@ function showReviewScreen() {
   const baseScore = calculateBaseScore();
   const bonusScore = calculateBonusScore();
   const totalScore = baseScore + bonusScore;
-
+const avgRating = calculateAverageRating();
+  const performanceLabel = performanceLabelFromRating(avgRating);
   let issuesHtml = '';
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
