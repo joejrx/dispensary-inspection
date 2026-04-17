@@ -508,7 +508,15 @@ const avgRating = calculateAverageRating();
       <p><strong>Date of Visit:</strong> ${visitDate}</p>
     </div>
 
-    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+   <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+
+<p>
+  <strong>Performance Rating (1–5):</strong>
+  ${avgRating !== null ? avgRating : '—'}
+  <br/>
+  <strong>Performance Level:</strong>
+  ${performanceLabel}
+</p>
 
     <h3>Issues / Opportunities</h3>
     <ul>${issuesHtml}</ul>
