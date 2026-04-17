@@ -372,6 +372,7 @@ const payload = {
   performanceRating: avgRating,             // 1–5 average
   ratedQuestionCount: Object.values(ratings)
     .filter(v => typeof v === 'number').length,
+performanceLabel: performanceLabelFromRating(avgRating),
 
   // ✅ Detail
   answers: answers,
