@@ -557,7 +557,9 @@ const avgRating = calculateAverageRating();
   ${avgRating !== null ? avgRating : '—'}
   <br/>
   <strong>Performance Level:</strong>
-  ${performanceLabel}
+  <span class="${performanceClass}">
+    ${performanceLabel}
+  </span>
 </p>
 
     <h3>Issues / Opportunities</h3>
