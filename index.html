@@ -228,6 +228,30 @@ function renderPositiveExperienceEntries() {
   });
 
   updateScore(currentConfig);
+  .performance-unacceptable {
+  color: #b00020;
+  font-weight: bold;
+}
+
+.performance-needs {
+  color: #e65100;
+  font-weight: bold;
+}
+
+.performance-meets {
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.performance-exceeds {
+  color: #1565c0;
+  font-weight: bold;
+}
+
+.performance-outstanding {
+  color: #6a1b9a;
+  font-weight: bold;
+}
 }
 function renderInspection(cfg) {
   const container = document.getElementById('inspection');
