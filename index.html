@@ -461,7 +461,9 @@ function performanceLabelFromRating(avg) {
   if (avg < 4.0) return 'Meets Expectations';
   if (avg < 4.5) return 'Exceeds Expectations';
   return 'Outstanding';
-  function performanceClassFromLabel(label) {
+}
+
+function performanceClassFromLabel(label) {
   switch (label) {
     case 'Unacceptable':
       return 'performance-unacceptable';
@@ -476,7 +478,6 @@ function performanceLabelFromRating(avg) {
     default:
       return '';
   }
-}
 }
 function showReviewScreen() {
   // ✅ Required header validation
