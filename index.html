@@ -461,6 +461,22 @@ function performanceLabelFromRating(avg) {
   if (avg < 4.0) return 'Meets Expectations';
   if (avg < 4.5) return 'Exceeds Expectations';
   return 'Outstanding';
+  function performanceClassFromLabel(label) {
+  switch (label) {
+    case 'Unacceptable':
+      return 'performance-unacceptable';
+    case 'Needs Improvement':
+      return 'performance-needs';
+    case 'Meets Expectations':
+      return 'performance-meets';
+    case 'Exceeds Expectations':
+      return 'performance-exceeds';
+    case 'Outstanding':
+      return 'performance-outstanding';
+    default:
+      return '';
+  }
+}
 }
 function showReviewScreen() {
   // ✅ Required header validation
