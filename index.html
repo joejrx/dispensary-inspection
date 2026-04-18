@@ -58,6 +58,10 @@ textarea {
 select:required:invalid {
   border: 2px solid #e65100;
   background-color: #fff3e0;
+}/* Explicit highlight for missing ratings */
+.rating-missing {
+  border: 2px solid #e65100 !important;
+  background-color: #fff3e0;
 }
   </style>
 </head>
@@ -310,8 +314,9 @@ function renderInspection(cfg) {
       ratingLabel.style.marginTop = '6px';
 
       const ratingSelect = document.createElement('select');
-      ratingSelect.required = true;
-      ratingSelect.style.width = '100%';
+   ratingSelect.classList.add('rating-select');
+ratingSelect.dataset.questionId = q.id;
+          ratingSelect.style.width = '100%';
       ratingSelect.style.marginTop = '4px';
 
       ratingSelect.innerHTML = `
