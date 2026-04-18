@@ -317,7 +317,7 @@ function renderInspection(cfg) {
         <option value="4">4 – Exceeds Expectations</option>
         <option value="5">5 – Outstanding</option>
       `;
-
+ratingSelect.required = true;
       ratingSelect.addEventListener('change', e => {
         ratings[q.id] = e.target.value ? Number(e.target.value) : null;
       });
