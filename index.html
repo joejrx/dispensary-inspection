@@ -505,6 +505,10 @@ function performanceClassFromLabel(label) {
       return '';
   }
 }
+  function isCompliantFromRating(rating) {
+  if (typeof rating !== 'number') return null; // not rated yet
+  return rating >= 3;
+}
 function showReviewScreen() {
   // ✅ Required header validation
   if (!selectedStore) {
