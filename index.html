@@ -541,11 +541,11 @@ function allQuestionsHaveRatings() {
 function performanceLabelFromRating(avg) {
   if (avg === null || avg === undefined) return '—';
 
-  if (avg < 2.0) return 'Unacceptable';
-  if (avg < 3.0) return 'Needs Improvement';
-  if (avg < 4.0) return 'Meets Expectations';
-  if (avg < 4.5) return 'Exceeds Expectations';
-  return 'Outstanding';
+  if (avg < 2.0) return 'Non-Compliant';
+  if (avg < 3.0) return 'Partial / Needs Improvement';
+  if (avg < 4.0) return 'Fully Compliant';
+  if (avg < 4.5) return 'Above Average';
+  return 'Exceeds Expectations';
 }
 
 function performanceClassFromLabel(label) {
