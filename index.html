@@ -613,7 +613,23 @@ const avgRating = calculateAverageRating();
   if (!positivesHtml) {
     positivesHtml = '<li>No positive experiences recorded.</li>';
   }
+let opportunitiesHtml = '';
 
+opportunities.forEach(o => {
+  if (o.area.trim() || o.observation.trim() || o.followUp.trim()) {
+    opportunitiesHtml += `
+      <li>
+        <strong>${o.area || 'Opportunity'}:</strong>
+        ${o.observation || ''}
+        ${o.followUp ? `<br/><em>Follow-up:</em> ${o.followUp}` : ''}
+      </li>
+    `;
+  }
+});
+
+if (!opportunitiesHtml) {
+  opportunitiesHtml = '<li>No opportunities noted.</li>';
+}
   review.innerHTML = `
     <h2>Final Review</h2>
 
