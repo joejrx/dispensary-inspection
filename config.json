@@ -149,6 +149,27 @@
   ]
 },
     {
+  "title": "BOH / Kitchen",
+  "questions": [
+    {
+      "id": "boh_area_clean_organized",
+      "label": "BOH / Kitchen area is clean, organized, and free of clutter"
+    },
+    {
+      "id": "boh_refrigerator_clean",
+      "label": "Refrigerator(s) are clean and properly maintained"
+    },
+    {
+      "id": "boh_equipment_functional",
+      "label": "All BOH / Kitchen equipment is clean and in good working condition"
+    },
+    {
+      "id": "boh_policies_posted",
+      "label": "Current and up-to-date policies are posted in BOH / Kitchen common areas"
+    }
+  ]
+},
+    {
       "id": "inventory",
       "title": "Inventory",
       "questions": [
