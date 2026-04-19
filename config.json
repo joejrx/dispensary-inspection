@@ -53,17 +53,39 @@
     }
   ]
 },
+ {
+  "title": "Reception",
+  "questions": [
     {
-      "id": "customerExperience",
-      "title": "Customer Experience",
-      "questions": [
-        { "id": "guestsGreeted", "label": "Guests Being Greeted?" },
-        { "id": "kiosksProper", "label": "Kiosks Being Used Properly?" },
-        { "id": "hospitalityVsService", "label": "Hospitality vs Service?" },
-        { "id": "knowsPromos", "label": "Team Members Know Promos?" },
-        { "id": "smiling", "label": "Smiling?" }
-      ]
+      "id": "rec_floors_clean",
+      "label": "Reception floors and carpets are clean"
     },
+    {
+      "id": "rec_counter_clean_organized",
+      "label": "Reception counter is clean, organized, and free of clutter"
+    },
+    {
+      "id": "rec_electronics_clean_functional",
+      "label": "Computers and electronics at reception are clean and in good working condition"
+    },
+    {
+      "id": "rec_walls_clutter_free",
+      "label": "Walls and surrounding reception areas are clean and clutter-free"
+    },
+    {
+      "id": "rec_interior_doors_clean",
+      "label": "Interior doors in the reception area are clean and in good condition"
+    },
+    {
+      "id": "rec_baseboards_clean",
+      "label": "Walls and baseboards are clean and well maintained throughout reception areas"
+    },
+    {
+      "id": "rec_glass_windows_clean",
+      "label": "Interior glass and windows in reception areas are clean"
+    }
+  ]
+},
     {
       "id": "inventory",
       "title": "Inventory",
