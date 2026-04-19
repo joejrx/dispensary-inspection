@@ -229,6 +229,76 @@ function renderPositiveExperiences() {
     .getElementById('addPositiveBtn')
     .addEventListener('click', addPositiveExperience);
 }
+  function renderOpportunities() {
+  const container = document.getElementById('opportunities');
+
+  container.innerHTML = `
+    <h2>Opportunities / Issues Observed</h2>
+    <div style="font-size:14px;color:#555;margin-bottom:8px">
+      Optional – document gaps, risks, or follow-up items
+    </div>
+    <button id="addOpportunityBtn">Add Opportunity</button>
+    <div id="opportunityList"></div>
+  `;
+
+  document
+    .getElementById('addOpportunityBtn')
+    .addEventListener('click', addOpportunity);
+}
+  function addOpportunity() {
+  if (opportunities.length >= 5) {
+    alert('Maximum of 5 opportunities allowed.');
+    return;
+  }
+
+  opportunities.push({
+    area: '',
+    observation: '',
+    followUp: ''
+  });
+
+  renderOpportunityEntries();
+}
+  function renderOpportunityEntries() {
+  const list = document.getElementById('opportunityList');
+  list.innerHTML = '';
+
+  opportunities.forEach((entry, index) => {
+    const div = document.createElement('div');
+    div.style.marginTop = '12px';
+
+    div.innerHTML = `
+      <div style="font-weight:bold">Area / Topic</div>
+      <input type="text" style="width:100%;margin-bottom:6px"
+        placeholder="e.g., Exterior, Inventory, Customer Experience"
+        value="${entry.area}">
+
+      <div style="font-weight:bold">What was observed?</div>
+      <textarea style="width:100%;margin-bottom:6px"
+        placeholder="Describe the issue or gap">${entry.observation}</textarea>
+
+      <div style="font-weight:bold">Suggested follow-up (optional)</div>
+      <textarea style="width:100%"
+        placeholder="Optional next steps">${entry.followUp}</textarea>
+    `;
+
+    const inputs = div.querySelectorAll('input, textarea');
+
+    inputs[0].addEventListener('input', e => {
+      entry.area = e.target.value;
+    });
+
+    inputs[1].addEventListener('input', e => {
+      entry.observation = e.target.value;
+    });
+
+    inputs[2].addEventListener('input', e => {
+      entry.followUp = e.target.value;
+    });
+
+    list.appendChild(div);
+  });
+}
 function addPositiveExperience() {
   if (positiveExperiences.length >= 5) {
     alert('Maximum of 5 positive experiences allowed.');
