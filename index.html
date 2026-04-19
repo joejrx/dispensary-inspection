@@ -203,8 +203,8 @@ fetch('config.json')
       'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
     renderInspection(cfg);
+    renderOpportunities();
    renderPositiveExperiences();
-
     updateScore(cfg);
   })
   .catch(err => {
