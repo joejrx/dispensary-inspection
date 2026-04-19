@@ -287,33 +287,7 @@ function renderInspection(cfg) {
       label.innerText = q.label;
       label.style.fontWeight = 'bold';
 
-      const yes = document.createElement('input');
-      yes.type = 'radio';
-      yes.name = q.id;
-      yes.value = 'yes';
-
-      const no = document.createElement('input');
-      no.type = 'radio';
-      no.name = q.id;
-      no.value = 'no';
-
-      const notes = document.createElement('textarea');
-      notes.placeholder = 'Notes';
-      notes.style.display = 'none';
-      notes.style.width = '100%';
-
-      yes.addEventListener('change', () => {
-        notes.style.display = 'none';
-        answers[q.id] = 'yes';
-        updateScore(cfg);
-      });
-
-      no.addEventListener('change', () => {
-        notes.style.display = 'block';
-        answers[q.id] = 'no';
-        updateScore(cfg);
-      });
-
+   
       const ratingLabel = document.createElement('div');
       ratingLabel.innerText = 'Score (1–5)';
       ratingLabel.style.fontWeight = 'bold';
