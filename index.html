@@ -521,11 +521,10 @@ function showReviewScreen() {
     return;
   }
 
-  // ✅ Require 1–5 rating for every question
-  if (!allQuestionsHaveRatings()) {
-    alert('Please select a 1–5 score for every question before reviewing.');
-    return;
-  }
+// ✅ Require 1–5 rating for every question
+if (!allQuestionsHaveRatings()) {
+  return;
+}
 
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
