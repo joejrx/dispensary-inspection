@@ -20,27 +20,39 @@
   },
 
   "sections": [
+ {
+  "title": "Exterior Appearance",
+  "questions": [
     {
-      "id": "firstImpressions",
-      "title": "First Impressions",
-      "questions": [
-        { "id": "exteriorCleanliness", "label": "Exterior Cleanliness?" },
-        { "id": "signageVisibility", "label": "Signage and Visibility?" },
-        { "id": "entryExperience", "label": "Fast and Friendly Entry Experience?" },
-        { "id": "securityProfessionalism", "label": "Security Professionalism?" },
-        { "id": "musicAppropriate", "label": "Music On and Appropriate?" }
-      ]
+      "id": "ext_parking_clean",
+      "label": "Parking lot is free of trash and debris"
     },
     {
-      "id": "compliance",
-      "title": "Compliance",
-      "questions": [
-        { "id": "guestCheckIn", "label": "Guest Check-in Process Up to Standard?" },
-        { "id": "cameraCompliance", "label": "Cameras / Security Compliant?" },
-        { "id": "cashHandlingCompliance", "label": "Cash Handling Compliant?" },
-        { "id": "logsReports", "label": "Logs / Reports Up to Date?" }
-      ]
+      "id": "ext_lighting_signage_functional",
+      "label": "Exterior lights and store signage are functioning properly"
     },
+    {
+      "id": "ext_landscaping_maintained",
+      "label": "Landscaping is clean, orderly, and well maintained"
+    },
+    {
+      "id": "ext_building_condition",
+      "label": "Building exterior is clean and in good condition"
+    },
+    {
+      "id": "ext_required_signage_visible",
+      "label": "Required signage is posted and clearly visible (DCC, weapons, hours of operation)"
+    },
+    {
+      "id": "ext_doors_functional",
+      "label": "Entry doors are clean and in proper working condition"
+    },
+    {
+      "id": "ext_trash_area_secured",
+      "label": "Trash and waste areas are secured and locked"
+    }
+  ]
+}
     {
       "id": "customerExperience",
       "title": "Customer Experience",
