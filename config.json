@@ -128,6 +128,27 @@
   ]
 },
     {
+  "title": "Security Experience (Safe but Not Intimidating)",
+  "questions": [
+    {
+      "id": "sec_visible_professional",
+      "label": "Security presence is clearly visible and professional"
+    },
+    {
+      "id": "sec_guest_greeting",
+      "label": "Security staff greets guests appropriately and professionally"
+    },
+    {
+      "id": "sec_guest_interactions_respectful",
+      "label": "Security interactions with guests are calm, respectful, and non-confrontational"
+    },
+    {
+      "id": "sec_overall_experience",
+      "label": "Overall security presence contributes to a safe and welcoming environment"
+    }
+  ]
+},
+    {
       "id": "inventory",
       "title": "Inventory",
       "questions": [
