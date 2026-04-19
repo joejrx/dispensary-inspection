@@ -602,20 +602,7 @@ if (!allQuestionsHaveRatings()) {
 const avgRating = calculateAverageRating();
   const performanceLabel = performanceLabelFromRating(avgRating);
   const performanceClass = performanceClassFromLabel(performanceLabel);
-  let issuesHtml = '';
-  currentConfig.sections.forEach(section => {
-    section.questions.forEach(q => {
-   
-const rating = ratings[q.id];
-if (rating !== null && rating <= 2) {
-  issuesHtml += `<li><strong>${q.label}</strong> (Score: ${rating})</li>`;
-}
 
-    });
-  });
-  if (!issuesHtml) {
-    issuesHtml = '<li>No issues noted.</li>';
-  }
 
   let positivesHtml = '';
   positiveExperiences.forEach(p => {
