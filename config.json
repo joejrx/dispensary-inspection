@@ -170,6 +170,31 @@
   ]
 },
     {
+  "title": "Bathrooms",
+  "questions": [
+    {
+      "id": "bath_floors_clean",
+      "label": "Bathroom floors are clean and free of debris"
+    },
+    {
+      "id": "bath_fixtures_clean",
+      "label": "Sinks and toilets are clean and sanitary"
+    },
+    {
+      "id": "bath_dispensers_stocked",
+      "label": "Soap, paper towels, and other dispensers are stocked and functional"
+    },
+    {
+      "id": "bath_supplies_not_visible",
+      "label": "No excess or unsecured supplies are visible"
+    },
+    {
+      "id": "bath_cabinets_organized",
+      "label": "Bathroom cabinets and storage areas are clean and well organized"
+    }
+  ]
+},
+    {
       "id": "inventory",
       "title": "Inventory",
       "questions": [
