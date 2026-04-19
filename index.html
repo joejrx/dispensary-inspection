@@ -411,11 +411,16 @@ function updateScore(cfg) {
   if (warning) warning.style.display = 'none';
 
   let baseScore = 0;
-  Object.values(answers).forEach(v => {
-    if (v === 'yes') baseScore += cfg.logic.scorePerYes;
+
+  cfg.sections.forEach(section => {
+    section.questions.forEach(q => {
+      const rating = ratings[q.id];
+      if (rating >= 3) {
+        baseScore += cfg.logic.scorePerYes;
+      }
+    });
   });
 
-  // ✅ Bonus logic
   let bonus = positiveExperiences.filter(
     p => p.notes.trim() !== ''
   ).length * 2;
