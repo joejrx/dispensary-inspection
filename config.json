@@ -216,6 +216,31 @@
   ]
 },
     {
+  "title": "Vault / Fulfillment",
+  "questions": [
+    {
+      "id": "vault_floors_clean",
+      "label": "Vault / fulfillment area floors are clean and free of debris"
+    },
+    {
+      "id": "vault_area_organized",
+      "label": "Vault / fulfillment area is organized and orderly"
+    },
+    {
+      "id": "vault_return_bin_used_properly",
+      "label": "Return bin is used properly and managed according to procedure"
+    },
+    {
+      "id": "vault_work_surfaces_clean",
+      "label": "Work surfaces and tabletops are clean, clear, and organized"
+    },
+    {
+      "id": "vault_electronics_functional",
+      "label": "Computers and electronics are clean and in good working condition"
+    }
+  ]
+},
+    {
       "id": "inventory",
       "title": "Inventory",
       "questions": [
