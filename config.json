@@ -195,6 +195,27 @@
   ]
 },
     {
+  "title": "Storage / Receiving",
+  "questions": [
+    {
+      "id": "stor_floors_clean",
+      "label": "Storage and receiving area floors are clean and free of debris"
+    },
+    {
+      "id": "stor_no_trash_boxes",
+      "label": "No trash, empty boxes, or unused materials are present"
+    },
+    {
+      "id": "stor_area_organized",
+      "label": "Storage and receiving areas are organized and orderly"
+    },
+    {
+      "id": "stor_containers_used",
+      "label": "Containers, shelving, and bins are used appropriately to keep items organized"
+    }
+  ]
+}
+    {
       "id": "inventory",
       "title": "Inventory",
       "questions": [
