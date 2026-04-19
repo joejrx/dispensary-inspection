@@ -374,14 +374,14 @@ ratingSelect.dataset.questionId = q.id;
           ratingSelect.style.width = '100%';
       ratingSelect.style.marginTop = '4px';
 
-      ratingSelect.innerHTML = `
-        <option value="">Select score</option>
-        <option value="1">1 – Unacceptable</option>
-        <option value="2">2 – Needs Improvement</option>
-        <option value="3">3 – Meets Expectations</option>
-        <option value="4">4 – Exceeds Expectations</option>
-        <option value="5">5 – Outstanding</option>
-      `;
+   ratingSelect.innerHTML = `
+  <option value="">Select score</option>
+  <option value="1">1 – Non-Compliant</option>
+  <option value="2">2 – Partial / Needs Improvement</option>
+  <option value="3">3 – Fully Compliant</option>
+  <option value="4">4 – Above Average</option>
+  <option value="5">5 – Exceeds Expectations</option>
+`;
 ratingSelect.required = true;
       ratingSelect.addEventListener('change', e => {
         ratings[q.id] = e.target.value ? Number(e.target.value) : null;
