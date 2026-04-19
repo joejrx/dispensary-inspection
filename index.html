@@ -560,9 +560,12 @@ const avgRating = calculateAverageRating();
   let issuesHtml = '';
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
-      if (answers[q.id] === 'no') {
-        issuesHtml += `<li><strong>${q.label}</strong></li>`;
-      }
+   
+const rating = ratings[q.id];
+if (rating !== null && rating <= 2) {
+  issuesHtml += `<li><strong>${q.label}</strong> (Score: ${rating})</li>`;
+}
+
     });
   });
   if (!issuesHtml) {
