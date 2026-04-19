@@ -431,11 +431,20 @@ performanceLabel: performanceLabelFromRating(avgRating),
   console.log('SUBMITTED INSPECTION:', payload);
   alert('Inspection submitted successfully.');
 }
-  function calculateBaseScore() {
+ function calculateBaseScore() {
   let score = 0;
-  Object.values(answers).forEach(v => {
-    if (v === 'yes') score += currentConfig.logic.scorePerYes;
+
+  currentConfig.sections.forEach(section => {
+    section.questions.forEach(q => {
+      const rating = ratings[q.id];
+      const compliant = isCompliantFromRating(rating);
+
+      if (compliant === true) {
+        score += currentConfig.logic.scorePerYes;
+      }
+    });
   });
+
   return score;
 }
 
