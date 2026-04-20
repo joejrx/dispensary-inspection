@@ -25,29 +25,47 @@
     {
       "id": "ext_parking_clean",
       "label": "Parking lot is free of trash and debris",
-      "type": "boolean"
+      "type": "yesno"
     },
     {
       "id": "ext_lighting_signage_functional",
       "label": "Exterior lights and store sign are functioning properly",
-      "type": "boolean"
+      "type": "yesno"
     },
     {
       "id": "ext_landscaping_maintained",
       "label": "Landscaping is clean and well maintained",
-      "type": "boolean"
+      "type": "yesno"
     },
     {
       "id": "ext_building_condition",
       "label": "Building exterior is clean and in good condition",
-      "type": "boolean"
+      "type": "yesno"
     },
     {
       "id": "ext_required_signage_visible",
       "label": "Required signage is posted and visible (DCC, weapons, hours of operation)",
-      "type": "boolean",
+      "type": "yesno",
       "critical": true
     },
+    {
+      "id": "ext_doors_functional",
+      "label": "Doors are clean and in proper working condition",
+      "type": "yesno"
+    },
+    {
+      "id": "ext_windows_clean",
+      "label": "All glass windows are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "ext_trash_area_secured",
+      "label": "Trash area is secured and locked",
+      "type": "yesno",
+      "critical": true
+    }
+  ]
+},
     {
       "id": "ext_doors_functional",
       "label": "Doors are clean and in proper working condition",
