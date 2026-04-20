@@ -240,51 +240,51 @@
     }
   ]
 },
-    {
-  "title": "Staff",
-  "questions": [
-    {
-      "id": "staff_dress_code",
-      "label": "Dress code is consistently followed by staff"
-    },
-    {
-      "id": "staff_tone_professional",
-      "label": "Staff tone is professional and appropriate with guests"
-    },
-    {
-      "id": "staff_guest_engagement",
-      "label": "Staff actively engages with guests in a helpful and welcoming manner"
-    },
-    {
-      "id": "staff_side_conversations_minimal",
-      "label": "Side conversations at the counter are minimal and do not distract from guest service"
-    },
-    {
-      "id": "staffing_levels_appropriate",
-      "label": "Staffing levels are appropriate (not overstaffed or understaffed)"
-    },
-    {
-      "id": "staff_phone_use",
-      "label": "Team members are not using personal phones while guests are present"
-    }
+{
+    "title": "Staff",
+    "questions": [
+      {
+        "id": "staff_dress_code",
+        "label": "Dress code is consistently followed by staff"
+      },
+      {
+        "id": "staff_tone_professional",
+        "label": "Staff tone is professional and appropriate with guests"
+      },
+      {
+        "id": "staff_guest_engagement",
+        "label": "Staff actively engages with guests in a helpful and welcoming manner"
+      },
+      {
+        "id": "staff_side_conversations_minimal",
+        "label": "Side conversations at the counter are minimal and do not distract from guest service"
+      },
+      {
+        "id": "staffing_levels_appropriate",
+        "label": "Staffing levels are appropriate (not overstaffed or understaffed)"
+      },
+      {
+        "id": "staff_phone_use",
+        "label": "Team members are not using personal phones while guests are present"
+      }
+    ]
+  }
+],
+
+"bonusSection": {
+  "id": "positiveExperiences",
+  "title": "Positive Experiences Observed",
+  "description": "Optional bonus points for observed excellence. Notes required.",
+  "maxBonusPoints": 10,
+  "pointsPerEntry": 2,
+  "fields": [
+    { "id": "teamMember", "label": "Team Member Name", "type": "text", "required": true }
   ]
 },
-  
-  "bonusSection": {
-    "id": "positiveExperiences",
-    "title": "Positive Experiences Observed",
-    "description": "Optional bonus points for observed excellence. Notes required.",
-    "maxBonusPoints": 10,
-    "pointsPerEntry": 2,
-    "fields": [
-      { "id": "teamMember", "label": "Team Member Name", "type": "text", "required": true }
-    ]
-  },
 
-  "logic": {
-    "scorePerYes": 2,
-    "scorePerNo": 0,
-    "notesRequiredIfNo": true,
-    "bonusCalculation": "min(entries * pointsPerEntry, maxBonusPoints)"
-  }
-
+"logic": {
+  "scorePerYes": 2,
+  "scorePerNo": 0,
+  "notesRequiredIfNo": true,
+  "bonusCalculation": "min(entries * pointsPerEntry, maxBonusPoints)"
+}
