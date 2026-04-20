@@ -508,8 +508,9 @@ function allQuestionsHaveRatings() {
 
   document.querySelectorAll('.rating-select').forEach(select => {
     const qId = select.dataset.questionId;
+    const value = ratings[qId];
 
-    if (typeof ratings[qId] !== 'number') {
+    if (value === null || value === undefined || value === '') {
       select.classList.add('rating-missing');
       allRated = false;
     } else {
@@ -518,11 +519,12 @@ function allQuestionsHaveRatings() {
   });
 
   if (!allRated) {
-    alert('Please select a 1–5 score for all questions highlighted in orange.');
+    alert('Please complete all required Yes/No and 1–5 questions.');
   }
 
   return allRated;
 }
+``
 function performanceLabelFromRating(avg) {
   if (avg === null || avg === undefined) return '—';
 
