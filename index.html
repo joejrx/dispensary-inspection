@@ -555,15 +555,15 @@ function performanceLabelFromRating(avg) {
 
 function performanceClassFromLabel(label) {
   switch (label) {
-    case 'Unacceptable':
+    case 'Non-Compliant':
       return 'performance-unacceptable';
-    case 'Needs Improvement':
+    case 'Partial / Needs Improvement':
       return 'performance-needs';
-    case 'Meets Expectations':
+    case 'Fully Compliant':
       return 'performance-meets';
-    case 'Exceeds Expectations':
+    case 'Above Average':
       return 'performance-exceeds';
-    case 'Outstanding':
+    case 'Exceeds Expectations':
       return 'performance-outstanding';
     default:
       return '';
