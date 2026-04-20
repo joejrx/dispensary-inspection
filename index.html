@@ -608,8 +608,7 @@ if (criticalFail) {
   document.getElementById('positive-experiences').style.display = 'none';
 document.getElementById('opportunities').style.display = 'none';
   const baseScore = calculateBaseScore();
-  const bonusScore = calculateBonusScore();
-  const totalScore = baseScore + bonusScore;
+const bonusScore = criticalFail ? 0 : calculateBonusScore();  const totalScore = baseScore + bonusScore;
 const avgRating = calculateAverageRating();
   const performanceLabel = performanceLabelFromRating(avgRating);
   const performanceClass = performanceClassFromLabel(performanceLabel);
