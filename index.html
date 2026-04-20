@@ -551,6 +551,21 @@ function performanceClassFromLabel(label) {
   if (typeof rating !== 'number') return null; // not rated yet
   return rating >= 3;
 }
+  function hasCriticalFailure() {
+  for (const section of currentConfig.sections) {
+    for (const q of section.questions) {
+      if (q.critical === true) {
+        const rating = ratings[q.id];
+
+        // rating <= 2 = No / Fail
+        if (typeof rating === 'number' && rating <= 2) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
 function showReviewScreen() {
   // ✅ Required header validation
   if (!selectedStore) {
