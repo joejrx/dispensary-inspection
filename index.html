@@ -88,59 +88,37 @@
 </div>
 <div class="section" id="visit-details">
   <h2>Store Being Visited</h2>
-  ...
-</div>
 
+  <label for="storeSelect" style="font-weight:bold">
+    Select Dispensary
+  </label>
 
-
- <label for="storeSelect" style="font-weight:bold">
-  Select Dispensary
-</label>
-
-<!-- inspection + positive experiences are above this -->
-
-
-
-<div id="reviewScreen" class="section" style="display:none;"></div>
   <select id="storeSelect" style="width:100%; margin-top:6px">
     <option value="">— Select a location —</option>
-  <option value="East Liverpool">East Liverpool</option>
-  <option value="Elyria">Elyria</option>
-  <option value="Cuyahoga Falls">Cuyahoga Falls</option>
-  <option value="Harrison">Harrison</option>
-  <option value="Norwood">Norwood</option>
-  <option value="New Paris">New Paris</option>
-  <option value="Keowee">Keowee</option>
-</select>
+    <option value="East Liverpool">East Liverpool</option>
+    <option value="Elyria">Elyria</option>
+    <option value="Cuyahoga Falls">Cuyahoga Falls</option>
+    <option value="Harrison">Harrison</option>
+    <option value="Norwood">Norwood</option>
+    <option value="New Paris">New Paris</option>
+    <option value="Keowee">Keowee</option>
+  </select>
+
   <label for="storeManagers" style="font-weight:bold; margin-top:10px; display:block;">
-  Store Manager(s)
-</label>
+    Store Manager(s)
+  </label>
+  <input type="text" id="storeManagers" style="width:100%; margin-top:6px;" />
 
-<input
-  type="text"
-  id="storeManagers"
-  placeholder="Enter store manager name(s)"
-  style="width:100%; margin-top:6px;"
-/>
   <label for="personVisiting" style="font-weight:bold; margin-top:10px; display:block;">
-  Person Visiting
-</label>
+    Person Visiting
+  </label>
+  <input type="text" id="personVisiting" style="width:100%; margin-top:6px;" />
 
-<input
-  type="text"
-  id="personVisiting"
-  placeholder="Enter name of person conducting visit"
-  style="width:100%; margin-top:6px;"
-/>
-<label for="visitDate" style="font-weight:bold; margin-top:10px; display:block;">
-  Date of Visit
-</label>
-
-<input
-  type="date"
-  id="visitDate"
-  style="width:100%; margin-top:6px;"
-/>
+  <label for="visitDate" style="font-weight:bold; margin-top:10px; display:block;">
+    Date of Visit
+  </label>
+  <input type="date" id="visitDate" style="width:100%; margin-top:6px;" />
+</div>
 </div>
   <div class="section">
   <h2>1–5 Scoring Rubric</h2>
