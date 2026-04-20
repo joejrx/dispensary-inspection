@@ -651,7 +651,15 @@ if (!opportunitiesHtml) {
       <p><strong>Date of Visit:</strong> ${visitDate}</p>
     </div>
 
-   <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+  <p>
+  <strong>Compliance Status:</strong>
+  ${criticalFail ? '❌ Non‑Compliant (Critical Failure)' : '✅ Compliant'}
+</p>
+
+<p>
+  <strong>Compliance Score:</strong>
+  ${baseScore} / 100
+</p>
 
 <p>
   <strong>Performance Rating (1–5):</strong>
