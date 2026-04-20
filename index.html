@@ -592,7 +592,15 @@ function showReviewScreen() {
 if (!allQuestionsHaveRatings()) {
   return;
 }
+const criticalFail = hasCriticalFailure();
 
+if (criticalFail) {
+  alert(
+    'This inspection contains a critical failure and cannot be marked compliant. ' +
+    'Please review required items before submitting.'
+  );
+}
+``
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
 
