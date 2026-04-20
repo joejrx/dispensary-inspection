@@ -6,7 +6,7 @@
     "baseScoreMax": 100,
     "bonusScoreMax": 10,
     "pointsPerQuestion": 2,
-"scoringModel": "rating_1_to_5"    "finalScoreFormula": "base_plus_bonus"
+"scoringModel": "rating_1_to_5"   
   },
 
   "header": {
