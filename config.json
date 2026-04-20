@@ -19,7 +19,7 @@
   },
 
   "sections": [
- {
+{
   "title": "Exterior Appearance",
   "questions": [
     {
@@ -62,24 +62,6 @@
       "id": "ext_trash_area_secured",
       "label": "Trash area is secured and locked",
       "type": "yesno",
-      "critical": true
-    }
-  ]
-},
-    {
-      "id": "ext_doors_functional",
-      "label": "Doors are clean and in proper working condition",
-      "type": "boolean"
-    },
-    {
-      "id": "ext_windows_clean",
-      "label": "All glass windows are clean",
-      "type": "boolean"
-    },
-    {
-      "id": "ext_trash_area_secured",
-      "label": "Trash area is secured and locked",
-      "type": "boolean",
       "critical": true
     }
   ]
