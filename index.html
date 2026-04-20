@@ -345,44 +345,39 @@ function renderInspection(cfg) {
       label.innerText = q.label;
       label.style.fontWeight = 'bold';
 
-   
-      const ratingLabel = document.createElement('div');
-      ratingLabel.innerText = 'Score (1–5)';
-      ratingLabel.style.fontWeight = 'bold';
-      ratingLabel.style.marginTop = '6px';
+      let inputEl;
 
-let inputEl;
+      if (q.type === 'yesno') {
+        inputEl = document.createElement('select');
+        inputEl.innerHTML = `
+          <option value="">Select</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        `;
+        inputEl.addEventListener('change', e => {
+          ratings[q.id] = e.target.value || null;
+        });
+      } else {
+        inputEl = document.createElement('select');
+        inputEl.innerHTML = `
+          <option value="">Select score</option>
+          <option value="1">1 – Non‑Compliant</option>
+          <option value="2">2 – Partial / Needs Improvement</option>
+          <option value="3">3 – Fully Compliant</option>
+          <option value="4">4 – Above Average</option>
+          <option value="5">5 – Exceeds Expectations</option>
+        `;
+        inputEl.addEventListener('change', e => {
+          ratings[q.id] = e.target.value ? Number(e.target.value) : null;
+        });
+      }
 
-if (q.type === 'yesno') {
-  inputEl = document.createElement('select');
-  inputEl.innerHTML = `
-    <option value="">Select</option>
-    <option value="yes">Yes</option>
-    <option value="no">No</option>
-  `;
+      inputEl.classList.add('rating-select');
 
-  inputEl.addEventListener('change', e => {
-    ratings[q.id] = e.target.value === 'yes' ? 'yes' : 'no';
-  });
-
-} else {
-  inputEl = document.createElement('select');
-  inputEl.innerHTML = `
-    <option value="">Select score</option>
-    <option value="1">1 – Non‑Compliant</option>
-    <option value="2">2 – Partial / Needs Improvement</option>
-    <option value="3">3 – Fully Compliant</option>
-    <option value="4">4 – Above Average</option>
-    <option value="5">5 – Exceeds Expectations</option>
-  `;
-
-  inputEl.addEventListener('change', e => {
-    ratings[q.id] = e.target.value ? Number(e.target.value) : null;
-  });
-}
-
-inputEl.classList.add('rating-select');
-row.appendChild(inputEl);
+      row.appendChild(label);
+      row.appendChild(inputEl);
+      sectionDiv.appendChild(row);
+    });
 
     container.appendChild(sectionDiv);
   });
