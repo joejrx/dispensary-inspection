@@ -351,32 +351,38 @@ function renderInspection(cfg) {
       ratingLabel.style.fontWeight = 'bold';
       ratingLabel.style.marginTop = '6px';
 
-      const ratingSelect = document.createElement('select');
-   ratingSelect.classList.add('rating-select');
-ratingSelect.dataset.questionId = q.id;
-          ratingSelect.style.width = '100%';
-      ratingSelect.style.marginTop = '4px';
+let inputEl;
 
-   ratingSelect.innerHTML = `
-  <option value="">Select score</option>
-  <option value="1">1 – Non-Compliant</option>
-  <option value="2">2 – Partial / Needs Improvement</option>
-  <option value="3">3 – Fully Compliant</option>
-  <option value="4">4 – Above Average</option>
-  <option value="5">5 – Exceeds Expectations</option>
-`;
-ratingSelect.required = true;
-      ratingSelect.addEventListener('change', e => {
-        ratings[q.id] = e.target.value ? Number(e.target.value) : null;
-      });
+if (q.type === 'yesno') {
+  inputEl = document.createElement('select');
+  inputEl.innerHTML = `
+    <option value="">Select</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  `;
 
-      row.appendChild(label);
-    
-      row.appendChild(ratingLabel);
-      row.appendChild(ratingSelect);
+  inputEl.addEventListener('change', e => {
+    ratings[q.id] = e.target.value === 'yes' ? 'yes' : 'no';
+  });
 
-      sectionDiv.appendChild(row);
-    });
+} else {
+  inputEl = document.createElement('select');
+  inputEl.innerHTML = `
+    <option value="">Select score</option>
+    <option value="1">1 – Non‑Compliant</option>
+    <option value="2">2 – Partial / Needs Improvement</option>
+    <option value="3">3 – Fully Compliant</option>
+    <option value="4">4 – Above Average</option>
+    <option value="5">5 – Exceeds Expectations</option>
+  `;
+
+  inputEl.addEventListener('change', e => {
+    ratings[q.id] = e.target.value ? Number(e.target.value) : null;
+  });
+}
+
+inputEl.classList.add('rating-select');
+row.appendChild(inputEl);
 
     container.appendChild(sectionDiv);
   });
@@ -398,9 +404,10 @@ function updateScore(cfg) {
   cfg.sections.forEach(section => {
     section.questions.forEach(q => {
       const rating = ratings[q.id];
-      if (rating >= 3) {
-        baseScore += cfg.logic.scorePerYes;
-      }
+    if (isCompliant(q, ratings[q.id])) {
+  baseScore += cfg.logic.scorePerYes;
+}
+
     });
   });
 
@@ -547,18 +554,19 @@ function performanceClassFromLabel(label) {
       return '';
   }
 }
-  function isCompliantFromRating(rating) {
-  if (typeof rating !== 'number') return null; // not rated yet
-  return rating >= 3;
+function isCompliant(q, value) {
+  if (q.type === 'yesno') {
+    return value === 'yes';
+  }
+  return typeof value === 'number' && value >= 3;
 }
-  function hasCriticalFailure() {
+
+function hasCriticalFailure() {
   for (const section of currentConfig.sections) {
     for (const q of section.questions) {
       if (q.critical === true) {
-        const rating = ratings[q.id];
-
-        // rating <= 2 = No / Fail
-        if (typeof rating === 'number' && rating <= 2) {
+        const value = ratings[q.id];
+        if (!isCompliant(q, value)) {
           return true;
         }
       }
@@ -566,6 +574,7 @@ function performanceClassFromLabel(label) {
   }
   return false;
 }
+``
 function showReviewScreen() {
   // ✅ Required header validation
   if (!selectedStore) {
