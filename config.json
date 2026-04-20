@@ -269,52 +269,7 @@
     }
   ]
 },
-    {
-      "id": "inventory",
-      "title": "Inventory",
-      "questions": [
-        {
-          "id": "inventoryDiscrepancies",
-          "label": "No discrepancies observed?"
-        },
-        {
-          "id": "inventoryOrganized",
-          "label": "Visually Organized?"
-        },
-        {
-          "id": "inventoryCompliant",
-          "label": "Visually Compliant?"
-        },
-        {
-          "id": "quarantineBin",
-          "label": "Quarantine Bin Accurate and to Standard?"
-        }
-      ]
-    },
-    {
-      "id": "merchandising",
-      "title": "Merchandising & Visual Standards",
-      "questions": [
-        {
-          "id": "budbarStandard",
-          "label": "Budbar Out & Up to Standard?"
-        },
-        {
-          "id": "tvsCompliant",
-          "label": "TV’s On and Compliant?"
-        },
-        {
-          "id": "marketingCurrent",
-          "label": "Marketing Product Current and Orderly?"
-        },
-        {
-          "id": "promoVisuals",
-          "label": "Promo Visuals / Flyers in Place?"
-        }
-      ]
-    }
-  ],
-
+    
   "bonusSection": {
     "id": "positiveExperiences",
     "title": "Positive Experiences Observed",
