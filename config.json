@@ -6,8 +6,7 @@
     "baseScoreMax": 100,
     "bonusScoreMax": 10,
     "pointsPerQuestion": 2,
-    "scoringModel": "yes_no",
-    "finalScoreFormula": "baseScore + bonusScore"
+"scoringModel": "rating_1_to_5"    "finalScoreFormula": "baseScore + bonusScore"
   },
 
   "header": {
@@ -287,4 +286,5 @@
   "scorePerNo": 0,
   "notesRequiredIfNo": true,
   "bonusCalculation": "min(entries * pointsPerEntry, maxBonusPoints)"
+}
 }
