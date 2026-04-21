@@ -203,24 +203,58 @@
     }
   ]
 },
-    {
+ {
   "title": "BOH / Kitchen",
   "questions": [
     {
+      "id": "boh_lights_functioning",
+      "label": "Lights are on and functioning properly",
+      "type": "yesno"
+    },
+    {
+      "id": "boh_interior_doors_clean",
+      "label": "All interior doors are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "boh_floors_carpets_clean",
+      "label": "Floors and carpets are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "boh_walls_baseboards_clean",
+      "label": "Walls and baseboards are clean in every room",
+      "type": "yesno"
+    },
+    {
+      "id": "boh_glass_clean",
+      "label": "All glass is clean",
+      "type": "yesno"
+    },
+    {
+      "id": "boh_ceiling_tiles_condition",
+      "label": "Ceiling tiles are in good condition",
+      "type": "yesno"
+    },
+    {
       "id": "boh_area_clean_organized",
-      "label": "BOH / Kitchen area is clean, organized, and free of clutter"
+      "label": "Area is clean and organized",
+      "type": "yesno"
     },
     {
       "id": "boh_refrigerator_clean",
-      "label": "Refrigerator(s) are clean and properly maintained"
+      "label": "Refrigerator is clean",
+      "type": "yesno"
     },
     {
-      "id": "boh_equipment_functional",
-      "label": "All BOH / Kitchen equipment is clean and in good working condition"
+      "id": "boh_equipment_working",
+      "label": "All equipment is in good working condition",
+      "type": "yesno"
     },
     {
       "id": "boh_policies_posted",
-      "label": "Current and up-to-date policies are posted in BOH / Kitchen common areas"
+      "label": "Up-to-date policies are posted in common areas",
+      "type": "yesno"
     }
   ]
 },
