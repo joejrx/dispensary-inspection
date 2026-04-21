@@ -626,7 +626,7 @@
       "type": "graded"
     },
 
-    {
+  {
       "id": "cx_online_reviews",
       "label": "Online reviews (Yelp, Google, Reddit – last 10) reflect a positive customer experience",
       "type": "graded"
@@ -642,7 +642,12 @@
   "maxBonusPoints": 10,
   "pointsPerEntry": 2,
   "fields": [
-    { "id": "teamMember", "label": "Team Member Name", "type": "text", "required": true }
+    {
+      "id": "teamMember",
+      "label": "Team Member Name",
+      "type": "text",
+      "required": true
+    }
   ]
 },
 
