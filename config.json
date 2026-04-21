@@ -112,47 +112,72 @@
   ]
 }
 ,
-    {
+  {
   "title": "Sales Floor / Register Area",
   "questions": [
     {
-      "id": "sf_music_authorized_volume",
-      "label": "Music is playing at an appropriate volume and uses an authorized playlist"
+      "id": "sf_lights_functioning",
+      "label": "Lights are on and functioning properly",
+      "type": "yesno"
     },
     {
-      "id": "sf_lighting_functional",
-      "label": "Sales floor and register area lighting is on and functioning properly"
+      "id": "sf_interior_doors_clean",
+      "label": "All interior doors are clean",
+      "type": "yesno"
     },
     {
-      "id": "sf_tvs_functional",
-      "label": "TVs and digital displays are on and working properly"
+      "id": "sf_floors_carpets_clean",
+      "label": "Floors and carpets are clean",
+      "type": "yesno"
     },
     {
-      "id": "sf_media_compliant",
-      "label": "Only current and compliant media is displayed on screens"
+      "id": "sf_walls_baseboards_clean",
+      "label": "Walls and baseboards are clean in every room",
+      "type": "yesno"
     },
     {
-      "id": "sf_floors_clean",
-      "label": "Sales floor and register area floors and carpets are clean"
+      "id": "sf_glass_clean",
+      "label": "All glass is clean",
+      "type": "yesno"
     },
     {
-      "id": "sf_register_countertops_clean",
-      "label": "Register countertops are clean, clear, and well organized"
+      "id": "sf_music_appropriate_authorized",
+      "label": "Music is playing at an appropriate volume and uses an authorized playlist",
+      "type": "yesno"
     },
     {
-      "id": "sf_register_electronics_clean",
-      "label": "Computers and electronics at registers are clean and in good working condition"
+      "id": "sf_ceiling_tiles_condition",
+      "label": "Ceiling tiles are in good condition",
+      "type": "yesno"
     },
     {
-      "id": "sf_displays_setup",
-      "label": "Product displays are properly set up and maintained"
+      "id": "sf_tvs_functioning",
+      "label": "TVs are on and working properly",
+      "type": "yesno"
     },
     {
-      "id": "sf_promotions_compliant",
-      "label": "Promotions are current and follow company guidelines"
+      "id": "sf_media_current_compliant",
+      "label": "Most current and compliant media is displayed on screens",
+      "type": "yesno"
+    },
+    {
+      "id": "sf_countertops_clean_organized",
+      "label": "Countertops are clean, clear, and organized",
+      "type": "yesno"
+    },
+    {
+      "id": "sf_electronics_clean_functioning",
+      "label": "Computers and electronics are clean and in good working condition",
+      "type": "yesno"
+    },
+    {
+      "id": "sf_displays_properly_setup",
+      "label": "Displays are properly set up",
+      "type": "yesno"
     }
   ]
-},
+}
+,
     {
   "title": "Security Experience (Safe but Not Intimidating)",
   "questions": [
