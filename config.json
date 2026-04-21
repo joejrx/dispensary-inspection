@@ -644,7 +644,7 @@
   "fields": [
     { "id": "teamMember", "label": "Team Member Name", "type": "text", "required": true }
   ]
-}
+},
 
 "logic": {
   "scorePerYes": 2,
