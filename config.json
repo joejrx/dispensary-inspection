@@ -439,8 +439,84 @@
       }
     ]
   }
-],
+    },
+{
+  "title": "Compliance / Procedure",
+  "questions": [
+    {
+      "id": "comp_promotional_displays_marketing",
+      "label": "Promotional displays and marketing are current, accurate, clean, and compliant (reception and sales floor)",
+      "type": "yesno",
+      "critical": true
+    },
+    {
+      "id": "comp_vault_visually_compliant",
+      "label": "Vault is visually compliant (metric tags visible)",
+      "type": "yesno",
+      "critical": true
+    },
+    {
+      "id": "comp_quarantine_area_standard",
+      "label": "Physical quarantine area is accurate and maintained to standard",
+      "type": "yesno",
+      "critical": true
+    },
+    {
+      "id": "comp_logs_reports_posted",
+      "label": "Required logs and reports are properly posted and up to date",
+      "type": "yesno",
+      "critical": true
+    },
+    {
+      "id": "comp_discrepancy_investigation_timely",
+      "label": "Discrepancies are investigated within the required timeframe",
+      "type": "yesno",
+      "critical": true
+    },
 
+    {
+      "id": "comp_labeling_accuracy_vault",
+      "label": "Labeling accuracy – Vault",
+      "type": "yesno",
+      "critical": true
+    },
+    {
+      "id": "comp_labeling_accuracy_transaction",
+      "label": "Labeling accuracy – Transaction",
+      "type": "yesno",
+      "critical": true
+    },
+
+    {
+      "id": "comp_cash_handling_security",
+      "label": "Cash handling procedures meet standard – Security",
+      "type": "yesno",
+      "critical": true
+    },
+    {
+      "id": "comp_cash_handling_over_short",
+      "label": "Cash handling procedures meet standard – Overages / Shortages",
+      "type": "yesno",
+      "critical": true
+    },
+
+    {
+      "id": "comp_check_in_process",
+      "label": "Check‑in process meets standard",
+      "type": "graded"
+    },
+    {
+      "id": "comp_phone_etiquette",
+      "label": "Phone etiquette meets standard",
+      "type": "graded"
+    },
+    {
+      "id": "comp_check_out_process",
+      "label": "Check‑out process meets standard",
+      "type": "graded"
+    }
+  ]
+}
 
 "bonusSection": {
   "id": "positiveExperiences",
