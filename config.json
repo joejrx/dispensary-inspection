@@ -258,28 +258,68 @@
     }
   ]
 },
-    {
+  {
   "title": "Bathrooms",
   "questions": [
     {
+      "id": "bath_lights_functioning",
+      "label": "Lights are on and functioning properly",
+      "type": "yesno"
+    },
+    {
+      "id": "bath_interior_doors_clean",
+      "label": "All interior doors are clean",
+      "type": "yesno"
+    },
+    {
       "id": "bath_floors_clean",
-      "label": "Bathroom floors are clean and free of debris"
+      "label": "Floors and carpets are clean",
+      "type": "yesno"
     },
     {
-      "id": "bath_fixtures_clean",
-      "label": "Sinks and toilets are clean and sanitary"
+      "id": "bath_walls_baseboards_clean",
+      "label": "Walls and baseboards are clean in every room",
+      "type": "yesno"
     },
     {
-      "id": "bath_dispensers_stocked",
-      "label": "Soap, paper towels, and other dispensers are stocked and functional"
+      "id": "bath_glass_windows_clean",
+      "label": "All glass windows are clean",
+      "type": "yesno"
     },
     {
-      "id": "bath_supplies_not_visible",
-      "label": "No excess or unsecured supplies are visible"
+      "id": "bath_ceiling_tiles_condition",
+      "label": "Ceiling tiles are in good condition",
+      "type": "yesno"
     },
     {
-      "id": "bath_cabinets_organized",
-      "label": "Bathroom cabinets and storage areas are clean and well organized"
+      "id": "bath_sink_toilet_clean",
+      "label": "Sink and toilet are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "bath_dispensers_clean_filled",
+      "label": "Dispensers are clean and filled",
+      "type": "yesno"
+    },
+    {
+      "id": "bath_no_extra_supplies_visible",
+      "label": "No extra supplies are visible",
+      "type": "yesno"
+    },
+    {
+      "id": "bath_cabinets_clean_organized",
+      "label": "Cabinets are clean and organized",
+      "type": "yesno"
+    },
+    {
+      "id": "bath_vents_clean",
+      "label": "Vents are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "bath_mirrors_clean",
+      "label": "Mirrors are clean",
+      "type": "yesno"
     }
   ]
 },
