@@ -621,7 +621,57 @@
       "id": "cx_online_reviews",
       "label": "Online reviews (Yelp, Google, Reddit – last 10) reflect a positive customer experience",
       "type": "graded"
-    }
+    },
+  {
+  "title": "Leadership & Culture",
+  "questions": [
+    {
+      "id": "lc_management_presence",
+      "label": "Management team presence (GM / AGM / Leads) is visible and engaged on the floor",
+      "type": "graded"
+    },
+
+    {
+      "id": "lc_schedule_posted_physical",
+      "label": "Schedule is posted physically",
+      "type": "yesno"
+    },
+    {
+      "id": "lc_schedule_posted_virtual",
+      "label": "Schedule is posted virtually",
+      "type": "yesno"
+    },
+    {
+      "id": "lc_schedule_posted_timing",
+      "label": "Schedule is posted within required timeframe",
+      "type": "yesno"
+    },
+
+    {
+      "id": "lc_teams_chats_call_offs",
+      "label": "Teams chats are utilized properly – Call‑offs",
+      "type": "yesno"
+    },
+    {
+      "id": "lc_teams_chats_shift_communications",
+      "label": "Teams chats are utilized properly – Shift communications",
+      "type": "yesno"
+    },
+    {
+      "id": "lc_teams_chats_announcements",
+      "label": "Teams chats are utilized properly – Announcements",
+      "type": "yesno"
+    },
+    {
+      "id": "lc_teams_chats_promos",
+      "label": "Teams chats are utilized properly – Promotions",
+      "type": "yesno"
+    },
+    {
+      "id": "lc_teams_chats_inventory",
+      "label": "Teams chats are utilized properly – Inventory",
+      "type": "yesno"
+ 
   ]
 }
 ],
