@@ -67,38 +67,51 @@
   ]
 },
  {
-  "title": "Reception (And foyer)",
+  "title": "Reception (And Foyer)",
   "questions": [
     {
-      "id": "rec_floors_clean",
-      "label": "Reception floors and carpets are clean"
-    },
-    {
-      "id": "rec_counter_clean_organized",
-      "label": "Reception counter is clean, organized, and free of clutter"
-    },
-    {
-      "id": "rec_electronics_clean_functional",
-      "label": "Computers and electronics at reception are clean and in good working condition"
-    },
-    {
-      "id": "rec_walls_clutter_free",
-      "label": "Walls and surrounding reception areas are clean and clutter-free"
+      "id": "rec_lights_functioning",
+      "label": "Lights are on and functioning properly",
+      "type": "yesno"
     },
     {
       "id": "rec_interior_doors_clean",
-      "label": "Interior doors in the reception area are clean and in good condition"
+      "label": "All interior doors are clean",
+      "type": "yesno"
     },
     {
-      "id": "rec_baseboards_clean",
-      "label": "Walls and baseboards are clean and well maintained throughout reception areas"
+      "id": "rec_floors_carpets_clean",
+      "label": "Floors and carpets are clean",
+      "type": "yesno"
     },
     {
-      "id": "rec_glass_windows_clean",
-      "label": "Interior glass and windows in reception areas are clean"
+      "id": "rec_walls_baseboards_clean",
+      "label": "Walls and baseboards are clean in every room",
+      "type": "yesno"
+    },
+    {
+      "id": "rec_ceiling_tiles_condition",
+      "label": "Ceiling tiles are in good condition",
+      "type": "yesno"
+    },
+    {
+      "id": "rec_counter_clean_organized",
+      "label": "Reception counter is clean and organized",
+      "type": "yesno"
+    },
+    {
+      "id": "rec_electronics_clean_functioning",
+      "label": "Computers and electronics are clean and in good working condition",
+      "type": "yesno"
+    },
+    {
+      "id": "rec_windows_clean",
+      "label": "All glass windows are clean",
+      "type": "yesno"
     }
   ]
-},
+}
+,
     {
   "title": "Sales Floor / Register Area",
   "questions": [
