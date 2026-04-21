@@ -31,6 +31,10 @@
   textarea {
     margin-top: 6px;
   }
+input[type="radio"] {
+  transform: scale(1.2);
+  margin-right: 4px;
+}
 
   @media (max-width: 768px) {
     .section ul li {
@@ -347,17 +351,28 @@ function renderInspection(cfg) {
 
       let inputEl;
 
-      if (q.type === 'yesno') {
-        inputEl = document.createElement('select');
-        inputEl.innerHTML = `
-          <option value="">Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        `;
-        inputEl.addEventListener('change', e => {
-          ratings[q.id] = e.target.value || null;
-        });
-      } else {
+    if (q.type === 'yesno') {
+  inputEl = document.createElement('div');
+
+  inputEl.innerHTML = `
+    <label style="margin-right:16px;">
+      <input type="radio" name="${q.id}" value="yes">
+      Yes
+    </label>
+    <label>
+      <input type="radio" name="${q.id}" value="no">
+      No
+    </label>
+  `;
+
+  inputEl.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      ratings[q.id] = e.target.value;
+      updateScore(currentConfig);
+    });
+  });
+}
+ else {
         inputEl = document.createElement('select');
         inputEl.innerHTML = `
           <option value="">Select score</option>
