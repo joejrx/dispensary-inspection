@@ -363,28 +363,48 @@
     }
   ]
 },
-    {
+ {
   "title": "Vault / Fulfillment",
   "questions": [
     {
+      "id": "vault_lights_functioning",
+      "label": "Lights are on and functioning properly",
+      "type": "yesno"
+    },
+    {
+      "id": "vault_interior_doors_clean",
+      "label": "All interior doors are clean",
+      "type": "yesno"
+    },
+    {
       "id": "vault_floors_clean",
-      "label": "Vault / fulfillment area floors are clean and free of debris"
+      "label": "Floors and carpets are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "vault_walls_baseboards_clean",
+      "label": "Walls and baseboards are clean in every room",
+      "type": "yesno"
     },
     {
       "id": "vault_area_organized",
-      "label": "Vault / fulfillment area is organized and orderly"
+      "label": "Area is organized",
+      "type": "yesno"
     },
     {
-      "id": "vault_return_bin_used_properly",
-      "label": "Return bin is used properly and managed according to procedure"
+      "id": "vault_return_bin_used",
+      "label": "Return bin is being used properly",
+      "type": "yesno"
     },
     {
-      "id": "vault_work_surfaces_clean",
-      "label": "Work surfaces and tabletops are clean, clear, and organized"
+      "id": "vault_tabletops_clean_organized",
+      "label": "Tabletops are clean and organized",
+      "type": "yesno"
     },
     {
-      "id": "vault_electronics_functional",
-      "label": "Computers and electronics are clean and in good working condition"
+      "id": "vault_electronics_clean_functioning",
+      "label": "Computers and electronics are clean and in good working condition",
+      "type": "yesno"
     }
   ]
 },
