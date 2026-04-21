@@ -363,82 +363,84 @@
     }
   ]
 },
- {
-  "title": "Vault / Fulfillment",
-  "questions": [
-    {
-      "id": "vault_lights_functioning",
-      "label": "Lights are on and functioning properly",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_interior_doors_clean",
-      "label": "All interior doors are clean",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_floors_clean",
-      "label": "Floors and carpets are clean",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_walls_baseboards_clean",
-      "label": "Walls and baseboards are clean in every room",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_area_organized",
-      "label": "Area is organized",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_return_bin_used",
-      "label": "Return bin is being used properly",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_tabletops_clean_organized",
-      "label": "Tabletops are clean and organized",
-      "type": "yesno"
-    },
-    {
-      "id": "vault_electronics_clean_functioning",
-      "label": "Computers and electronics are clean and in good working condition",
-      "type": "yesno"
-    }
-  ]
-},
-{
-  "title": "IT Room",
-  "questions": [
-    {
-      "id": "it_ac_running_cooling",
-      "label": "AC unit is running and cooling properly",
-      "type": "yesno"
-    },
-    {
-      "id": "it_extra_equipment_organized",
-      "label": "Extra IT equipment is organized",
-      "type": "yesno"
-    },
-    {
-      "id": "it_floors_clean",
-      "label": "Floors are clean",
-      "type": "yesno"
-    },
-    {
-      "id": "it_dust_free",
-      "label": "Area is dust free",
-      "type": "yesno"
-    },
-    {
-      "id": "it_tools_organized",
-      "label": "Tools are organized",
-      "type": "yesno"
-    }
-  ]
-}
-,
+
+  {
+    "title": "Vault / Fulfillment",
+    "questions": [
+      {
+        "id": "vault_lights_functioning",
+        "label": "Lights are on and functioning properly",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_interior_doors_clean",
+        "label": "All interior doors are clean",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_floors_clean",
+        "label": "Floors and carpets are clean",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_walls_baseboards_clean",
+        "label": "Walls and baseboards are clean in every room",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_area_organized",
+        "label": "Area is organized",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_return_bin_used",
+        "label": "Return bin is being used properly",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_tabletops_clean_organized",
+        "label": "Tabletops are clean and organized",
+        "type": "yesno"
+      },
+      {
+        "id": "vault_electronics_clean_functioning",
+        "label": "Computers and electronics are clean and in good working condition",
+        "type": "yesno"
+      }
+    ]
+  },
+  {
+    "title": "IT Room",
+    "questions": [
+      {
+        "id": "it_ac_running_cooling",
+        "label": "AC unit is running and cooling properly",
+        "type": "yesno"
+      },
+      {
+        "id": "it_extra_equipment_organized",
+        "label": "Extra IT equipment is organized",
+        "type": "yesno"
+      },
+      {
+        "id": "it_floors_clean",
+        "label": "Floors are clean",
+        "type": "yesno"
+      },
+      {
+        "id": "it_dust_free",
+        "label": "Area is dust free",
+        "type": "yesno"
+      },
+      {
+        "id": "it_tools_organized",
+        "label": "Tools are organized",
+        "type": "yesno"
+      }
+    ]
+  }
+],
+``
 
 "bonusSection": {
   "id": "positiveExperiences",
