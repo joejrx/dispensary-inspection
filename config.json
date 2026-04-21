@@ -1,6 +1,6 @@
 
 {
-  "inspectionMeta": {
+  "inspectionMeta": {                
     "inspectionName": "Dispensary Visit Scorecard",
     "version": "1.1.0",
     "baseScoreMax": 100,
@@ -409,35 +409,36 @@
   ]
 },
 {
-    "title": "Staff",
-    "questions": [
-      {
-        "id": "staff_dress_code",
-        "label": "Dress code is consistently followed by staff"
-      },
-      {
-        "id": "staff_tone_professional",
-        "label": "Staff tone is professional and appropriate with guests"
-      },
-      {
-        "id": "staff_guest_engagement",
-        "label": "Staff actively engages with guests in a helpful and welcoming manner"
-      },
-      {
-        "id": "staff_side_conversations_minimal",
-        "label": "Side conversations at the counter are minimal and do not distract from guest service"
-      },
-      {
-        "id": "staffing_levels_appropriate",
-        "label": "Staffing levels are appropriate (not overstaffed or understaffed)"
-      },
-      {
-        "id": "staff_phone_use",
-        "label": "Team members are not using personal phones while guests are present"
-      }
-    ]
-  }
-],
+  "title": "IT Room",
+  "questions": [
+    {
+      "id": "it_ac_running_cooling",
+      "label": "AC unit is running and cooling properly",
+      "type": "yesno"
+    },
+    {
+      "id": "it_extra_equipment_organized",
+      "label": "Extra IT equipment is organized",
+      "type": "yesno"
+    },
+    {
+      "id": "it_floors_clean",
+      "label": "Floors are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "it_dust_free",
+      "label": "Area is dust free",
+      "type": "yesno"
+    },
+    {
+      "id": "it_tools_organized",
+      "label": "Tools are organized",
+      "type": "yesno"
+    }
+  ]
+}
+,
 
 "bonusSection": {
   "id": "positiveExperiences",
