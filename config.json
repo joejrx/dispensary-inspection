@@ -323,24 +323,43 @@
     }
   ]
 },
-    {
+{
   "title": "Storage / Receiving",
   "questions": [
     {
+      "id": "stor_lights_functioning",
+      "label": "Lights are on and functioning properly",
+      "type": "yesno"
+    },
+    {
+      "id": "stor_interior_doors_clean",
+      "label": "All interior doors are clean",
+      "type": "yesno"
+    },
+    {
       "id": "stor_floors_clean",
-      "label": "Storage and receiving area floors are clean and free of debris"
+      "label": "Floors are clean",
+      "type": "yesno"
+    },
+    {
+      "id": "stor_walls_baseboards_clean",
+      "label": "Walls and baseboards are clean in every room",
+      "type": "yesno"
     },
     {
       "id": "stor_no_trash_boxes",
-      "label": "No trash, empty boxes, or unused materials are present"
+      "label": "No trash or empty boxes are present",
+      "type": "yesno"
     },
     {
       "id": "stor_area_organized",
-      "label": "Storage and receiving areas are organized and orderly"
+      "label": "Area is organized",
+      "type": "yesno"
     },
     {
       "id": "stor_containers_used",
-      "label": "Containers, shelving, and bins are used appropriately to keep items organized"
+      "label": "Containers are used where appropriate and are organized",
+      "type": "yesno"
     }
   ]
 },
