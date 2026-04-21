@@ -473,7 +473,6 @@
       "type": "yesno",
       "critical": true
     },
-
     {
       "id": "comp_labeling_accuracy_vault",
       "label": "Labeling accuracy – Vault",
@@ -486,7 +485,6 @@
       "type": "yesno",
       "critical": true
     },
-
     {
       "id": "comp_cash_handling_security",
       "label": "Cash handling procedures meet standard – Security",
@@ -499,7 +497,6 @@
       "type": "yesno",
       "critical": true
     },
-
     {
       "id": "comp_check_in_process",
       "label": "Check‑in process meets standard",
@@ -514,8 +511,10 @@
       "id": "comp_check_out_process",
       "label": "Check‑out process meets standard",
       "type": "graded"
-    },
-  {
+    }
+  ]
+},
+{
   "title": "Customer Experience",
   "questions": [
     {
@@ -528,7 +527,6 @@
       "label": "Greeting & engagement – Sales floor (timely, friendly, personalized)",
       "type": "graded"
     },
-
     {
       "id": "cx_dress_code_enforced",
       "label": "Dress code is enforced",
@@ -549,19 +547,16 @@
       "label": "Cell phone use by team members is appropriate",
       "type": "yesno"
     },
-
     {
       "id": "cx_guided_kiosk_experience",
       "label": "Guided kiosk experience meets standard",
       "type": "graded"
     },
-
     {
       "id": "cx_team_knows_sales_promos",
       "label": "Team members are knowledgeable about current sales and promotions",
       "type": "yesno"
     },
-
     {
       "id": "cx_consultative_asking_questions",
       "label": "Consultative selling – Asking questions",
@@ -577,7 +572,6 @@
       "label": "Consultative selling – Upselling accessories",
       "type": "yesno"
     },
-
     {
       "id": "cx_wait_time_communication",
       "label": "Wait time management – Communication",
@@ -588,7 +582,6 @@
       "label": "Wait time management – Efficiency",
       "type": "yesno"
     },
-
     {
       "id": "cx_checkout_friendly",
       "label": "Checkout experience – Friendly",
@@ -609,7 +602,6 @@
       "label": "Checkout experience – Upselling",
       "type": "graded"
     },
-
     {
       "id": "cx_entry_security_greeting",
       "label": "Entry experience – Security greeting",
@@ -625,8 +617,7 @@
       "label": "Entry experience – Wait time",
       "type": "graded"
     },
-
-  {
+    {
       "id": "cx_online_reviews",
       "label": "Online reviews (Yelp, Google, Reddit – last 10) reflect a positive customer experience",
       "type": "graded"
@@ -647,9 +638,9 @@
       "label": "Team Member Name",
       "type": "text",
       "required": true
-     ]
-}
+    }
   ]
+},
 
 "logic": {
   "scorePerYes": 2,
