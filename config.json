@@ -514,10 +514,125 @@
       "id": "comp_check_out_process",
       "label": "Check‑out process meets standard",
       "type": "graded"
+    },
+  {
+  "title": "Customer Experience",
+  "questions": [
+    {
+      "id": "cx_reception_engagement",
+      "label": "Greeting & engagement – Reception (timely, friendly, personalized)",
+      "type": "graded"
+    },
+    {
+      "id": "cx_sales_floor_engagement",
+      "label": "Greeting & engagement – Sales floor (timely, friendly, personalized)",
+      "type": "graded"
+    },
+
+    {
+      "id": "cx_dress_code_enforced",
+      "label": "Dress code is enforced",
+      "type": "yesno"
+    },
+    {
+      "id": "cx_side_conversations_minimized",
+      "label": "Side conversations at the counter are kept to a minimum",
+      "type": "yesno"
+    },
+    {
+      "id": "cx_staffing_level_appropriate",
+      "label": "Staffing level is appropriate (not overstaffed or understaffed)",
+      "type": "yesno"
+    },
+    {
+      "id": "cx_cell_phone_use_appropriate",
+      "label": "Cell phone use by team members is appropriate",
+      "type": "yesno"
+    },
+
+    {
+      "id": "cx_guided_kiosk_experience",
+      "label": "Guided kiosk experience meets standard",
+      "type": "graded"
+    },
+
+    {
+      "id": "cx_team_knows_sales_promos",
+      "label": "Team members are knowledgeable about current sales and promotions",
+      "type": "yesno"
+    },
+
+    {
+      "id": "cx_consultative_asking_questions",
+      "label": "Consultative selling – Asking questions",
+      "type": "yesno"
+    },
+    {
+      "id": "cx_consultative_tailoring_recommendations",
+      "label": "Consultative selling – Tailoring recommendations",
+      "type": "yesno"
+    },
+    {
+      "id": "cx_consultative_upselling_accessories",
+      "label": "Consultative selling – Upselling accessories",
+      "type": "yesno"
+    },
+
+    {
+      "id": "cx_wait_time_communication",
+      "label": "Wait time management – Communication",
+      "type": "yesno"
+    },
+    {
+      "id": "cx_wait_time_efficiency",
+      "label": "Wait time management – Efficiency",
+      "type": "yesno"
+    },
+
+    {
+      "id": "cx_checkout_friendly",
+      "label": "Checkout experience – Friendly",
+      "type": "graded"
+    },
+    {
+      "id": "cx_checkout_speed",
+      "label": "Checkout experience – Speed",
+      "type": "graded"
+    },
+    {
+      "id": "cx_checkout_accuracy",
+      "label": "Checkout experience – Accuracy",
+      "type": "graded"
+    },
+    {
+      "id": "cx_checkout_upselling",
+      "label": "Checkout experience – Upselling",
+      "type": "graded"
+    },
+
+    {
+      "id": "cx_entry_security_greeting",
+      "label": "Entry experience – Security greeting",
+      "type": "graded"
+    },
+    {
+      "id": "cx_entry_check_in_flow",
+      "label": "Entry experience – Check‑in flow",
+      "type": "graded"
+    },
+    {
+      "id": "cx_entry_wait_time",
+      "label": "Entry experience – Wait time",
+      "type": "graded"
+    },
+
+    {
+      "id": "cx_online_reviews",
+      "label": "Online reviews (Yelp, Google, Reddit – last 10) reflect a positive customer experience",
+      "type": "graded"
     }
   ]
- }
-],
+}
 
 "bonusSection": {
   "id": "positiveExperiences",
