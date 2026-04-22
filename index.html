@@ -370,7 +370,27 @@ notesInput.style.minHeight = '60px';
 notesInput.addEventListener('input', e => {
   notes[q.id] = e.target.value;
 });
+// --- Photo upload (hidden by default) ---
+const photoContainer = document.createElement('div');
+photoContainer.style.display = 'none';
+photoContainer.style.marginTop = '6px';
 
+const photoLabel = document.createElement('div');
+photoLabel.innerText = 'Attach photo(s)';
+photoLabel.style.fontWeight = 'bold';
+photoLabel.style.fontSize = '13px';
+
+const photoInput = document.createElement('input');
+photoInput.type = 'file';
+photoInput.accept = 'image/*';
+photoInput.multiple = true;
+
+photoInput.addEventListener('change', e => {
+  photos[q.id] = Array.from(e.target.files);
+});
+
+photoContainer.appendChild(photoLabel);
+photoContainer.appendChild(photoInput);
 notesContainer.appendChild(notesLabel);
 notesContainer.appendChild(notesInput);
 
@@ -391,16 +411,16 @@ row.appendChild(notesContainer);
 
  
 inputEl.querySelectorAll('input[type="radio"]').forEach(radio => {
-  radio.addEventListener('change', e => {
-    const value = e.target.value;
-    ratings[q.id] = value;
-    updateScore(currentConfig);
+ radio.addEventListener('change', e => {
+  const value = e.target.value;
+  ratings[q.id] = value;
+  updateScore(currentConfig);
 
-    // ✅ STEP 3: auto‑show notes on "No"
-    if (cfg.notes?.autoShowOn?.yesno?.includes(value)) {
-      notesContainer.style.display = 'block';
-    }
-  });
+  if (cfg.notes?.autoShowOn?.yesno?.includes(value)) {
+    notesContainer.style.display = 'block';
+    photoContainer.style.display = 'block';
+  }
+});
 });
 
 }
