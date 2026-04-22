@@ -387,12 +387,20 @@ row.appendChild(notesContainer);
     </label>
   `;
 
-  inputEl.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-      ratings[q.id] = e.target.value;
-      updateScore(currentConfig);
-    });
+ 
+inputEl.querySelectorAll('input[type="radio"]').forEach(radio => {
+  radio.addEventListener('change', e => {
+    const value = e.target.value;
+    ratings[q.id] = value;
+    updateScore(currentConfig);
+
+    // ✅ STEP 3: auto‑show notes on "No"
+    if (cfg.notes?.autoShowOn?.yesno?.includes(value)) {
+      notesContainer.style.display = 'block';
+    }
   });
+});
+
 }
  else {
         inputEl = document.createElement('select');
@@ -404,9 +412,16 @@ row.appendChild(notesContainer);
           <option value="4">4 – Above Average</option>
           <option value="5">5 – Exceeds Expectations</option>
         `;
-        inputEl.addEventListener('change', e => {
-          ratings[q.id] = e.target.value ? Number(e.target.value) : null;
-        });
+      inputEl.addEventListener('change', e => {
+  const value = e.target.value ? Number(e.target.value) : null;
+  ratings[q.id] = value;
+  updateScore(currentConfig);
+
+  // ✅ STEP 3: auto‑show notes on low scores
+  if (cfg.notes?.autoShowOn?.graded?.includes(value)) {
+    notesContainer.style.display = 'block';
+  }
+});
       }
 
       inputEl.classList.add('rating-select');
