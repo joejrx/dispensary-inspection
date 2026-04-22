@@ -647,7 +647,11 @@ function hasCriticalFailure() {
   }
   return false;
 }
-
+function hasEvidence(qId) {
+  const hasNote = notes[qId] && notes[qId].trim() !== '';
+  const hasPhotos = photos[qId] && photos[qId].length > 0;
+  return hasNote || hasPhotos;
+}
 function showReviewScreen() {
   // ✅ Required header validation
   if (!selectedStore) {
