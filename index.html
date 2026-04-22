@@ -150,6 +150,7 @@ input[type="radio"] {
 </button>
 </div>
 <script>
+  let notes = {};
   let positiveExperiences = [];
   let opportunities = [];
   let selectedStore = '';
@@ -350,7 +351,28 @@ function renderInspection(cfg) {
       label.style.fontWeight = 'bold';
 
       let inputEl;
+// --- Notes (hidden by default) ---
+const notesContainer = document.createElement('div');
+notesContainer.style.display = 'none';
+notesContainer.style.marginTop = '6px';
 
+const notesLabel = document.createElement('div');
+notesLabel.innerText = 'Notes';
+notesLabel.style.fontWeight = 'bold';
+notesLabel.style.fontSize = '13px';
+
+const notesInput = document.createElement('textarea');
+notesInput.style.width = '100%';
+notesInput.style.minHeight = '60px';
+
+notesInput.addEventListener('input', e => {
+  notes[q.id] = e.target.value;
+});
+
+notesContainer.appendChild(notesLabel);
+notesContainer.appendChild(notesInput);
+
+row.appendChild(notesContainer);
     if (q.type === 'yesno') {
   inputEl = document.createElement('div');
 
