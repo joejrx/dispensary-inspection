@@ -617,12 +617,15 @@
       "label": "Entry experience – Wait time",
       "type": "graded"
     },
-    {
+   {
       "id": "cx_online_reviews",
       "label": "Online reviews (Yelp, Google, Reddit – last 10) reflect a positive customer experience",
       "type": "graded"
-    },
-  {
+    }
+  ]
+},
+
+{
   "title": "Leadership & Culture",
   "questions": [
     {
@@ -630,7 +633,6 @@
       "label": "Management team presence (GM / AGM / Leads) is visible and engaged on the floor",
       "type": "graded"
     },
-
     {
       "id": "lc_schedule_posted_physical",
       "label": "Schedule is posted physically",
@@ -646,7 +648,6 @@
       "label": "Schedule is posted within required timeframe",
       "type": "yesno"
     },
-
     {
       "id": "lc_teams_chats_call_offs",
       "label": "Teams chats are utilized properly – Call‑offs",
