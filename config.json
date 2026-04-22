@@ -17,7 +17,17 @@
       { "id": "inspector", "label": "Person Visiting", "type": "text", "required": true }
     ]
   },
-
+"notes": {
+  "enabled": true,
+  "autoShowOn": {
+    "yesno": ["no"],
+    "graded": [1, 2]
+  },
+  "requiredOn": {
+    "criticalFailure": true
+  },
+  "maxLength": 500
+},
   "sections": [
 {
   "title": "Exterior Appearance",
