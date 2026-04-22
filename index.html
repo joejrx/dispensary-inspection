@@ -726,6 +726,60 @@ opportunities.forEach(o => {
 if (!opportunitiesHtml) {
   opportunitiesHtml = '<li>No opportunities noted.</li>';
 }
+  let evidenceHtml = '';
+
+currentConfig.sections.forEach(section => {
+  let sectionEvidence = '';
+
+  section.questions.forEach(q => {
+    if (!hasEvidence(q.id)) return;
+
+    // Notes
+    let noteHtml = '';
+    if (notes[q.id]) {
+      noteHtml = `
+        <div style="margin-top:4px;">
+          <strong>Notes:</strong>
+          <div style="white-space:pre-wrap; margin-left:8px;">
+            ${notes[q.id]}
+          </div>
+        </div>
+      `;
+    }
+
+    // Photos
+    let photoHtml = '';
+    if (photos[q.id] && photos[q.id].length > 0) {
+      photoHtml = `
+        <div style="margin-top:4px;">
+          <strong>Photos:</strong>
+          <ul style="margin:4px 0 0 16px;">
+            ${photos[q.id]
+              .map(file => `<li>${file.name}</li>`)
+              .join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    sectionEvidence += `
+      <div style="margin-bottom:12px;">
+        <div style="font-weight:bold;">${q.label}</div>
+        ${noteHtml}
+        ${photoHtml}
+      </div>
+    `;
+  });
+
+  if (sectionEvidence) {
+    evidenceHtml += `
+      <div style="margin-top:16px;">
+        <h3>${section.title}</h3>
+        ${sectionEvidence}
+      </div>
+    `;
+  }
+});
   review.innerHTML = `
     <h2>Final Review</h2>
 
@@ -760,6 +814,8 @@ if (!opportunitiesHtml) {
 <ul>${opportunitiesHtml}</ul>
     <h3>Positive Experiences</h3>
     <ul>${positivesHtml}</ul>
+<h3>Notes & Photo Evidence</h3>
+${evidenceHtml || '<div>No notes or photos recorded.</div>'}
 
     <div style="margin-top:16px">
       <button id="confirmSubmit">Confirm & Submit</button>
