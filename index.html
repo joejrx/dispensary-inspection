@@ -145,7 +145,7 @@ input[type="radio"] {
   id="submitInspection"
   type="button"
   style="font-size:16px; padding:10px 14px; width:100%;">
-   <div class="section" style="background:#fff8e1;">
+  <div class="section" style="background:#fff8e1;">
   <button
     id="qaAnswerAllYes"
     type="button"
@@ -155,8 +155,15 @@ input[type="radio"] {
   </button>
 </div>
 
-  Review & Submit Inspection
-</button>
+<div class="section">
+  <button
+    id="submitInspection"
+    type="button"
+    style="font-size:16px; padding:10px 14px; width:100%;"
+  >
+    Review &amp; Submit Inspection
+  </button>
+</div>
 </div>
 <script>
   
@@ -190,6 +197,8 @@ document.getElementById('visitDate').addEventListener('change', e => {
 });
 
 document.getElementById('submitInspection').addEventListener('click', showReviewScreen);
+  document.getElementById('qaAnswerAllYes')
+  .addEventListener('click', qaAnswerYesToAll);
 
 let currentConfig;
 
@@ -438,7 +447,8 @@ inputEl.querySelectorAll('input[type="radio"]').forEach(radio => {
 
 }
  else {
-        inputEl = document.createElement('select');
+      inputEl = document.createElement('select');
+inputEl.name = q.id;
         inputEl.innerHTML = `
           <option value="">Select score</option>
           <option value="1">1 – Non‑Compliant</option>
@@ -671,13 +681,12 @@ function hasEvidence(qId) {
   const hasPhotos = photos[qId] && photos[qId].length > 0;
   return hasNote || hasPhotos;
 }
-  function qaAnswerYesToAll() {
+function qaAnswerYesToAll() {
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
       if (q.type === 'yesno') {
         ratings[q.id] = 'yes';
 
-        // Update UI radios
         const radios = document.querySelectorAll(
           `input[type="radio"][name="${q.id}"]`
         );
@@ -689,11 +698,10 @@ function hasEvidence(qId) {
       if (q.type === 'graded') {
         ratings[q.id] = 3;
 
-        // Update UI select
         const select = document.querySelector(
-          `select.rating-select`
+          `select.rating-select[name="${q.id}"]`
         );
-        if (select && select.options) {
+        if (select) {
           select.value = '3';
         }
       }
@@ -880,9 +888,7 @@ ${evidenceHtml || '<div>No notes or photos recorded.</div>'}
   document.getElementById('confirmSubmit').addEventListener('click', submitInspection);
   document.getElementById('goBackEdit').addEventListener('click', exitReviewScreen);
   document
-  .getElementById('qaAnswerAllYes')
-  .addEventListener('click', qaAnswerYesToAll);
-}
+ }
 
 
 function exitReviewScreen() {
