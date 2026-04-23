@@ -580,7 +580,7 @@ function lockInspection() {
   document.getElementById('status').innerText = 'Inspection submitted';
 }
 function allQuestionsHaveRatings() {
-  let allRated = true;
+  const missing = [];
 
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
@@ -591,19 +591,34 @@ function allQuestionsHaveRatings() {
         value === undefined ||
         value === ''
       ) {
-        allRated = false;
+        missing.push({
+          section: section.title,
+          id: q.id,
+          label: q.label
+        });
       }
     });
   });
 
-  if (!allRated) {
-    alert('Please complete all required Yes/No and 1–5 questions.');
+  if (missing.length > 0) {
+    console.warn('Missing answers:', missing);
+
+    alert(
+      'Some questions are still unanswered:\n\n' +
+      missing
+        .slice(0, 3)
+        .map(m => `• ${m.section}: ${m.label}`)
+        .join('\n') +
+      (missing.length > 3
+        ? `\n…and ${missing.length - 3} more`
+        : '')
+    );
+
+    return false;
   }
 
-  return allRated;
+  return true;
 }
-``
-``
 function performanceLabelFromRating(avg) {
   if (avg === null || avg === undefined) return '—';
 
