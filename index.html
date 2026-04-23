@@ -706,13 +706,14 @@ function qaAnswerYesToAll() {
 }
 function showReviewScreen() {
   alert('Review button fired');
-  console.log('Review button clicked');
 
-  // ✅ Required header validation
-  if (!selectedStore) {
-    alert('Please select a store before reviewing.');
-    return;
-  }
+  const review = document.getElementById('reviewScreen');
+  review.style.display = 'block';
+  review.innerHTML = '<h2>FINAL REVIEW TEST</h2>';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+``
 
   if (!storeManagers.trim()) {
     alert('Please enter the Store Manager(s).');
