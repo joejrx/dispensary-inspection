@@ -700,9 +700,14 @@ function qaAnswerYesToAll() {
 function showReviewScreen() {
   alert('Review button fired');
 
+  // ✅ Require all questions to have answers
+  if (!allQuestionsHaveRatings()) {
+    return;
+  }
+
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
-  review.innerHTML = '<h2>FINAL REVIEW TEST</h2>';
+  review.innerHTML = '<h2>FINAL REVIEW TEST (PASSED VALIDATION)</h2>';
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
