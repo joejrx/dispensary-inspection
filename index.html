@@ -544,28 +544,25 @@ performanceLabel: performanceLabelFromRating(avgRating),
   console.log('SUBMITTED INSPECTION:', payload);
   alert('Inspection submitted successfully.');
 }
- function calculateBaseScore() {
-  let score = 0;
+function calculateBaseScore() {
+  let total = 0;
+  let compliant = 0;
 
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
-      const rating = ratings[q.id];
-const compliant = isCompliant(q, rating);
-      if (compliant === true) {
-        score += currentConfig.logic.scorePerYes;
+      total += 1;
+
+      const value = ratings[q.id];
+      if (isCompliant(q, value)) {
+        compliant += 1;
       }
     });
   });
 
-  return score;
-}
+  if (total === 0) return 0;
 
-function calculateBonusScore() {
-  let bonus = positiveExperiences.filter(
-    p => p.name.trim() !== '' && p.notes.trim() !== ''
-  ).length * 2;
-
-  return Math.min(bonus, 10);
+  // Normalize to 0–100
+  return Math.round((compliant / total) * 100);
 }
 function lockInspection() {
   // Disable all inputs
