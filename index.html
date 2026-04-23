@@ -714,6 +714,8 @@ function qaAnswerYesToAll() {
   alert('QA: All questions answered as compliant.');
 }
 function showReviewScreen() {
+  console.log('Review button clicked');
+
   // ✅ Required header validation
   if (!selectedStore) {
     alert('Please select a store before reviewing.');
@@ -757,7 +759,8 @@ document.getElementById('opportunities').style.display = 'none';
   document.getElementById('scoring-rubric').style.display = 'none';
 
   const baseScore = calculateBaseScore();
-const bonusScore = criticalFail ? 0 : calculateBonusScore();  const totalScore = baseScore + bonusScore;
+const bonusScore = 0;
+const totalScore = baseScore;
 const avgRating = calculateAverageRating();
   const performanceLabel = performanceLabelFromRating(avgRating);
   const performanceClass = performanceClassFromLabel(performanceLabel);
