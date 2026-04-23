@@ -81,14 +81,12 @@ input[type="radio"] {
 
 <div class="card">
   <div><strong>Status:</strong> <span id="status">Loading…</span></div>
-  <div>
-    <strong>Score:</strong>
-    <span id="score">0</span> / 100
-     (+<span id="bonus">0</span> bonus)
-  </div>
-  <div id="storeWarning" style="color:#b00020; font-size:14px; display:none;">
-    Please select a store to begin scoring.
-  </div>
+ <div>
+  <strong>Score:</strong>
+  <span id="score">0</span> /
+  <span id="scoreMax">100</span>
+  (+<span id="bonus">0</span> bonus)
+</div>
 </div>
 <div class="section" id="visit-details">
   <h2>Store Being Visited</h2>
@@ -186,17 +184,21 @@ let currentConfig;
 
 fetch('config.json')
   .then(r => r.json())
-  .then(cfg => {
-    currentConfig = cfg;
+ .then(cfg => {
+  currentConfig = cfg;
 
-    document.getElementById('status').innerText =
-      'Loaded: ' + cfg.inspectionMeta.inspectionName;
+  document.getElementById('status').innerText =
+    'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
-    renderInspection(cfg);
-    renderOpportunities();
-   renderPositiveExperiences();
-    updateScore(cfg);
-  })
+  // ✅ ADD THIS LINE
+  document.getElementById('scoreMax').innerText =
+    cfg.inspectionMeta.baseScoreMax;
+
+  renderInspection(cfg);
+  renderOpportunities();
+  renderPositiveExperiences();
+  updateScore(cfg);
+})
   .catch(err => {
     document.getElementById('status').innerText =
       'Config load error: ' + err.message;
@@ -488,8 +490,8 @@ function updateScore(cfg) {
 
   bonus = Math.min(bonus, 10);
 
-  document.getElementById('score').innerText = baseScore + bonus;
-  document.getElementById('bonus').innerText = bonus;
+ document.getElementById('score').innerText = baseScore;
+document.getElementById('bonus').innerText = bonus;
 }
   function calculateAverageRating() {
   const values = Object.values(ratings).filter(v => typeof v === 'number');
@@ -548,8 +550,7 @@ performanceLabel: performanceLabelFromRating(avgRating),
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
       const rating = ratings[q.id];
-      const compliant = isCompliantFromRating(rating);
-
+const compliant = isCompliant(q, rating);
       if (compliant === true) {
         score += currentConfig.logic.scorePerYes;
       }
