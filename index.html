@@ -466,23 +466,15 @@ function updateScore(cfg) {
 
   if (!selectedStore) {
     document.getElementById('score').innerText = 0;
+    document.getElementById('bonus').innerText = 0;
     if (warning) warning.style.display = 'block';
     return;
   }
 
   if (warning) warning.style.display = 'none';
 
-  let baseScore = 0;
-
-  cfg.sections.forEach(section => {
-    section.questions.forEach(q => {
-      const rating = ratings[q.id];
-    if (isCompliant(q, ratings[q.id])) {
-  baseScore += cfg.logic.scorePerYes;
-}
-
-    });
-  });
+  // ✅ Use normalized scoring everywhere
+  const baseScore = calculateBaseScore();
 
   let bonus = positiveExperiences.filter(
     p => p.notes.trim() !== ''
@@ -490,8 +482,8 @@ function updateScore(cfg) {
 
   bonus = Math.min(bonus, 10);
 
- document.getElementById('score').innerText = baseScore;
-document.getElementById('bonus').innerText = bonus;
+  document.getElementById('score').innerText = baseScore;
+  document.getElementById('bonus').innerText = bonus;
 }
   function calculateAverageRating() {
   const values = Object.values(ratings).filter(v => typeof v === 'number');
