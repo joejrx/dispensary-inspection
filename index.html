@@ -582,16 +582,18 @@ function lockInspection() {
 function allQuestionsHaveRatings() {
   let allRated = true;
 
-  document.querySelectorAll('.rating-select').forEach(select => {
-    const qId = select.dataset.questionId;
-    const value = ratings[qId];
+  currentConfig.sections.forEach(section => {
+    section.questions.forEach(q => {
+      const value = ratings[q.id];
 
-    if (value === null || value === undefined || value === '') {
-      select.classList.add('rating-missing');
-      allRated = false;
-    } else {
-      select.classList.remove('rating-missing');
-    }
+      if (
+        value === null ||
+        value === undefined ||
+        value === ''
+      ) {
+        allRated = false;
+      }
+    });
   });
 
   if (!allRated) {
@@ -600,6 +602,7 @@ function allQuestionsHaveRatings() {
 
   return allRated;
 }
+``
 ``
 function performanceLabelFromRating(avg) {
   if (avg === null || avg === undefined) return '—';
