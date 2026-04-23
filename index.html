@@ -122,7 +122,8 @@ input[type="radio"] {
   <input type="date" id="visitDate" style="width:100%; margin-top:6px;" />
 </div>
   <div id="reviewScreen" class="section" style="display:none;"></div>
-  <div class="section">
+
+<div class="section" id="scoring-rubric">
   <h2>1–5 Scoring Rubric</h2>
 
 <ul style="padding-left:18px; margin:0;">
@@ -697,10 +698,12 @@ if (criticalFail) {
 
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
-
+window.scrollTo({ top: 0, behavior: 'smooth' });
   document.getElementById('inspection').style.display = 'none';
   document.getElementById('positive-experiences').style.display = 'none';
 document.getElementById('opportunities').style.display = 'none';
+  document.getElementById('scoring-rubric').style.display = 'none';
+
   const baseScore = calculateBaseScore();
 const bonusScore = criticalFail ? 0 : calculateBonusScore();  const totalScore = baseScore + bonusScore;
 const avgRating = calculateAverageRating();
@@ -841,6 +844,8 @@ function exitReviewScreen() {
   document.getElementById('inspection').style.display = 'block';
   document.getElementById('positive-experiences').style.display = 'block';
   document.getElementById('opportunities').style.display = 'block';
+    document.getElementById('scoring-rubric').style.display = 'block';
+
 }
 </script>
 
