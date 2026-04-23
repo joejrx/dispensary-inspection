@@ -145,16 +145,7 @@ input[type="radio"] {
   id="submitInspection"
   type="button"
   style="font-size:16px; padding:10px 14px; width:100%;">
-<!-- ✅ QA helper -->
-<div class="section" style="background:#fff8e1;">
-  <button
-    id="qaAnswerAllYes"
-    type="button"
-    style="font-size:14px; padding:8px 12px; width:100%; background:#ffb300;"
-  >
-    ⚠️ QA: Answer Yes to All Questions
-  </button>
-</div>
+
 
 <!-- ✅ Review / Submit -->
 <div class="section">
@@ -166,6 +157,7 @@ input[type="radio"] {
     Review &amp; Submit Inspection
   </button>
 </div>
+
 <script>
   
 let photos = {};
@@ -198,8 +190,7 @@ document.getElementById('visitDate').addEventListener('change', e => {
 });
 
 document.getElementById('submitInspection').addEventListener('click', showReviewScreen);
-  document.getElementById('qaAnswerAllYes')
-  .addEventListener('click', qaAnswerYesToAll);
+
 
 let currentConfig;
 
@@ -714,6 +705,7 @@ function qaAnswerYesToAll() {
   alert('QA: All questions answered as compliant.');
 }
 function showReviewScreen() {
+  alert('Review button fired');
   console.log('Review button clicked');
 
   // ✅ Required header validation
