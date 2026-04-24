@@ -536,19 +536,20 @@ performanceLabel: performanceLabelFromRating(avgRating),
 };
 
   // 3️⃣ Lock the inspection
-  lockInspection();
+// ✅ 3️⃣ DOWNLOAD FIRST — must be first line after payload
+downloadInspectionJSON(payload);
 
-  // 4️⃣ Confirm to user (for now)
-  console.log('SUBMITTED INSPECTION:', payload);
-  alert('Inspection submitted successfully.');
-    downloadInspectionJSON(payload);
+// ✅ 4️⃣ Lock the inspection AFTER download
+lockInspection();
 
+// ✅ 5️⃣ User confirmation (alerts are now safe)
 alert(
   'Inspection downloaded.\n\n' +
   'Next steps:\n' +
   '1. Upload this JSON file and any photos to SharePoint\n' +
   '2. Select the JSON file and run the inspection flow.'
 );
+
 }
 function calculateBaseScore() {
   let total = 0;
