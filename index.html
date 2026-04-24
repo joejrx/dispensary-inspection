@@ -497,6 +497,14 @@ function updateScore(cfg) {
   const total = values.reduce((sum, v) => sum + v, 0);
   return Number((total / values.length).toFixed(1));
 }
+  function calculateBonusScore() {
+  return Math.min(
+    positiveExperiences.filter(
+      p => p.name.trim() !== '' || p.notes.trim() !== ''
+    ).length * 2,
+    10
+  );
+}
   function submitInspection() {
   // 1️⃣ Validate store
   if (!selectedStore) {
@@ -516,8 +524,8 @@ const payload = {
 
   // ✅ Compliance scoring
   complianceScore: calculateBaseScore(),   // 0–100
-  bonusScore: calculateBonusScore(),
-  totalScore: calculateBaseScore() + calculateBonusScore(),
+bonusScore: 0,
+totalScore: calculateBaseScore(),
 
   // ✅ Performance scoring (NEW)
   performanceRating: avgRating,             // 1–5 average
