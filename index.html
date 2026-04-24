@@ -541,6 +541,14 @@ performanceLabel: performanceLabelFromRating(avgRating),
   // 4️⃣ Confirm to user (for now)
   console.log('SUBMITTED INSPECTION:', payload);
   alert('Inspection submitted successfully.');
+    downloadInspectionJSON(payload);
+
+alert(
+  'Inspection downloaded.\n\n' +
+  'Next steps:\n' +
+  '1. Upload this JSON file and any photos to SharePoint\n' +
+  '2. Select the JSON file and run the inspection flow.'
+);
 }
 function calculateBaseScore() {
   let total = 0;
@@ -864,6 +872,28 @@ function exitReviewScreen() {
     document.getElementById('scoring-rubric').style.display = 'block';
 
 }
+  function downloadInspectionJSON(payload) {
+  const fileName =
+    `inspection-${payload.store}-${payload.visitDate}.json`;
+
+  const jsonBlob = new Blob(
+    [JSON.stringify(payload, null, 2)],
+    { type: 'application/json' }
+  );
+
+  const url = URL.createObjectURL(jsonBlob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 </script>
 
 
