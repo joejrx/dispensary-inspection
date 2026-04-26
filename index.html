@@ -883,7 +883,8 @@ function exitReviewScreen() {
 }
   function downloadInspectionJSON(payload) {
   const fileName =
-    `inspection-${store}-${visitDate}.json`;
+  `Inspection_${payload.store}_${payload.visitDate}_${payload.submittedAt.slice(0,10)}.json`;
+
 
   const jsonBlob = new Blob(
     [JSON.stringify(payload, null, 2)],
