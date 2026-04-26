@@ -881,10 +881,9 @@ function exitReviewScreen() {
     document.getElementById('scoring-rubric').style.display = 'block';
 
 }
-  function downloadInspectionJSON(payload) {
+function downloadInspectionJSON(payload) {
   const fileName =
-  `Inspection_${payload.store}_${payload.visitDate}_${payload.submittedAt.slice(0,10)}.json`;
-
+    `Inspection_${payload.store}_${payload.visitDate}_${payload.submittedAt.slice(0,10)}.json`;
 
   const jsonBlob = new Blob(
     [JSON.stringify(payload, null, 2)],
@@ -903,6 +902,7 @@ function exitReviewScreen() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
 
 </script>
 
