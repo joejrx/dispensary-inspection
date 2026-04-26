@@ -505,7 +505,7 @@ function updateScore(cfg) {
     10
   );
 }
-  function submitInspection() {
+function submitInspection() {
   // 1️⃣ Validate store
   if (!selectedStore) {
     alert('Please select a store before submitting.');
@@ -513,52 +513,56 @@ function updateScore(cfg) {
   }
 
   // 2️⃣ Build payload
-const avgRating = calculateAverageRating();
+  const avgRating = calculateAverageRating();
 
-const payload = {
-  // ✅ Header
-  store: selectedStore,
-  storeManagers: storeManagers,
-  personVisiting: personVisiting,
-  visitDate: visitDate,
+  const payload = {
+    // ✅ Header
+    store: selectedStore,
+    storeManagers: storeManagers,
+    personVisiting: personVisiting,
+    visitDate: visitDate,
 
-  // ✅ Compliance scoring
-  complianceScore: calculateBaseScore(),   // 0–100
-bonusScore: 0,
-totalScore: calculateBaseScore(),
+    // ✅ Compliance scoring
+    complianceScore: calculateBaseScore(),   // 0–100
+    bonusScore: 0,
+    totalScore: calculateBaseScore(),
 
-  // ✅ Performance scoring (NEW)
-  performanceRating: avgRating,             // 1–5 average
-  ratedQuestionCount: Object.values(ratings)
-    .filter(v => typeof v === 'number').length,
-performanceLabel: performanceLabelFromRating(avgRating),
+    // ✅ Performance scoring
+    performanceRating: avgRating,             // 1–5 average
+    ratedQuestionCount: Object.values(ratings)
+      .filter(v => typeof v === 'number').length,
+    performanceLabel: performanceLabelFromRating(avgRating),
 
-  // ✅ Detail
-  answers: answers,
-  ratings: ratings,
-  positiveExperiences: positiveExperiences.filter(
-    p => p.name.trim() !== '' || p.notes.trim() !== ''
-  ),
+    // ✅ Detail
+    answers: answers,
+    ratings: ratings,
+    positiveExperiences: positiveExperiences.filter(
+      p => p.name.trim() !== '' || p.notes.trim() !== ''
+    ),
 
-  submittedAt: new Date().toISOString()
-};
+    submittedAt: new Date().toISOString()
+  };
 
-  // 3️⃣ Lock the inspection
-// ✅ 3️⃣ DOWNLOAD FIRST — must be first line after payload
-downloadInspectionJSON(payload);
+  // ✅ 3️⃣ Download JSON (system of record)
+  downloadInspectionJSON(payload);
 
-// ✅ 4️⃣ Lock the inspection AFTER download
-lockInspection();
+  // ✅ 4️⃣ Open SharePoint upload folder (after short delay)
+  setTimeout(() => {
+    openInspectionUploadFolder();
+  }, 500);
 
-// ✅ 5️⃣ User confirmation (alerts are now safe)
-alert(
-  'Inspection downloaded.\n\n' +
-  'Next steps:\n' +
-  '1. Upload this JSON file and any photos to SharePoint\n' +
-  '2. Select the JSON file and run the inspection flow.'
-);
+  // ✅ 5️⃣ Lock the inspection
+  lockInspection();
 
+  // ✅ 6️⃣ Clear instructions
+  alert(
+    'Inspection saved.\n\n' +
+    'Next step:\n' +
+    'Upload the downloaded JSON file (and any photos)\n' +
+    'to Inspection Submissions → Incoming.'
+  );
 }
+
 function calculateBaseScore() {
   let total = 0;
   let compliant = 0;
@@ -566,7 +570,6 @@ function calculateBaseScore() {
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
       total += 1;
-
       const value = ratings[q.id];
       if (isCompliant(q, value)) {
         compliant += 1;
@@ -579,8 +582,8 @@ function calculateBaseScore() {
   // Normalize to 0–100
   return Math.round((compliant / total) * 100);
 }
+
 function lockInspection() {
-  // Disable all inputs
   document
     .querySelectorAll('input, textarea, select, button')
     .forEach(el => {
@@ -589,298 +592,9 @@ function lockInspection() {
       }
     });
 
-  // Update status
   document.getElementById('status').innerText = 'Inspection submitted';
 }
-function allQuestionsHaveRatings() {
-  const missing = [];
 
-  currentConfig.sections.forEach(section => {
-    section.questions.forEach(q => {
-      const value = ratings[q.id];
-
-      if (
-        value === null ||
-        value === undefined ||
-        value === ''
-      ) {
-        missing.push({
-          section: section.title,
-          id: q.id,
-          label: q.label
-        });
-      }
-    });
-  });
-
-  if (missing.length > 0) {
-    console.warn('Missing answers:', missing);
-
-    alert(
-      'Some questions are still unanswered:\n\n' +
-      missing
-        .slice(0, 3)
-        .map(m => `• ${m.section}: ${m.label}`)
-        .join('\n') +
-      (missing.length > 3
-        ? `\n…and ${missing.length - 3} more`
-        : '')
-    );
-
-    return false;
-  }
-
-  return true;
-}
-function performanceLabelFromRating(avg) {
-  if (avg === null || avg === undefined) return '—';
-
-  if (avg < 2.0) return 'Non-Compliant';
-  if (avg < 3.0) return 'Partial / Needs Improvement';
-  if (avg < 4.0) return 'Fully Compliant';
-  if (avg < 4.5) return 'Above Average';
-  return 'Exceeds Expectations';
-}
-
-function performanceClassFromLabel(label) {
-  switch (label) {
-    case 'Non-Compliant':
-      return 'performance-unacceptable';
-    case 'Partial / Needs Improvement':
-      return 'performance-needs';
-    case 'Fully Compliant':
-      return 'performance-meets';
-    case 'Above Average':
-      return 'performance-exceeds';
-    case 'Exceeds Expectations':
-      return 'performance-outstanding';
-    default:
-      return '';
-  }
-}
-function isCompliant(q, value) {
-  if (q.type === 'yesno') {
-    return value === 'yes';
-  }
-  return typeof value === 'number' && value >= 3;
-}
-
-function hasCriticalFailure() {
-  for (const section of currentConfig.sections) {
-    for (const q of section.questions) {
-      if (q.critical === true) {
-        const value = ratings[q.id];
-        if (!isCompliant(q, value)) {
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-function hasEvidence(qId) {
-  const hasNote = notes[qId] && notes[qId].trim() !== '';
-  const hasPhotos = photos[qId] && photos[qId].length > 0;
-  return hasNote || hasPhotos;
-}
-function qaAnswerYesToAll() {
-  currentConfig.sections.forEach(section => {
-    section.questions.forEach(q => {
-      if (q.type === 'yesno') {
-        ratings[q.id] = 'yes';
-
-        const radios = document.querySelectorAll(
-          `input[type="radio"][name="${q.id}"]`
-        );
-        radios.forEach(r => {
-          r.checked = r.value === 'yes';
-        });
-      }
-
-      if (q.type === 'graded') {
-        ratings[q.id] = 3;
-
-        const select = document.querySelector(
-          `select.rating-select[name="${q.id}"]`
-        );
-        if (select) {
-          select.value = '3';
-        }
-      }
-    });
-  });
-
-  updateScore(currentConfig);
-
-  alert('QA: All questions answered as compliant.');
-}
-function showReviewScreen() {
-  // ✅ Header validation
-  if (!selectedStore) {
-    alert('Please select a store before reviewing.');
-    return;
-  }
-
-  if (!storeManagers.trim()) {
-    alert('Please enter the Store Manager(s).');
-    return;
-  }
-
-  if (!personVisiting.trim()) {
-    alert('Please enter the Person Visiting.');
-    return;
-  }
-
-  if (!visitDate) {
-    alert('Please select the Date of Visit.');
-    return;
-  }
-
-  // ✅ Require all questions answered
-  if (!allQuestionsHaveRatings()) {
-    return;
-  }
-
-  const criticalFail = hasCriticalFailure();
-
-  if (criticalFail) {
-    alert(
-      'This inspection contains a critical failure and cannot be marked compliant.'
-    );
-  }
-
-  // ✅ Scores
-  const baseScore = calculateBaseScore();
-  const avgRating = calculateAverageRating();
-  const performanceLabel = performanceLabelFromRating(avgRating);
-  const performanceClass = performanceClassFromLabel(performanceLabel);
-
-  // ✅ Positive Experiences
-  let positivesHtml = '';
-  positiveExperiences.forEach(p => {
-    if (p.name.trim() || p.notes.trim()) {
-      positivesHtml += `<li><strong>${p.name || 'Team Member'}:</strong> ${p.notes}</li>`;
-    }
-  });
-  if (!positivesHtml) {
-    positivesHtml = '<li>No positive experiences recorded.</li>';
-  }
-
-  // ✅ Opportunities
-  let opportunitiesHtml = '';
-  opportunities.forEach(o => {
-    if (o.area.trim() || o.observation.trim() || o.followUp.trim()) {
-      opportunitiesHtml += `
-        <li>
-          <strong>${o.area || 'Opportunity'}:</strong>
-          ${o.observation || ''}
-          ${o.followUp ? `<br/><em>Follow‑up:</em> ${o.followUp}` : ''}
-        </li>`;
-    }
-  });
-  if (!opportunitiesHtml) {
-    opportunitiesHtml = '<li>No opportunities noted.</li>';
-  }
-
-  // ✅ Notes & Photos
-  let evidenceHtml = '';
-  currentConfig.sections.forEach(section => {
-    let sectionEvidence = '';
-
-    section.questions.forEach(q => {
-      if (!hasEvidence(q.id)) return;
-
-      let noteHtml = notes[q.id]
-        ? `<div><strong>Notes:</strong><div style="white-space:pre-wrap;margin-left:8px;">${notes[q.id]}</div></div>`
-        : '';
-
-      let photoHtml =
-        photos[q.id] && photos[q.id].length > 0
-          ? `<div><strong>Photos:</strong><ul>${photos[q.id]
-              .map(f => `<li>${f.name}</li>`)
-              .join('')}</ul></div>`
-          : '';
-
-      sectionEvidence += `
-        <div style="margin-bottom:12px;">
-          <div style="font-weight:bold;">${q.label}</div>
-          ${noteHtml}
-          ${photoHtml}
-        </div>`;
-    });
-
-    if (sectionEvidence) {
-      evidenceHtml += `<h3>${section.title}</h3>${sectionEvidence}`;
-    }
-  });
-
-  if (!evidenceHtml) {
-    evidenceHtml = '<div>No notes or photos recorded.</div>';
-  }
-
-  // ✅ Render Review
-  const review = document.getElementById('reviewScreen');
-  review.style.display = 'block';
-
-  document.getElementById('inspection').style.display = 'none';
-  document.getElementById('positive-experiences').style.display = 'none';
-  document.getElementById('opportunities').style.display = 'none';
-  document.getElementById('scoring-rubric').style.display = 'none';
-
-  review.innerHTML = `
-    <h2>Final Review</h2>
-
-    <p><strong>Store:</strong> ${selectedStore}</p>
-    <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
-    <p><strong>Person Visiting:</strong> ${personVisiting}</p>
-    <p><strong>Date of Visit:</strong> ${visitDate}</p>
-
-    <p><strong>Compliance Status:</strong>
-      ${criticalFail ? '❌ Non‑Compliant (Critical Failure)' : '✅ Compliant'}
-    </p>
-
-    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
-
-    <p>
-      <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
-      <strong>Performance Level:</strong>
-      <span class="${performanceClass}">${performanceLabel}</span>
-    </p>
-
-    <h3>Opportunities / Issues</h3>
-    <ul>${opportunitiesHtml}</ul>
-
-    <h3>Positive Experiences</h3>
-    <ul>${positivesHtml}</ul>
-
-    <h3>Notes & Photo Evidence</h3>
-    ${evidenceHtml}
-
-    <div style="margin-top:16px;">
-      <button id="confirmSubmit">Confirm & Submit</button>
-      <button id="goBackEdit" style="margin-left:8px;">Go Back & Edit</button>
-    </div>
-  `;
-
-  document
-    .getElementById('confirmSubmit')
-    .addEventListener('click', submitInspection);
-
-  document
-    .getElementById('goBackEdit')
-    .addEventListener('click', exitReviewScreen);
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function exitReviewScreen() {
-  document.getElementById('reviewScreen').style.display = 'none';
-  document.getElementById('inspection').style.display = 'block';
-  document.getElementById('positive-experiences').style.display = 'block';
-  document.getElementById('opportunities').style.display = 'block';
-    document.getElementById('scoring-rubric').style.display = 'block';
-
-}
 function downloadInspectionJSON(payload) {
   const fileName =
     `Inspection_${payload.store}_${payload.visitDate}_${payload.submittedAt.slice(0,10)}.json`;
@@ -901,6 +615,14 @@ function downloadInspectionJSON(payload) {
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+// ✅ NEW helper — placed AFTER downloadInspectionJSON
+function openInspectionUploadFolder() {
+  window.open(
+    "https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming",
+    "_blank"
+  );
 }
 
 
