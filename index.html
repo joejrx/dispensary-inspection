@@ -505,30 +505,159 @@ function updateScore(cfg) {
     10
   );
 }
-  function showReviewScreen() {
-  document.getElementById('reviewScreen').style.display = 'block';
+ function showReviewScreen() {
+  // ✅ Header validation
+  if (!selectedStore) {
+    alert('Please select a store before reviewing.');
+    return;
+  }
+  if (!storeManagers.trim()) {
+    alert('Please enter the Store Manager(s).');
+    return;
+  }
+  if (!personVisiting.trim()) {
+    alert('Please enter the Person Visiting.');
+    return;
+  }
+  if (!visitDate) {
+    alert('Please select the Date of Visit.');
+    return;
+  }
+
+  // ✅ Require all questions answered
+  if (!allQuestionsHaveRatings()) {
+    return;
+  }
+
+  const criticalFail = hasCriticalFailure();
+
+  // ✅ Scores
+  const baseScore = calculateBaseScore();
+  const avgRating = calculateAverageRating();
+  const performanceLabel = performanceLabelFromRating(avgRating);
+  const performanceClass = performanceClassFromLabel(performanceLabel);
+
+  // ✅ Positive Experiences
+  let positivesHtml = '';
+  positiveExperiences.forEach(p => {
+    if (p.name.trim() || p.notes.trim()) {
+      positivesHtml += `<li><strong>${p.name || 'Team Member'}:</strong> ${p.notes}</li>`;
+    }
+  });
+  if (!positivesHtml) positivesHtml = '<li>No positive experiences recorded.</li>';
+
+  // ✅ Opportunities
+  let opportunitiesHtml = '';
+  opportunities.forEach(o => {
+    if (o.area || o.observation || o.followUp) {
+      opportunitiesHtml += `
+        <li>
+          <strong>${o.area || 'Opportunity'}:</strong>
+          ${o.observation || ''}
+          ${o.followUp ? `<br/><em>Follow‑up:</em> ${o.followUp}` : ''}
+        </li>`;
+    }
+  });
+  if (!opportunitiesHtml) opportunitiesHtml = '<li>No opportunities noted.</li>';
+
+  // ✅ Notes & Photos
+  let evidenceHtml = '';
+  currentConfig.sections.forEach(section => {
+    let sectionEvidence = '';
+
+    section.questions.forEach(q => {
+      if (!hasEvidence(q.id)) return;
+
+      const noteHtml = notes[q.id]
+        ? `<div><strong>Notes:</strong><div style="margin-left:8px;">${notes[q.id]}</div></div>`
+        : '';
+
+      const photoHtml =
+        photos[q.id] && photos[q.id].length
+          ? `<div><strong>Photos:</strong><ul>${photos[q.id].map(f => `<li>${f.name}</li>`).join('')}</ul></div>`
+          : '';
+
+      sectionEvidence += `
+        <div style="margin-bottom:12px;">
+          <div style="font-weight:bold;">${q.label}</div>
+          ${noteHtml}
+          ${photoHtml}
+        </div>`;
+    });
+
+    if (sectionEvidence) {
+      evidenceHtml += `<h3>${section.title}</h3>${sectionEvidence}`;
+    }
+  });
+
+  if (!evidenceHtml) evidenceHtml = '<div>No notes or photos recorded.</div>';
+
+  // ✅ Render Review
+  const review = document.getElementById('reviewScreen');
+  review.style.display = 'block';
+
   document.getElementById('inspection').style.display = 'none';
   document.getElementById('positive-experiences').style.display = 'none';
   document.getElementById('opportunities').style.display = 'none';
   document.getElementById('scoring-rubric').style.display = 'none';
 
-  document.getElementById('reviewScreen').innerHTML = `
+  review.innerHTML = `
     <h2>Final Review</h2>
-    <p><strong>Store:</strong> ${selectedStore}</p>
-    <p><strong>Person Visiting:</strong> ${personVisiting}</p>
-    <p><strong>Date:</strong> ${visitDate}</p>
 
-    <button onclick="submitInspection()">Confirm & Submit</button>
-    <button onclick="exitReviewScreen()">Go Back & Edit</button>
+    <p><strong>Store:</strong> ${selectedStore}</p>
+    <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
+    <p><strong>Person Visiting:</strong> ${personVisiting}</p>
+    <p><strong>Date of Visit:</strong> ${visitDate}</p>
+
+    <p><strong>Compliance Status:</strong>
+      ${criticalFail ? '❌ Non‑Compliant (Critical Failure)' : '✅ Compliant'}
+    </p>
+
+    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+
+    <p>
+      <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
+      <strong>Performance Level:</strong>
+      <span class="${performanceClass}">${performanceLabel}</span>
+    </p>
+
+    <h3>Opportunities / Issues</h3>
+    <ul>${opportunitiesHtml}</ul>
+
+    <h3>Positive Experiences</h3>
+    <ul>${positivesHtml}</ul>
+
+    <h3>Notes & Photo Evidence</h3>
+    ${evidenceHtml}
+
+    <div style="margin-top:16px;">
+      <button id="confirmSubmit">Confirm & Submit</button>
+      <button id="goBackEdit" style="margin-left:8px;">Go Back & Edit</button>
+    </div>
   `;
+
+  document.getElementById('confirmSubmit')
+    .addEventListener('click', submitInspection);
+
+  document.getElementById('goBackEdit')
+    .addEventListener('click', exitReviewScreen);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 function submitInspection() {
   // 1️⃣ Validate store
   if (!selectedStore) {
     alert('Please select a store before submitting.');
     return;
   }
-
+function exitReviewScreen() {
+  document.getElementById('reviewScreen').style.display = 'none';
+  document.getElementById('inspection').style.display = 'block';
+  document.getElementById('positive-experiences').style.display = 'block';
+  document.getElementById('opportunities').style.display = 'block';
+  document.getElementById('scoring-rubric').style.display = 'block';
+}
   // 2️⃣ Build payload
   const avgRating = calculateAverageRating();
 
