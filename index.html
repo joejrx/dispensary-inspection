@@ -466,7 +466,13 @@ row.appendChild(photoContainer);
     container.appendChild(sectionDiv);
   });
 }
-
+function exitReviewScreen() {
+  document.getElementById('reviewScreen').style.display = 'none';
+  document.getElementById('inspection').style.display = 'block';
+  document.getElementById('positive-experiences').style.display = 'block';
+  document.getElementById('opportunities').style.display = 'block';
+  document.getElementById('scoring-rubric').style.display = 'block';
+}
 function updateScore(cfg) {
   const warning = document.getElementById('storeWarning');
 
@@ -504,6 +510,34 @@ function updateScore(cfg) {
     ).length * 2,
     10
   );
+}
+  function allQuestionsHaveRatings() {
+  const missing = [];
+
+  currentConfig.sections.forEach(section => {
+    section.questions.forEach(q => {
+      const value = ratings[q.id];
+      if (value === null || value === undefined || value === '') {
+        missing.push({
+          section: section.title,
+          label: q.label
+        });
+      }
+    });
+  });
+
+  if (missing.length > 0) {
+    alert(
+      'Some questions are still unanswered:\n\n' +
+      missing.slice(0, 3)
+        .map(m => `• ${m.section}: ${m.label}`)
+        .join('\n') +
+      (missing.length > 3 ? `\n…and ${missing.length - 3} more` : '')
+    );
+    return false;
+  }
+
+  return true;
 }
  function showReviewScreen() {
   // ✅ Header validation
@@ -651,13 +685,7 @@ function submitInspection() {
     alert('Please select a store before submitting.');
     return;
   }
-function exitReviewScreen() {
-  document.getElementById('reviewScreen').style.display = 'none';
-  document.getElementById('inspection').style.display = 'block';
-  document.getElementById('positive-experiences').style.display = 'block';
-  document.getElementById('opportunities').style.display = 'block';
-  document.getElementById('scoring-rubric').style.display = 'block';
-}
+
   // 2️⃣ Build payload
   const avgRating = calculateAverageRating();
 
