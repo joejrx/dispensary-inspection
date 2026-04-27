@@ -742,6 +742,19 @@ function isCompliant(q, value) {
   }
   return typeof value === 'number' && value >= 3;
 }
+function hasCriticalFailure() {
+  for (const section of currentConfig.sections) {
+    for (const q of section.questions) {
+      if (q.critical === true) {
+        const value = ratings[q.id];
+        if (!isCompliant(q, value)) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
 
 function calculateBaseScore() {
   let total = 0;
