@@ -736,6 +736,12 @@ function submitInspection() {
     'to Inspection Submissions → Incoming.'
   );
 }
+function isCompliant(q, value) {
+  if (q.type === 'yesno') {
+    return value === 'yes';
+  }
+  return typeof value === 'number' && value >= 3;
+}
 
 function calculateBaseScore() {
   let total = 0;
