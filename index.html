@@ -548,6 +548,22 @@ function updateScore(cfg) {
   if (avg < 4.5) return 'Above Average';
   return 'Exceeds Expectations';
 }
+  function performanceClassFromLabel(label) {
+  switch (label) {
+    case 'Non-Compliant':
+      return 'performance-unacceptable';
+    case 'Partial / Needs Improvement':
+      return 'performance-needs';
+    case 'Fully Compliant':
+      return 'performance-meets';
+    case 'Above Average':
+      return 'performance-exceeds';
+    case 'Exceeds Expectations':
+      return 'performance-outstanding';
+    default:
+      return '';
+  }
+}
  function showReviewScreen() {
   // ✅ Header validation
   if (!selectedStore) {
