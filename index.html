@@ -505,6 +505,23 @@ function updateScore(cfg) {
     10
   );
 }
+  function showReviewScreen() {
+  document.getElementById('reviewScreen').style.display = 'block';
+  document.getElementById('inspection').style.display = 'none';
+  document.getElementById('positive-experiences').style.display = 'none';
+  document.getElementById('opportunities').style.display = 'none';
+  document.getElementById('scoring-rubric').style.display = 'none';
+
+  document.getElementById('reviewScreen').innerHTML = `
+    <h2>Final Review</h2>
+    <p><strong>Store:</strong> ${selectedStore}</p>
+    <p><strong>Person Visiting:</strong> ${personVisiting}</p>
+    <p><strong>Date:</strong> ${visitDate}</p>
+
+    <button onclick="submitInspection()">Confirm & Submit</button>
+    <button onclick="exitReviewScreen()">Go Back & Edit</button>
+  `;
+}
 function submitInspection() {
   // 1️⃣ Validate store
   if (!selectedStore) {
