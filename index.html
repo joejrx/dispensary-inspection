@@ -207,135 +207,43 @@ fetch('config.json')
     console.error(err);
   });
 
-function renderPositiveExperiences() {
-  const container = document.getElementById('positive-experiences');
+function renderSummary(summaryConfig) {
+  if (!summaryConfig || !summaryConfig.fields) return;
+
+  const container = document.createElement('div');
+  container.className = 'section';
 
   container.innerHTML = `
-    <h2>Positive Experiences Observed</h2>
-    <div style="font-size:14px;color:#555;margin-bottom:8px">
-      Optional – recognizes team members going above and beyond (+10 max)
+    <h2>${summaryConfig.title}</h2>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-weight:bold; margin-bottom:4px;">
+        ${summaryConfig.fields[0].label}
+      </div>
+      <textarea
+        id="${summaryConfig.fields[0].id}"
+        style="width:100%; min-height:100px;"
+      ></textarea>
     </div>
-    <button id="addPositiveBtn">Add Positive Experience</button>
-    <div id="positiveList"></div>
+
+    <div>
+      <div style="font-weight:bold; margin-bottom:4px;">
+        ${summaryConfig.fields[1].label}
+      </div>
+      <textarea
+        id="${summaryConfig.fields[1].id}"
+        style="width:100%; min-height:100px;"
+      ></textarea>
+    </div>
   `;
 
-  document
-    .getElementById('addPositiveBtn')
-    .addEventListener('click', addPositiveExperience);
+  document.getElementById('inspection').appendChild(container);
 }
-  function renderOpportunities() {
-  const container = document.getElementById('opportunities');
 
-  container.innerHTML = `
-    <h2>Opportunities / Issues Observed</h2>
-    <div style="font-size:14px;color:#555;margin-bottom:8px">
-      Optional – document gaps, risks, or follow-up items
-    </div>
-    <button id="addOpportunityBtn">Add Opportunity</button>
-    <div id="opportunityList"></div>
-  `;
+ 
 
-  document
-    .getElementById('addOpportunityBtn')
-    .addEventListener('click', addOpportunity);
-}
-  function addOpportunity() {
-  if (opportunities.length >= 5) {
-    alert('Maximum of 5 opportunities allowed.');
-    return;
-  }
 
-  opportunities.push({
-    area: '',
-    observation: '',
-    followUp: ''
-  });
 
-  renderOpportunityEntries();
-}
-  function renderOpportunityEntries() {
-  const list = document.getElementById('opportunityList');
-  list.innerHTML = '';
-
-  opportunities.forEach((entry, index) => {
-    const div = document.createElement('div');
-    div.style.marginTop = '12px';
-
-    div.innerHTML = `
-      <div style="font-weight:bold">Area / Topic</div>
-      <input type="text" style="width:100%;margin-bottom:6px"
-        placeholder="e.g., Exterior, Inventory, Customer Experience"
-        value="${entry.area}">
-
-      <div style="font-weight:bold">What was observed?</div>
-      <textarea style="width:100%;margin-bottom:6px"
-        placeholder="Describe the issue or gap">${entry.observation}</textarea>
-
-      <div style="font-weight:bold">Suggested follow-up (optional)</div>
-      <textarea style="width:100%"
-        placeholder="Optional next steps">${entry.followUp}</textarea>
-    `;
-
-    const inputs = div.querySelectorAll('input, textarea');
-
-    inputs[0].addEventListener('input', e => {
-      entry.area = e.target.value;
-    });
-
-    inputs[1].addEventListener('input', e => {
-      entry.observation = e.target.value;
-    });
-
-    inputs[2].addEventListener('input', e => {
-      entry.followUp = e.target.value;
-    });
-
-    list.appendChild(div);
-  });
-}
-function addPositiveExperience() {
-  if (positiveExperiences.length >= 5) {
-    alert('Maximum of 5 positive experiences allowed.');
-    return;
-  }
-
-  const entry = { name: '', notes: '' };
-  positiveExperiences.push(entry);
-
-  renderPositiveExperienceEntries();
-}
-function renderPositiveExperienceEntries() {
-  const list = document.getElementById('positiveList');
-  list.innerHTML = '';
-
-  positiveExperiences.forEach((entry, index) => {
-    const div = document.createElement('div');
-    div.style.marginTop = '12px';
-
-    div.innerHTML = `
-      <div style="font-weight:bold">Team Member Name</div>
-      <input type="text" style="width:100%;margin-bottom:6px"
-        value="${entry.name}">
-      <div style="font-weight:bold">What was observed?</div>
-      <textarea style="width:100%">${entry.notes}</textarea>
-    `;
-
-    const inputs = div.querySelectorAll('input, textarea');
-    inputs[0].addEventListener('input', e => {
-      entry.name = e.target.value;
-      updateScore(currentConfig);
-    });
-    inputs[1].addEventListener('input', e => {
-      entry.notes = e.target.value;
-      updateScore(currentConfig);
-    });
-
-    list.appendChild(div);
-  });
-
-  updateScore(currentConfig);
-
-}
 function renderInspection(cfg) {
   const container = document.getElementById('inspection');
   container.innerHTML = '';
