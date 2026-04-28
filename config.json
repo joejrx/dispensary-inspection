@@ -701,22 +701,6 @@
   ]
 },
 
-"bonusSection": {
-  "id": "positiveExperiences",
-  "title": "Positive Experiences Observed",
-  "description": "Optional bonus points for observed excellence. Notes required.",
-  "maxBonusPoints": 10,
-  "pointsPerEntry": 2,
-  "fields": [
-    {
-      "id": "teamMember",
-      "label": "Team Member Name",
-      "type": "text",
-      "required": true
-    }
-  ]
-},
-
 "logic": {
   "scorePerYes": 2,
   "scorePerNo": 0,
