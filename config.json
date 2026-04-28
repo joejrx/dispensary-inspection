@@ -192,24 +192,10 @@
   "title": "Security Experience (Safe but Not Intimidating)",
   "questions": [
     {
-      "id": "sec_visible_professional",
-      "label": "Security presence is clearly visible and professional",
-      "type": "yesno"
-    },
-    {
-      "id": "sec_guest_greeting",
-      "label": "Security staff greets guests appropriately and professionally",
-      "type": "yesno"
-    },
-    {
-      "id": "sec_guest_interactions_respectful",
-      "label": "Security interactions with guests are calm, respectful, and non-confrontational",
-      "type": "yesno"
-    },
-    {
-      "id": "sec_overall_experience",
-      "label": "Overall security presence contributes to a safe and welcoming environment",
-      "type": "yesno"
+      "id": "sec_overall_experience_graded",
+      "label": "Security experience (safe but not intimidating)",
+      "type": "graded",
+      "critical": false
     }
   ]
 },
