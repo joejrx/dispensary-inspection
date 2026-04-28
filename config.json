@@ -101,7 +101,7 @@
     },
     {
       "id": "rec_ceiling_tiles_condition",
-      "label": "Ceiling tiles are in good condition",
+      "label": "Ceiling tiles in good condition",
       "type": "yesno"
     },
     {
