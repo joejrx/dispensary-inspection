@@ -723,3 +723,4 @@
   "notesRequiredIfNo": true,
   "bonusCalculation": "min(entries * pointsPerEntry, maxBonusPoints)"
 }
+}
