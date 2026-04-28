@@ -137,9 +137,7 @@ input[type="radio"] {
 <div id="inspection"></div>
   
 <!-- ✅ Opportunities / Issues -->
-<div id="opportunities" class="section"></div>
 
-  <div id="positive-experiences" class="section"></div>
  <div class="section">
   <button
     id="submitInspection"
@@ -200,8 +198,7 @@ fetch('config.json')
     cfg.inspectionMeta.baseScoreMax;
 
   renderInspection(cfg);
-  renderOpportunities();
-  renderPositiveExperiences();
+ 
   updateScore(cfg);
 })
   .catch(err => {
