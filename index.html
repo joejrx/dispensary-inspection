@@ -198,7 +198,7 @@ fetch('config.json')
     cfg.inspectionMeta.baseScoreMax;
 
   renderInspection(cfg);
- 
+ renderSummary(cfg.summary);
   updateScore(cfg);
 })
   .catch(err => {
@@ -225,7 +225,7 @@ function renderSummary(summaryConfig) {
         style="width:100%; min-height:100px;"
       ></textarea>
     </div>
-renderSummary(currentConfig.summary);
+
     <div>
       <div style="font-weight:bold; margin-bottom:4px;">
         ${summaryConfig.fields[1].label}
@@ -239,7 +239,6 @@ renderSummary(currentConfig.summary);
 
   document.getElementById('inspection').appendChild(container);
 }
-
  
 
 
