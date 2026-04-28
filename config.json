@@ -132,7 +132,7 @@
     },
     {
       "id": "sf_interior_doors_clean",
-      "label": "All interior doors are clean",
+      "label": "Doors are clean and in proper working condition",
       "type": "yesno"
     },
     {
@@ -142,7 +142,7 @@
     },
     {
       "id": "sf_walls_baseboards_clean",
-      "label": "Walls and baseboards are clean in every room",
+      "label": "Walls and baseboards clean",
       "type": "yesno"
     },
     {
