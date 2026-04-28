@@ -2,14 +2,14 @@
 {
 
 "inspectionMeta": {
-  "version": "1.2.0"
-}
+  "inspectionName": "Dispensary Visit Scorecard",
+  "version": "1.2.0",
+  "baseScoreMax": 100,
+  "bonusScoreMax": 10,
+  "pointsPerQuestion": 2,
+  "scoringModel": "rating_1_to_5"
+},
 
-    "baseScoreMax": 100,
-    "bonusScoreMax": 10,
-    "pointsPerQuestion": 2,
-"scoringModel": "rating_1_to_5"   
-  },
 
   "header": {
     "fields": [
