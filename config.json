@@ -678,6 +678,27 @@
       "type": "yesno"
     }
   ]
+},
+    {
+  "id": "summary",
+  "title": "Summary",
+  "type": "narrative",
+  "fields": [
+    {
+      "id": "what_is_going_well",
+      "label": "What is going well?",
+      "type": "textarea",
+      "required": false,
+      "maxLength": 1000
+    },
+    {
+      "id": "areas_need_improvement",
+      "label": "What areas need improvement?",
+      "type": "textarea",
+      "required": false,
+      "maxLength": 1000
+    }
+  ]
 }
 ],
 
