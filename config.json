@@ -266,7 +266,7 @@
     },
     {
       "id": "bath_interior_doors_clean",
-     ""label": "Doors are clean and in proper working condition",
+     "label": "Doors are clean and in proper working condition",
       "type": "yesno"
     },
     {
