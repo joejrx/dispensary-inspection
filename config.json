@@ -211,7 +211,7 @@
     },
     {
       "id": "boh_interior_doors_clean",
-      "label": "All interior doors are clean",
+    "label": "Doors are clean and in proper working condition",
       "type": "yesno"
     },
     {
@@ -221,7 +221,7 @@
     },
     {
       "id": "boh_walls_baseboards_clean",
-      "label": "Walls and baseboards are clean in every room",
+       "label": "Walls and baseboards clean",
       "type": "yesno"
     },
     {
@@ -246,7 +246,7 @@
     },
     {
       "id": "boh_equipment_working",
-      "label": "All equipment is in good working condition",
+       "label": "Computers are clean and in good working condition",
       "type": "yesno"
     },
     {
