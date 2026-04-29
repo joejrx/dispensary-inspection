@@ -634,18 +634,10 @@ function submitInspection() {
 
   // ✅ 4️⃣ Open SharePoint upload folder (after short delay)
   setTimeout(() => {
-    openInspectionUploadFolder();
-  }, 500);
-
-  // ✅ 5️⃣ Lock the inspection
-  lockInspection();
-
-  // ✅ 6️⃣ Clear instructions
-  alert(
-    'Inspection saved.\n\n' +
-    'Next step:\n' +
-    'Upload the downloaded JSON file (and any photos)\n' +
-    'to Inspection Submissions → Incoming.'
+ function openInspectionUploadFolder() {
+  window.open(
+    "https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming",
+    "_blank"
   );
 }
 function isCompliant(q, value) {
