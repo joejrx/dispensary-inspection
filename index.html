@@ -589,62 +589,69 @@ function updateScore(cfg) {
 }
 
 function submitInspection() {
-  // 1️⃣ Validate store
+  // ✅ 1️⃣ Validate required header fields
   if (!selectedStore) {
     alert('Please select a store before submitting.');
     return;
-    
-setTimeout(openInspectionUploadFolder, 500);
-
   }
 
-  // 2️⃣ Build payload
+  // ✅ 2️⃣ Build payload
   const avgRating = calculateAverageRating();
 
   const payload = {
-    // ✅ Header
     store: selectedStore,
     storeManagers: storeManagers,
     personVisiting: personVisiting,
     visitDate: visitDate,
 
-    // ✅ Compliance scoring
-    complianceScore: calculateBaseScore(),   // 0–100
+    complianceScore: calculateBaseScore(),
     bonusScore: 0,
     totalScore: calculateBaseScore(),
 
-    // ✅ Performance scoring
-    performanceRating: avgRating,             // 1–5 average
+    performanceRating: avgRating,
     ratedQuestionCount: Object.values(ratings)
       .filter(v => typeof v === 'number').length,
     performanceLabel: performanceLabelFromRating(avgRating),
 
-    // ✅ Detail
-    answers: answers,
     ratings: ratings,
-    positiveExperiences: positiveExperiences.filter(
-      p => p.name.trim() !== '' || p.notes.trim() !== ''
-    ),
+    notes: notes,
+    photos: photos,
 
     submittedAt: new Date().toISOString()
   };
 
-  // ✅ 3️⃣ Download JSON (system of record)
+  // ✅ 3️⃣ Download JSON
   downloadInspectionJSON(payload);
 
-  // ✅ 4️⃣ Open SharePoint upload folder (after short delay)
- function openInspectionUploadFolder() {
+  // ✅ 4️⃣ Open SharePoint upload folder
+  setTimeout(openInspectionUploadFolder, 500);
+
+  // ✅ 5️⃣ Lock inspection
+  lockInspection();
+}
+
+/* ===============================
+   SHAREPOINT UPLOAD
+   =============================== */
+
+function openInspectionUploadFolder() {
   window.open(
     "https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming",
     "_blank"
   );
 }
+
+/* ===============================
+   SCORING HELPERS
+   =============================== */
+
 function isCompliant(q, value) {
   if (q.type === 'yesno') {
     return value === 'yes';
   }
   return typeof value === 'number' && value >= 3;
 }
+
 function hasCriticalFailure() {
   for (const section of currentConfig.sections) {
     for (const q of section.questions) {
@@ -674,10 +681,29 @@ function calculateBaseScore() {
   });
 
   if (total === 0) return 0;
-
-  // Normalize to 0–100
   return Math.round((compliant / total) * 100);
 }
+
+function calculateAverageRating() {
+  const values = Object.values(ratings).filter(v => typeof v === 'number');
+  if (values.length === 0) return null;
+  return Number(
+    (values.reduce((sum, v) => sum + v, 0) / values.length).toFixed(1)
+  );
+}
+
+function performanceLabelFromRating(avg) {
+  if (avg === null || avg === undefined) return '—';
+  if (avg < 2.0) return 'Non-Compliant';
+  if (avg < 3.0) return 'Partial / Needs Improvement';
+  if (avg < 4.0) return 'Fully Compliant';
+  if (avg < 4.5) return 'Above Average';
+  return 'Exceeds Expectations';
+}
+
+/* ===============================
+   FINALIZATION
+   =============================== */
 
 function lockInspection() {
   document
@@ -711,15 +737,6 @@ function downloadInspectionJSON(payload) {
 
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-}
-
-// ✅ NEW helper — placed AFTER downloadInspectionJSON
-
-function openInspectionUploadFolder() {
-  window.open(
-    "https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming", "_blank"
-    
-  );
 }
 </script>
 
