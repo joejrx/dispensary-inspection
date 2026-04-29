@@ -510,26 +510,7 @@ function updateScore(cfg) {
   const performanceLabel = performanceLabelFromRating(avgRating);
   const performanceClass = performanceClassFromLabel(performanceLabel);
 
-  // ✅ Positive Experiences
-  let positivesHtml = '';
-  positiveExperiences.forEach(p => {
-    if (p.name.trim() || p.notes.trim()) {
-      positivesHtml += `<li><strong>${p.name || 'Team Member'}:</strong> ${p.notes}</li>`;
-    }
-  });
-  if (!positivesHtml) positivesHtml = '<li>No positive experiences recorded.</li>';
-
-  // ✅ Opportunities
-  let opportunitiesHtml = '';
-  opportunities.forEach(o => {
-    if (o.area || o.observation || o.followUp) {
-      opportunitiesHtml += `
-        <li>
-          <strong>${o.area || 'Opportunity'}:</strong>
-          ${o.observation || ''}
-          ${o.followUp ? `<br/><em>Follow‑up:</em> ${o.followUp}` : ''}
-        </li>`;
-    }
+ 
   });
   if (!opportunitiesHtml) opportunitiesHtml = '<li>No opportunities noted.</li>';
 
@@ -569,10 +550,7 @@ function updateScore(cfg) {
   const review = document.getElementById('reviewScreen');
   review.style.display = 'block';
 
-  document.getElementById('inspection').style.display = 'none';
-  document.getElementById('positive-experiences').style.display = 'none';
-  document.getElementById('opportunities').style.display = 'none';
-  document.getElementById('scoring-rubric').style.display = 'none';
+ 
 
   review.innerHTML = `
     <h2>Final Review</h2>
@@ -594,11 +572,6 @@ function updateScore(cfg) {
       <span class="${performanceClass}">${performanceLabel}</span>
     </p>
 
-    <h3>Opportunities / Issues</h3>
-    <ul>${opportunitiesHtml}</ul>
-
-    <h3>Positive Experiences</h3>
-    <ul>${positivesHtml}</ul>
 
     <h3>Notes & Photo Evidence</h3>
     ${evidenceHtml}
