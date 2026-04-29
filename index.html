@@ -373,9 +373,7 @@ row.appendChild(photoContainer);
 function exitReviewScreen() {
   document.getElementById('reviewScreen').style.display = 'none';
   document.getElementById('inspection').style.display = 'block';
-  document.getElementById('positive-experiences').style.display = 'block';
-  document.getElementById('opportunities').style.display = 'block';
-  document.getElementById('scoring-rubric').style.display = 'block';
+    document.getElementById('scoring-rubric').style.display = 'block';
 }
 function updateScore(cfg) {
   const warning = document.getElementById('storeWarning');
@@ -511,8 +509,7 @@ function updateScore(cfg) {
   const performanceClass = performanceClassFromLabel(performanceLabel);
 
  
-  });
-  if (!opportunitiesHtml) opportunitiesHtml = '<li>No opportunities noted.</li>';
+  
 
   // ✅ Notes & Photos
   let evidenceHtml = '';
@@ -596,6 +593,9 @@ function submitInspection() {
   if (!selectedStore) {
     alert('Please select a store before submitting.');
     return;
+    
+setTimeout(openInspectionUploadFolder, 500);
+
   }
 
   // 2️⃣ Build payload
@@ -633,7 +633,6 @@ function submitInspection() {
   downloadInspectionJSON(payload);
 
   // ✅ 4️⃣ Open SharePoint upload folder (after short delay)
-  setTimeout(() => {
  function openInspectionUploadFolder() {
   window.open(
     "https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming",
