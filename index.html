@@ -562,7 +562,7 @@ function updateScore(cfg) {
     <p><strong>Person Visiting:</strong> ${personVisiting}</p>
     <p><strong>Date of Visit:</strong> ${visitDate}</p>
 
-   <p><strong>Compliance Status:</strong>
+<p><strong>Compliance Status:</strong>
   ${baseScore >= COMPLIANCE_PASS_SCORE
     ? '✅ Compliant'
     : '❌ Non‑Compliant'}
@@ -572,11 +572,12 @@ function updateScore(cfg) {
 
 <p>
   <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
- <strong>Performance Level:</strong>
-<span class="${performanceClass}">
-  ${getDisplayPerformanceLabel(baseScore, performanceLabel)}
-</span>
+  <strong>Performance Level:</strong>
+  <span class="${performanceClass}">
+    ${getDisplayPerformanceLabel(baseScore, performanceLabel)}
+  </span>
 </p>
+``
 
 <h3>Notes & Photo Evidence</h3>
 ${evidenceHtml}
