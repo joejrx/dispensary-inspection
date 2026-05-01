@@ -562,43 +562,43 @@ function getDisplayPerformanceLabel(baseScore, performanceLabel) {
 
  
 
-  review.innerHTML = `
-    <h2>Final Review</h2>
+  reviewDiv.innerHTML = `
+  <h2>Final Review</h2>
 
-    <p><strong>Store:</strong> ${selectedStore}</p>
-    <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
-    <p><strong>Person Visiting:</strong> ${personVisiting}</p>
-    <p><strong>Date of Visit:</strong> ${visitDate}</p>
+  <p><strong>Store:</strong> ${selectedStore}</p>
+  <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
+  <p><strong>Person Visiting:</strong> ${personVisiting}</p>
+  <p><strong>Date of Visit:</strong> ${visitDate}</p>
 
-<p><strong>Compliance Status:</strong>
-  ${baseScore >= COMPLIANCE_PASS_SCORE
-    ? '✅ Compliant'
-    : '❌ Non‑Compliant'}
-</p>
+  <p><strong>Compliance Status:</strong>
+    ${baseScore >= COMPLIANCE_PASS_SCORE
+      ? '✅ Compliant'
+      : '❌ Non-Compliant'}
+  </p>
 
-<p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+  <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
 
-<p>
-  <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
- <strong>Performance Level:</strong>
-<span class="${performanceClass}">
-  ${
-    baseScore < COMPLIANCE_PASS_SCORE && performanceLabel === 'Fully Compliant'
-      ? 'Meets Expectations'
-      : performanceLabel
-  }
-</span>
+  <p>
+    <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
+    <strong>Performance Level:</strong>
+    <span class="${performanceClass}">
+      ${
+        baseScore < COMPLIANCE_PASS_SCORE &&
+        performanceLabel === 'Fully Compliant'
+          ? 'Meets Expectations'
+          : performanceLabel
+      }
+    </span>
+  </p>
 
-</p>
-``
+  <h3>Notes & Photo Evidence</h3>
+  ${evidenceHtml}
 
-<h3>Notes & Photo Evidence</h3>
-${evidenceHtml}
-
-<div style="margin-top:16px;">
-      <button id="confirmSubmit">Confirm & Submit</button>
-      <button id="goBackEdit" style="margin-left:8px;">Go Back & Edit</button>
-    </div>
+  <div style="margin-top:16px;">
+    <button onclick="confirmSubmit()">Confirm & Submit</button>
+    <button onclick="goBackToEdit()">Go Back & Edit</button>
+  </div>
+`;
   `;
 
   document.getElementById('confirmSubmit')
