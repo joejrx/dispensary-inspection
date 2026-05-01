@@ -489,7 +489,7 @@ function getDisplayPerformanceLabel(baseScore, performanceLabel) {
   }
   return performanceLabel;
 }
- function showReviewScreen() {
+function showReviewScreen() {
   // ✅ Header validation
   if (!selectedStore) {
     alert('Please select a store before reviewing.');
@@ -503,103 +503,54 @@ function getDisplayPerformanceLabel(baseScore, performanceLabel) {
     alert('Please enter the Person Visiting.');
     return;
   }
-  if (!visitDate) {
-    alert('Please select the Date of Visit.');
+
+  // ✅ ADD THIS BLOCK RIGHT HERE
+  const reviewDiv = document.getElementById('review');
+  if (!reviewDiv) {
+    console.error('Review container not found');
     return;
   }
 
-  // ✅ Require all questions answered
-  if (!allQuestionsHaveRatings()) {
-    return;
-  }
-
-  const criticalFail = hasCriticalFailure();
-
-  // ✅ Scores
-  const baseScore = calculateBaseScore();
-  const avgRating = calculateAverageRating();
-  const performanceLabel = performanceLabelFromRating(avgRating);
-  const performanceClass = performanceClassFromLabel(performanceLabel);
-
- 
-  
-
-  // ✅ Notes & Photos
-  let evidenceHtml = '';
-  currentConfig.sections.forEach(section => {
-    let sectionEvidence = '';
-
-    section.questions.forEach(q => {
-      if (!hasEvidence(q.id)) return;
-
-      const noteHtml = notes[q.id]
-        ? `<div><strong>Notes:</strong><div style="margin-left:8px;">${notes[q.id]}</div></div>`
-        : '';
-
-      const photoHtml =
-        photos[q.id] && photos[q.id].length
-          ? `<div><strong>Photos:</strong><ul>${photos[q.id].map(f => `<li>${f.name}</li>`).join('')}</ul></div>`
-          : '';
-
-      sectionEvidence += `
-        <div style="margin-bottom:12px;">
-          <div style="font-weight:bold;">${q.label}</div>
-          ${noteHtml}
-          ${photoHtml}
-        </div>`;
-    });
-
-    if (sectionEvidence) {
-      evidenceHtml += `<h3>${section.title}</h3>${sectionEvidence}`;
-    }
-  });
-
-  if (!evidenceHtml) evidenceHtml = '<div>No notes or photos recorded.</div>';
-
-  // ✅ Render Review
-  const review = document.getElementById('reviewScreen');
-  review.style.display = 'block';
-
- 
-
+  // ✅ everything below can safely use reviewDiv
   reviewDiv.innerHTML = `
-  <h2>Final Review</h2>
+    <h2>Final Review</h2>
 
-  <p><strong>Store:</strong> ${selectedStore}</p>
-  <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
-  <p><strong>Person Visiting:</strong> ${personVisiting}</p>
-  <p><strong>Date of Visit:</strong> ${visitDate}</p>
+    <p><strong>Store:</strong> ${selectedStore}</p>
+    <p><strong>Store Manager(s):</strong> ${storeManagers}</p>
+    <p><strong>Person Visiting:</strong> ${personVisiting}</p>
+    <p><strong>Date of Visit:</strong> ${visitDate}</p>
 
-  <p><strong>Compliance Status:</strong>
-    ${baseScore >= COMPLIANCE_PASS_SCORE
-      ? '✅ Compliant'
-      : '❌ Non-Compliant'}
-  </p>
+    <p><strong>Compliance Status:</strong>
+      ${baseScore >= COMPLIANCE_PASS_SCORE
+        ? '✅ Compliant'
+        : '❌ Non-Compliant'}
+    </p>
 
-  <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
 
-  <p>
-    <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
-    <strong>Performance Level:</strong>
-    <span class="${performanceClass}">
-      ${
-        baseScore < COMPLIANCE_PASS_SCORE &&
-        performanceLabel === 'Fully Compliant'
-          ? 'Meets Expectations'
-          : performanceLabel
-      }
-    </span>
-  </p>
+    <p>
+      <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
+      <strong>Performance Level:</strong>
+      <span class="${performanceClass}">
+        ${
+          baseScore < COMPLIANCE_PASS_SCORE &&
+          performanceLabel === 'Fully Compliant'
+            ? 'Meets Expectations'
+            : performanceLabel
+        }
+      </span>
+    </p>
 
-  <h3>Notes & Photo Evidence</h3>
-  ${evidenceHtml}
+    <h3>Notes & Photo Evidence</h3>
+    ${evidenceHtml}
 
-  <div style="margin-top:16px;">
-    <button onclick="confirmSubmit()">Confirm & Submit</button>
-    <button onclick="goBackToEdit()">Go Back & Edit</button>
-  </div>
-`;
- 
+    <div style="margin-top:16px;">
+      <button onclick="confirmSubmit()">Confirm & Submit</button>
+      <button onclick="goBackToEdit()">Go Back & Edit</button>
+    </div>
+  `;
+}
+
 
   document.getElementById('confirmSubmit')
     .addEventListener('click', submitInspection);
