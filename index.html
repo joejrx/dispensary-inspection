@@ -566,9 +566,11 @@ function updateScore(cfg) {
       ${criticalFail ? '❌ Non‑Compliant (Critical Failure)' : '✅ Compliant'}
     </p>
 
-    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
-
-    <p>
+    <p><strong>Compliance Status:</strong>
+  ${baseScore >= COMPLIANCE_PASS_SCORE
+    ? '✅ Compliant'
+    : '❌ Non‑Compliant'}
+</p>
       <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
       <strong>Performance Level:</strong>
       <span class="${performanceClass}">${performanceLabel}</span>
