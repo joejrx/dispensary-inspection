@@ -151,6 +151,8 @@ input[type="radio"] {
 
 <script>
   
+const QA_MODE = true; // 🔴 set to false before prod
+
 let photos = {};
   let notes = {};
   let positiveExperiences = [];
@@ -198,6 +200,9 @@ fetch('config.json')
     cfg.inspectionMeta.baseScoreMax;
 
   renderInspection(cfg);
+   
+if (QA_MODE) renderQAModeButton();
+
  renderSummary(cfg.summary);
   updateScore(cfg);
 })
