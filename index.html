@@ -572,8 +572,10 @@ function updateScore(cfg) {
 
 <p>
   <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
-  <strong>Performance Level:</strong>
-  <span class="${performanceClass}">${performanceLabel}</span>
+ <strong>Performance Level:</strong>
+<span class="${performanceClass}">
+  ${getDisplayPerformanceLabel(baseScore, performanceLabel)}
+</span>
 </p>
 
 <h3>Notes & Photo Evidence</h3>
