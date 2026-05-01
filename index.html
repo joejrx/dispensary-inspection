@@ -743,6 +743,52 @@ function downloadInspectionJSON(payload) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+  function renderQAModeButton() {
+  const container = document.getElementById('inspection');
+  if (!container) return;
+
+  const qaBtn = document.createElement('button');
+  qaBtn.textContent = '✅ QA MODE: Mark All Questions YES';
+  qaBtn.style.marginBottom = '12px';
+  qaBtn.style.padding = '10px';
+  qaBtn.style.fontSize = '15px';
+  qaBtn.style.background = '#e3f2fd';
+  qaBtn.style.border = '2px solid #1565c0';
+  qaBtn.style.cursor = 'pointer';
+
+  qaBtn.addEventListener('click', qaFillAllYes);
+
+  container.prepend(qaBtn);
+}
+  function qaFillAllYes() {
+  if (!currentConfig) return;
+
+  currentConfig.sections.forEach(section => {
+    section.questions.forEach(q => {
+
+      if (q.type === 'yesno') {
+        ratings[q.id] = 'yes';
+
+        const yesRadio = document.querySelector(
+          `input[name="${q.id}"][value="yes"]`
+        );
+        if (yesRadio) yesRadio.checked = true;
+      }
+
+      if (q.type === 'graded') {
+        ratings[q.id] = 3;
+
+        const select = document.querySelector(
+          `select[name="${q.id}"]`
+        );
+        if (select) select.value = '3';
+      }
+
+    });
+  });
+
+  updateScore(currentConfig);
+}
 </script>
 
 </body>
