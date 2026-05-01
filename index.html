@@ -562,25 +562,24 @@ function updateScore(cfg) {
     <p><strong>Person Visiting:</strong> ${personVisiting}</p>
     <p><strong>Date of Visit:</strong> ${visitDate}</p>
 
-    <p><strong>Compliance Status:</strong>
-      ${criticalFail ? '❌ Non‑Compliant (Critical Failure)' : '✅ Compliant'}
-    </p>
-
-    <p><strong>Compliance Status:</strong>
+   <p><strong>Compliance Status:</strong>
   ${baseScore >= COMPLIANCE_PASS_SCORE
     ? '✅ Compliant'
     : '❌ Non‑Compliant'}
 </p>
-      <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
-      <strong>Performance Level:</strong>
-      <span class="${performanceClass}">${performanceLabel}</span>
-    </p>
 
+<p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
 
-    <h3>Notes & Photo Evidence</h3>
-    ${evidenceHtml}
+<p>
+  <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
+  <strong>Performance Level:</strong>
+  <span class="${performanceClass}">${performanceLabel}</span>
+</p>
 
-    <div style="margin-top:16px;">
+<h3>Notes & Photo Evidence</h3>
+${evidenceHtml}
+
+<div style="margin-top:16px;">
       <button id="confirmSubmit">Confirm & Submit</button>
       <button id="goBackEdit" style="margin-left:8px;">Go Back & Edit</button>
     </div>
