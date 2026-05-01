@@ -580,10 +580,15 @@ function getDisplayPerformanceLabel(baseScore, performanceLabel) {
 
 <p>
   <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
-  <strong>Performance Level:</strong>
-  <span class="${performanceClass}">
-    ${getDisplayPerformanceLabel(baseScore, performanceLabel)}
-  </span>
+ <strong>Performance Level:</strong>
+<span class="${performanceClass}">
+  ${
+    baseScore < COMPLIANCE_PASS_SCORE && performanceLabel === 'Fully Compliant'
+      ? 'Meets Expectations'
+      : performanceLabel
+  }
+</span>
+
 </p>
 ``
 
