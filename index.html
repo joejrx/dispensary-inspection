@@ -480,7 +480,15 @@ function updateScore(cfg) {
 
   return hasNote || hasPhotos;
 }
-
+function getDisplayPerformanceLabel(baseScore, performanceLabel) {
+  if (
+    baseScore < COMPLIANCE_PASS_SCORE &&
+    performanceLabel === 'Fully Compliant'
+  ) {
+    return 'Meets Expectations';
+  }
+  return performanceLabel;
+}
  function showReviewScreen() {
   // ✅ Header validation
   if (!selectedStore) {
