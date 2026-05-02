@@ -329,35 +329,7 @@ photoInput.addEventListener('change', e => {
 photoContainer.appendChild(photoLabel);
 photoContainer.appendChild(photoInput);
 photoContainer.appendChild(photoCount);
-``
 
-
-
-
-let photoInput = document.createElement('input');
-photoInput.type = 'file';
-photoInput.accept = 'image/*';
-photoInput.multiple = true;
-
-photoInput.addEventListener('change', e => {
-  const newFiles = Array.from(e.target.files);
-
-  if (!photos[q.id]) {
-    photos[q.id] = [];
-  }
-
-  photos[q.id].push(...newFiles);
-
-  const count = photos[q.id].length;
-  photoCount.innerText =
-    count === 1
-      ? '1 photo attached'
-      : `${count} photos attached`;
-
-  // ✅ Allow re‑adding
-  photoInput.value = '';
-});
-``
 
 
 notesContainer.appendChild(notesLabel);
