@@ -505,14 +505,19 @@ function showReviewScreen() {
   }
 
   // ✅ ADD THIS BLOCK RIGHT HERE
-  const reviewDiv = document.getElementById('review');
-  if (!reviewDiv) {
+const reviewDiv = document.getElementById('reviewScreen');  if (!reviewDiv) {
     console.error('Review container not found');
     return;
   }
 
+ const avgRating = calculateAverageRating();
+  const performanceLabel = performanceLabelFromRating(avgRating);
+  const performanceClass = performanceClassFromLabel(performanceLabel);
+  const baseScore = calculateBaseScore();
+
   // ✅ everything below can safely use reviewDiv
-  reviewDiv.innerHTML = `
+ 
+ reviewDiv.innerHTML = `
     <h2>Final Review</h2>
 
     <p><strong>Store:</strong> ${selectedStore}</p>
@@ -526,7 +531,9 @@ function showReviewScreen() {
         : '❌ Non-Compliant'}
     </p>
 
-    <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+
+   
+<p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
 
     <p>
       <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
@@ -546,9 +553,13 @@ function showReviewScreen() {
 
     <div style="margin-top:16px;">
       <button onclick="confirmSubmit()">Confirm & Submit</button>
-      <button onclick="goBackToEdit()">Go Back & Edit</button>
+      <button onclick="exitReviewScreen()">Go Back & Edit</button>
     </div>
   `;
+
+  document.getElementById('inspection').style.display = 'none';
+  document.getElementById('scoring-rubric').style.display = 'none';
+  reviewDiv.style.display = 'block';
 }
 
 
