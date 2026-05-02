@@ -315,27 +315,38 @@ row.appendChild(notesContainer);
   inputEl = document.createElement('div');
 
   inputEl.innerHTML = `
-    <label style="margin-right:16px;">
-      <input type="radio" name="${q.id}" value="yes">
-      Yes
-    </label>
-    <label>
-      <input type="radio" name="${q.id}" value="no">
-      No
-    </label>
-  `;
+  <label style="margin-right:16px;">
+    <input type="radio" name="${q.id}" value="yes">
+    Yes
+  </label>
+  <label style="margin-right:16px;">
+    <input type="radio" name="${q.id}" value="no">
+    No
+  </label>
+  <label>
+    <input type="radio" name="${q.id}" value="na">
+    NA
+  </label>
+`;
 
  
 inputEl.querySelectorAll('input[type="radio"]').forEach(radio => {
  radio.addEventListener('change', e => {
-  const value = e.target.value;
-  ratings[q.id] = value;
-  updateScore(currentConfig);
+const value = e.target.value;
 
-  if (cfg.notes?.autoShowOn?.yesno?.includes(value)) {
-    notesContainer.style.display = 'block';
-    photoContainer.style.display = 'block';
-  }
+// ✅ Store NA explicitly
+ratings[q.id] = value === 'na' ? null : value;
+
+updateScore(currentConfig);
+
+// ✅ Only show notes/photos for No (not NA)
+if (value === 'no' && cfg.notes?.autoShowOn?.yesno?.includes(value)) {
+  notesContainer.style.display = 'block';
+  photoContainer.style.display = 'block';
+} else {
+  notesContainer.style.display = 'none';
+  photoContainer.style.display = 'none';
+}
 });
 });
 
@@ -424,12 +435,13 @@ function updateScore(cfg) {
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
       const value = ratings[q.id];
-      if (value === null || value === undefined || value === '') {
-        missing.push({
-          section: section.title,
-          label: q.label
-        });
-      }
+   // ✅ NA (null) is allowed
+if (value === undefined || value === '') {
+  missing.push({
+    section: section.title,
+    label: q.label
+  });
+}
     });
   });
 
@@ -645,10 +657,18 @@ function calculateBaseScore() {
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
       total += 1;
-      const value = ratings[q.id];
-      if (isCompliant(q, value)) {
-        compliant += 1;
-      }
+ const value = ratings[q.id];
+
+// ✅ Skip NA entirely
+if (value === null || value === undefined) {
+  return;
+}
+
+total += 1;
+
+if (isCompliant(q, value)) {
+  compliant += 1;
+}
     });
   });
 
