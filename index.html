@@ -649,32 +649,31 @@ function hasCriticalFailure() {
   }
   return false;
 }
-
 function calculateBaseScore() {
   let total = 0;
   let compliant = 0;
 
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
+      const value = ratings[q.id];
+
+      // ✅ Skip NA entirely
+      if (value === null || value === undefined) {
+        return;
+      }
+
       total += 1;
- const value = ratings[q.id];
 
-// ✅ Skip NA entirely
-if (value === null || value === undefined) {
-  return;
-}
-
-total += 1;
-
-if (isCompliant(q, value)) {
-  compliant += 1;
-}
+      if (isCompliant(q, value)) {
+        compliant += 1;
+      }
     });
   });
 
   if (total === 0) return 0;
   return Math.round((compliant / total) * 100);
 }
+
 
 function calculateAverageRating() {
   const values = Object.values(ratings).filter(v => typeof v === 'number');
