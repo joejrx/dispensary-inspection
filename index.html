@@ -563,15 +563,6 @@ const reviewDiv = document.getElementById('reviewScreen');  if (!reviewDiv) {
 }
 
 
-  document.getElementById('confirmSubmit')
-    .addEventListener('click', submitInspection);
-
-  document.getElementById('goBackEdit')
-    .addEventListener('click', exitReviewScreen);
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
 function submitInspection() {
   // ✅ 1️⃣ Validate required header fields
   if (!selectedStore) {
