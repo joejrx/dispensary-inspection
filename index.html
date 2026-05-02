@@ -364,15 +364,30 @@ inputEl.name = q.id;
   <option value="5">5 – Exceeds Expectations</option>
 `;
    inputEl.addEventListener('change', e => {
-  const value = e.target.value ? Number(e.target.value) : null;
-  ratings[q.id] = value;
-  updateScore(currentConfig);
+const rawValue = e.target.value;
 
-  // ✅ STEP 3: auto‑show notes AND photos on low scores
-  if (cfg.notes?.autoShowOn?.graded?.includes(value)) {
-    notesContainer.style.display = 'block';
-    photoContainer.style.display = 'block';
-  }
+// ✅ Normalize graded value safely
+let value = null;
+
+if (rawValue !== '' && rawValue !== 'na') {
+  const parsed = Number(rawValue);
+  value = Number.isFinite(parsed) ? parsed : null;
+}
+
+ratings[q.id] = value;
+updateScore(currentConfig);
+
+// ✅ Only show notes/photos for LOW numeric scores (not NA)
+if (
+  Number.isFinite(value) &&
+  cfg.notes?.autoShowOn?.graded?.includes(value)
+) {
+  notesContainer.style.display = 'block';
+  photoContainer.style.display = 'block';
+} else {
+  notesContainer.style.display = 'none';
+  photoContainer.style.display = 'none';
+}
 }); }
 
       inputEl.classList.add('rating-select');
@@ -417,7 +432,9 @@ function updateScore(cfg) {
   document.getElementById('bonus').innerText = bonus;
 }
   function calculateAverageRating() {
-  const values = Object.values(ratings).filter(v => typeof v === 'number');
+  const values = Object.values(ratings)
+  .filter(v => Number.isFinite(v));
+
   if (values.length === 0) return null;
   const total = values.reduce((sum, v) => sum + v, 0);
   return Number((total / values.length).toFixed(1));
