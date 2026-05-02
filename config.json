@@ -704,11 +704,10 @@
         "type": "yesno"
       }
     ]
-},
+}
+  ],
   
     
-
-
 "summary": {
   "title": "Summary",
   "fields": [
