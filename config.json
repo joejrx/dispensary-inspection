@@ -702,7 +702,9 @@
         "id": "lc_teams_chats_inventory",
         "label": "Teams chats are utilized properly – Inventory",
         "type": "yesno"
-      },
+      }
+    ]
+},
       {
   "title": "Other Observations / Anomalies",
   "description": "Use the fields below to capture any unusual conditions, exceptions, or store‑specific observations not covered elsewhere.",
