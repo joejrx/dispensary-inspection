@@ -467,7 +467,7 @@
     },
     {
       "id": "comp_logs_reports_posted",
-      "label": "Required logs and reports are properly posted and up to date",
+      "label": "Required logs and reports are properly posted to sharepoint and up to date",
       "type": "yesno",
       "critical": true
     },
