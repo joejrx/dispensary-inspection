@@ -446,7 +446,21 @@ function updateScore(cfg) {
 
   // ✅ Use normalized scoring everywhere
   const baseScore = calculateBaseScore();
+// ✅ Build photo evidence summary
+let photoQuestionCount = 0;
+let totalPhotoCount = 0;
 
+Object.values(photos).forEach(fileList => {
+  if (Array.isArray(fileList) && fileList.length > 0) {
+    photoQuestionCount += 1;
+    totalPhotoCount += fileList.length;
+  }
+});
+
+const photoSummary =
+  totalPhotoCount === 0
+    ? 'No photos attached'
+    : `${totalPhotoCount} photo${totalPhotoCount > 1 ? 's' : ''} attached across ${photoQuestionCount} question${photoQuestionCount > 1 ? 's' : ''}`;
   let bonus = positiveExperiences.filter(
     p => p.notes.trim() !== ''
   ).length * 2;
@@ -604,6 +618,7 @@ const photoSummary =
 
    
 <p><strong>Compliance Score:</strong> ${baseScore} / 100</p>
+<p><strong>Photo Evidence:</strong> ${photoSummary}</p>
 
     <p>
       <strong>Performance Rating (1–5):</strong> ${avgRating ?? '—'}<br/>
