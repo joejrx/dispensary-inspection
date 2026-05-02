@@ -571,6 +571,32 @@
       "label": "Consultative selling – Tailoring recommendations",
       "type": "yesno"
     },
+{
+  "id": "budbar_out",
+  "label": "Is the Budbar out and accessible?",
+  "type": "yesno"
+},
+{
+  "id": "budbar_clean",
+  "label": "Is the Budbar clean and fresh?",
+  "type": "yesno"
+},
+{
+  "id": "budbar_labeled",
+  "label": "Is the Budbar labeled properly?",
+  "type": "yesno"
+},
+{
+  "id": "budbar_staffed",
+  "label": "Is someone on the floor with the Budbar per DCC requirements?",
+  "type": "yesno"
+},
+{
+  "id": "budbar_promoted",
+  "label": "Is the Budbar being actively promoted?",
+  "type": "yesno"
+},
+
     {
       "id": "cx_consultative_upselling_accessories",
       "label": "Consultative selling – Upselling accessories",
