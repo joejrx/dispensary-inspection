@@ -295,15 +295,41 @@ const photoLabel = document.createElement('div');
 photoLabel.innerText = 'Attach one or more photos';
 photoLabel.style.fontWeight = 'bold';
 photoLabel.style.fontSize = '13px';
+
+const photoInput = document.createElement('input');
+photoInput.type = 'file';
+photoInput.accept = 'image/*';
+photoInput.multiple = true;
+
 const photoCount = document.createElement('div');
 photoCount.style.fontSize = '12px';
 photoCount.style.color = '#555';
 photoCount.style.marginTop = '4px';
 photoCount.innerText = 'No photos attached';
 
+photoInput.addEventListener('change', e => {
+  const newFiles = Array.from(e.target.files);
+
+  if (!photos[q.id]) {
+    photos[q.id] = [];
+  }
+
+  photos[q.id].push(...newFiles);
+
+  const count = photos[q.id].length;
+  photoCount.innerText =
+    count === 1
+      ? '1 photo attached'
+      : `${count} photos attached`;
+
+  // ✅ allow adding more photos
+  photoInput.value = '';
+});
+
 photoContainer.appendChild(photoLabel);
 photoContainer.appendChild(photoInput);
 photoContainer.appendChild(photoCount);
+
 
 
 const photoInput = document.createElement('input');
