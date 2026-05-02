@@ -224,7 +224,7 @@ function renderSummary(summaryConfig) {
 
   summaryConfig.fields.forEach(field => {
     const wrapper = document.createElement('div');
-    wrapper.style.marginBottom = '16px';
+    wrapper.style.marginBottom = '20px';
 
     const label = document.createElement('div');
     label.innerText = field.label;
@@ -239,6 +239,53 @@ function renderSummary(summaryConfig) {
 
     wrapper.appendChild(label);
     wrapper.appendChild(textarea);
+
+    // ✅ OPTIONAL PHOTO UPLOAD (for anomalies)
+    if (field.allowPhotos) {
+      const photoContainer = document.createElement('div');
+      photoContainer.style.marginTop = '6px';
+
+      const photoLabel = document.createElement('div');
+      photoLabel.innerText = 'Attach one or more photos';
+      photoLabel.style.fontWeight = 'bold';
+      photoLabel.style.fontSize = '13px';
+
+      const photoInput = document.createElement('input');
+      photoInput.type = 'file';
+      photoInput.accept = 'image/*';
+      photoInput.multiple = true;
+
+      const photoCount = document.createElement('div');
+      photoCount.style.fontSize = '12px';
+      photoCount.style.color = '#555';
+      photoCount.style.marginTop = '4px';
+      photoCount.innerText = 'No photos attached';
+
+      photoInput.addEventListener('change', e => {
+        const newFiles = Array.from(e.target.files);
+
+        if (!photos[field.id]) {
+          photos[field.id] = [];
+        }
+
+        photos[field.id].push(...newFiles);
+
+        const count = photos[field.id].length;
+        photoCount.innerText =
+          count === 1
+            ? '1 photo attached'
+            : `${count} photos attached`;
+
+        // allow incremental uploads
+        photoInput.value = '';
+      });
+
+      photoContainer.appendChild(photoLabel);
+      photoContainer.appendChild(photoInput);
+      photoContainer.appendChild(photoCount);
+      wrapper.appendChild(photoContainer);
+    }
+
     container.appendChild(wrapper);
   });
 
