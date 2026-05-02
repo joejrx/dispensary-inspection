@@ -710,38 +710,7 @@
   "title": "Other Observations / Anomalies",
   "description": "Use the fields below to capture any unusual conditions, exceptions, or store‑specific observations not covered elsewhere.",
   "questions": [
-    {
-      "id": "other_anomaly_1",
-      "label": "Other Observation / Anomaly #1",
-      "type": "textarea",
-      "allowPhotos": true,
-      "maxPhotos": 5,
-      "required": false,
-      "maxLength": 500,
-      "scored": false
-    },
-    {
-      "id": "other_anomaly_2",
-      "label": "Other Observation / Anomaly #2",
-      "type": "textarea",
-      "allowPhotos": true,
-      "maxPhotos": 5,
-      "required": false,
-      "maxLength": 500,
-      "scored": false
-    },
-    {
-      "id": "other_anomaly_3",
-      "label": "Other Observation / Anomaly #3",
-      "type": "textarea",
-      "allowPhotos": true,
-      "maxPhotos": 5,
-      "required": false,
-      "maxLength": 500,
-      "scored": false
-    }
-  ]
-}
+    
 ],
 
 "summary": {
@@ -760,6 +729,30 @@
       "type": "textarea",
       "required": false,
       "maxLength": 1000
+    },
+    {
+      "id": "other_anomaly_1",
+      "label": "Other Observation / Anomaly #1 (Optional)",
+      "type": "textarea",
+      "required": false,
+      "maxLength": 500,
+      "allowPhotos": true
+    },
+    {
+      "id": "other_anomaly_2",
+      "label": "Other Observation / Anomaly #2 (Optional)",
+      "type": "textarea",
+      "required": false,
+      "maxLength": 500,
+      "allowPhotos": true
+    },
+    {
+      "id": "other_anomaly_3",
+      "label": "Other Observation / Anomaly #3 (Optional)",
+      "type": "textarea",
+      "required": false,
+      "maxLength": 500,
+      "allowPhotos": true
     }
   ]
 },
