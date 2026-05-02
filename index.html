@@ -571,7 +571,22 @@ const reviewDiv = document.getElementById('reviewScreen');  if (!reviewDiv) {
   const baseScore = calculateBaseScore();
 
   // ✅ everything below can safely use reviewDiv
- 
+ // ✅ Build photo summary for review screen
+let photoQuestionCount = 0;
+let totalPhotoCount = 0;
+
+Object.values(photos).forEach(fileList => {
+  if (Array.isArray(fileList) && fileList.length > 0) {
+    photoQuestionCount += 1;
+    totalPhotoCount += fileList.length;
+  }
+});
+
+const photoSummary =
+  totalPhotoCount === 0
+    ? 'No photos attached'
+    : `${totalPhotoCount} photo${totalPhotoCount > 1 ? 's' : ''} attached across ${photoQuestionCount} question${photoQuestionCount > 1 ? 's' : ''}`;
+
  reviewDiv.innerHTML = `
     <h2>Final Review</h2>
 
