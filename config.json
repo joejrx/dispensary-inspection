@@ -706,36 +706,37 @@
     ]
 },
       {
+  {
   "title": "Other Observations / Anomalies",
   "description": "Use the fields below to capture any unusual conditions, exceptions, or store‑specific observations not covered elsewhere.",
   "questions": [
     {
       "id": "other_anomaly_1",
       "label": "Other Observation / Anomaly #1",
-      "type": "other",
-      "allowText": true,
+      "type": "textarea",
       "allowPhotos": true,
       "maxPhotos": 5,
+      "required": false,
       "maxLength": 500,
       "scored": false
     },
     {
       "id": "other_anomaly_2",
       "label": "Other Observation / Anomaly #2",
-      "type": "other",
-      "allowText": true,
+      "type": "textarea",
       "allowPhotos": true,
       "maxPhotos": 5,
+      "required": false,
       "maxLength": 500,
       "scored": false
     },
     {
       "id": "other_anomaly_3",
       "label": "Other Observation / Anomaly #3",
-      "type": "other",
-      "allowText": true,
+      "type": "textarea",
       "allowPhotos": true,
       "maxPhotos": 5,
+      "required": false,
       "maxLength": 500,
       "scored": false
     }
