@@ -292,9 +292,19 @@ photoContainer.style.display = 'none';
 photoContainer.style.marginTop = '6px';
 
 const photoLabel = document.createElement('div');
-photoLabel.innerText = 'Attach photo(s)';
+photoLabel.innerText = 'Attach one or more photos';
 photoLabel.style.fontWeight = 'bold';
 photoLabel.style.fontSize = '13px';
+const photoCount = document.createElement('div');
+photoCount.style.fontSize = '12px';
+photoCount.style.color = '#555';
+photoCount.style.marginTop = '4px';
+photoCount.innerText = 'No photos attached';
+
+photoContainer.appendChild(photoLabel);
+photoContainer.appendChild(photoInput);
+photoContainer.appendChild(photoCount);
+
 
 const photoInput = document.createElement('input');
 photoInput.type = 'file';
@@ -302,8 +312,24 @@ photoInput.accept = 'image/*';
 photoInput.multiple = true;
 
 photoInput.addEventListener('change', e => {
-  photos[q.id] = Array.from(e.target.files);
+  const newFiles = Array.from(e.target.files);
+
+  if (!photos[q.id]) {
+    photos[q.id] = [];
+  }
+
+  photos[q.id].push(...newFiles);
+
+  const count = photos[q.id].length;
+  photoCount.innerText =
+    count === 1
+      ? '1 photo attached'
+      : `${count} photos attached`;
+
+  // ✅ Allow re‑adding
+  photoInput.value = '';
 });
+``
 
 photoContainer.appendChild(photoLabel);
 photoContainer.appendChild(photoInput);
