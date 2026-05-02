@@ -354,14 +354,15 @@ if (value === 'no' && cfg.notes?.autoShowOn?.yesno?.includes(value)) {
  else {
       inputEl = document.createElement('select');
 inputEl.name = q.id;
-        inputEl.innerHTML = `
-          <option value="">Select score</option>
-          <option value="1">1 – Non‑Compliant</option>
-          <option value="2">2 – Partial / Needs Improvement</option>
-          <option value="3">3 – Fully Compliant</option>
-          <option value="4">4 – Above Average</option>
-          <option value="5">5 – Exceeds Expectations</option>
-        `;
+     inputEl.innerHTML = `
+  <option value="">Select score</option>
+  <option value="na">NA</option>
+  <option value="1">1 – Non‑Compliant</option>
+  <option value="2">2 – Partial / Needs Improvement</option>
+  <option value="3">3 – Fully Compliant</option>
+  <option value="4">4 – Above Average</option>
+  <option value="5">5 – Exceeds Expectations</option>
+`;
    inputEl.addEventListener('change', e => {
   const value = e.target.value ? Number(e.target.value) : null;
   ratings[q.id] = value;
