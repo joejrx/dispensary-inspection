@@ -150,7 +150,27 @@ input[type="radio"] {
 
 
 <script>
-  
+  function loadDraftIfExists() {
+  const raw = localStorage.getItem(DRAFT_KEY);
+  if (!raw) return;
+
+  try {
+    const draft = JSON.parse(raw);
+
+    selectedStore = draft.selectedStore || '';
+    storeManagers = draft.storeManagers || '';
+    personVisiting = draft.personVisiting || '';
+    visitDate = draft.visitDate || '';
+    ratings = draft.ratings || {};
+    notes = draft.notes || {};
+    photos = draft.photos || {};
+
+    console.log('✅ Draft restored');
+  } catch (e) {
+    console.warn('Draft corrupted, clearing');
+    localStorage.removeItem(DRAFT_KEY);
+  }
+}
 const DRAFT_KEY = 'dispensary_inspection_draft_v1';
 
 const QA_MODE = true; // 🔴 set to false before prod
@@ -197,7 +217,7 @@ fetch('config.json')
   .then(r => r.json())
  .then(cfg => {
   currentConfig = cfg;
-
+loadDraftIfExists();
   document.getElementById('status').innerText =
     'Loaded: ' + cfg.inspectionMeta.inspectionName;
 
@@ -210,6 +230,12 @@ fetch('config.json')
 if (QA_MODE) renderQAModeButton();
 
  renderSummary(cfg.summary);
+   
+ document.getElementById('storeSelect').value = selectedStore;
+  document.getElementById('storeManagers').value = storeManagers;
+  document.getElementById('personVisiting').value = personVisiting;
+  document.getElementById('visitDate').value = visitDate;
+
   updateScore(cfg);
 })
   .catch(err => {
