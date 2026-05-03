@@ -802,6 +802,7 @@ function submitInspection() {
 
   // ✅ 5️⃣ Lock inspection
   lockInspection();
+  localStorage.removeItem(DRAFT_KEY);
 }
 
 /* ===============================
