@@ -151,6 +151,8 @@ input[type="radio"] {
 
 <script>
   
+const DRAFT_KEY = 'dispensary_inspection_draft_v1';
+
 const QA_MODE = true; // 🔴 set to false before prod
 const COMPLIANCE_PASS_SCORE = 85;
 let photos = {};
@@ -167,19 +169,23 @@ let ratings = {};
 
 document.getElementById('storeSelect').addEventListener('change', e => {
   selectedStore = e.target.value;
+  saveDraft();
   if (currentConfig) updateScore(currentConfig);
 });
 
 document.getElementById('storeManagers').addEventListener('input', e => {
   storeManagers = e.target.value;
+  saveDraft();
 });
 
 document.getElementById('personVisiting').addEventListener('input', e => {
   personVisiting = e.target.value;
+  saveDraft();
 });
 
 document.getElementById('visitDate').addEventListener('change', e => {
   visitDate = e.target.value;
+  saveDraft();
 });
 
 document.getElementById('submitInspection').addEventListener('click', showReviewScreen);
@@ -211,7 +217,21 @@ if (QA_MODE) renderQAModeButton();
       'Config load error: ' + err.message;
     console.error(err);
   });
+function saveDraft() {
+  const draft = {
+    selectedStore,
+    storeManagers,
+    personVisiting,
+    visitDate,
+    ratings,
+    notes,
+    photos,
+    draftSavedAt: new Date().toISOString()
+  };
 
+  localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+  console.log('✅ Draft saved');
+}
 function renderSummary(summaryConfig) {
   if (!summaryConfig || !summaryConfig.fields) return;
 
@@ -332,6 +352,7 @@ notesInput.style.minHeight = '60px';
 
 notesInput.addEventListener('input', e => {
   notes[q.id] = e.target.value;
+  saveDraft();
 });
 // --- Photo upload (hidden by default) ---
 const photoContainer = document.createElement('div');
@@ -362,7 +383,7 @@ photoInput.addEventListener('change', e => {
   }
 
   photos[q.id].push(...newFiles);
-
+  saveDraft();
   const count = photos[q.id].length;
   photoCount.innerText =
     count === 1
@@ -408,7 +429,7 @@ const value = e.target.value;
 
 // ✅ Store NA explicitly
 ratings[q.id] = value === 'na' ? null : value;
-
+saveDraft();
 updateScore(currentConfig);
 
 // ✅ Only show notes/photos for No (not NA)
@@ -447,6 +468,7 @@ if (rawValue !== '' && rawValue !== 'na') {
 }
 
 ratings[q.id] = value;
+     saveDraft();
 updateScore(currentConfig);
 
 // ✅ Only show notes/photos for LOW numeric scores (not NA)
