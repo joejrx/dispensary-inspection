@@ -185,6 +185,25 @@ let photos = {};
   let visitDate = '';
 let answers = {};
 let ratings = {};
+  function rehydrateRatingsUI() {
+  Object.entries(ratings).forEach(([id, value]) => {
+
+    // ✅ YES / NO / NA radios
+    if (value === 'yes' || value === 'no' || value === null) {
+      const radioValue = value === null ? 'na' : value;
+      const radio = document.querySelector(
+        `input[name="${id}"][value="${radioValue}"]`
+      );
+      if (radio) radio.checked = true;
+    }
+
+    // ✅ Graded dropdowns (1–5)
+    if (typeof value === 'number') {
+      const select = document.querySelector(`select[name="${id}"]`);
+      if (select) select.value = String(value);
+    }
+  });
+}
 // ✅ Header field listeners (REGISTER ONCE)
 
 document.getElementById('storeSelect').addEventListener('change', e => {
@@ -226,7 +245,7 @@ loadDraftIfExists();
     cfg.inspectionMeta.baseScoreMax;
 
   renderInspection(cfg);
-   
+   rehydrateRatingsUI();
 if (QA_MODE) renderQAModeButton();
 
  renderSummary(cfg.summary);
@@ -526,6 +545,7 @@ function exitReviewScreen() {
   document.getElementById('reviewScreen').style.display = 'none';
   document.getElementById('inspection').style.display = 'block';
     document.getElementById('scoring-rubric').style.display = 'block';
+  rehydrateRatingsUI();
 }
 function updateScore(cfg) {
   const warning = document.getElementById('storeWarning');
