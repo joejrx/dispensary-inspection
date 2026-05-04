@@ -788,6 +788,12 @@ function submitInspection() {
     performanceLabel: performanceLabelFromRating(avgRating),
 
     ratings: ratings,
+    
+ratingsList: Object.entries(ratings).map(([id, value]) => ({
+    id,
+    value
+  })),
+
     notes: notes,
     photos: photos,
 
