@@ -760,7 +760,17 @@ const photoSummary =
   document.getElementById('scoring-rubric').style.display = 'none';
   reviewDiv.style.display = 'block';
 }
+function buildQuestionLabelMap(config) {
+  const map = {};
 
+  config.sections.forEach(section => {
+    section.questions.forEach(q => {
+      map[q.id] = q.label;
+    });
+  });
+
+  return map;
+}
 
 function submitInspection() {
   // ✅ 1️⃣ Validate required header fields
