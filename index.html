@@ -804,6 +804,9 @@ ratingsList: Object.entries(ratings).map(([id, value]) => ({
     value
   })),
 
+// ✅ NEW — label lookup
+  questionLabels: buildQuestionLabelMap(currentConfig),
+
     notes: notes,
     photos: photos,
 
