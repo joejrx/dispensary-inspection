@@ -771,6 +771,17 @@ function buildQuestionLabelMap(config) {
 
   return map;
 }
+function buildQuestionSectionMap(config) {
+  const map = {};
+
+  config.sections.forEach(section => {
+    section.questions.forEach(q => {
+      map[q.id] = section.title;
+    });
+  });
+
+  return map;
+}
 
 function submitInspection() {
   // ✅ 1️⃣ Validate required header fields
@@ -806,6 +817,7 @@ ratingsList: Object.entries(ratings).map(([id, value]) => ({
 
 // ✅ NEW — label lookup
   questionLabels: buildQuestionLabelMap(currentConfig),
+     questionSections: buildQuestionSectionMap(currentConfig),
 
     notes: notes,
     photos: photos,
