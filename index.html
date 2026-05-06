@@ -782,7 +782,21 @@ function buildQuestionSectionMap(config) {
 
   return map;
 }
+function buildAnomaliesList(notes, photos) {
+  const keys = new Set([
+    ...Object.keys(notes || {}),
+    ...Object.keys(photos || {})
+  ]);
 
+  return Array.from(keys)
+    .map(id => ({
+      id,
+      notes: (notes && notes[id]) ? notes[id] : '',
+      photoCount: (photos && photos[id]) ? photos[id].length : 0
+    }))
+    .filter(item => item.notes || item.photoCount > 0);
+}
+``
 function submitInspection() {
   // ✅ 1️⃣ Validate required header fields
   if (!selectedStore) {
