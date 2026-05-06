@@ -800,6 +800,16 @@ function buildQuestionSectionMap(config) {
 
   return map;
 }
+  function buildAnomalyLabelMap(summaryConfig) {
+  const map = {};
+  if (!summaryConfig || !summaryConfig.fields) return map;
+
+  summaryConfig.fields.forEach(field => {
+    map[field.id] = field.label;
+  });
+
+  return map;
+}
 function buildAnomaliesList(notes, photos) {
   const keys = new Set([
     ...Object.keys(notes || {}),
@@ -854,6 +864,7 @@ ratingsList: Object.entries(ratings).map(([id, value]) => ({
     notes: notes,
     photos: photos,
     anomaliesList: buildAnomaliesList(notes, photos),
+    anomalyLabels: buildAnomalyLabelMap(currentConfig.summary),
     submittedAt: new Date().toISOString()
   };
 
