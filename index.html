@@ -138,7 +138,26 @@ input[type="radio"] {
   
 <!-- ✅ Opportunities / Issues -->
 
- <div class="section">
+<div class="section">
+  <button
+    type="button"
+    onclick="resetInspection()"
+    style="
+      font-size:14px;
+      padding:8px 12px;
+      width:100%;
+      background:#fff3e0;
+      border:2px solid #e65100;
+      color:#e65100;
+      margin-bottom:8px;
+      cursor:pointer;
+    "
+  >
+    🔄 Reset Inspection (QA)
+  </button>
+</div>
+
+<div class="section">
   <button
     id="submitInspection"
     type="button"
@@ -147,7 +166,6 @@ input[type="radio"] {
     Review &amp; Submit Inspection
   </button>
 </div>
-
 
 <script>
   function loadDraftIfExists() {
