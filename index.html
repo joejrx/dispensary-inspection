@@ -821,7 +821,7 @@ ratingsList: Object.entries(ratings).map(([id, value]) => ({
 
     notes: notes,
     photos: photos,
-
+    anomaliesList: buildAnomaliesList(notes, photos),
     submittedAt: new Date().toISOString()
   };
 
