@@ -201,6 +201,34 @@ let photos = {};
   let storeManagers = '';
   let personVisiting = '';
   let visitDate = '';
+  function resetInspection() {
+  const confirmReset = confirm(
+    'This will clear the current inspection and start fresh.\n\nContinue?'
+  );
+
+  if (!confirmReset) return;
+
+  // ✅ Clear saved draft
+  localStorage.removeItem('dispensary_inspection_draft_v1');
+
+  // ✅ Reset in-memory state
+  ratings = {};
+  notes = {};
+  photos = {};
+
+  selectedStore = '';
+  storeManagers = '';
+  personVisiting = '';
+  visitDate = '';
+
+  // ✅ Re-enable all inputs (safety)
+  document
+    .querySelectorAll('input, textarea, select, button')
+    .forEach(el => (el.disabled = false));
+
+  // ✅ Reload clean
+  location.reload();
+}
 let answers = {};
 let ratings = {};
   function rehydrateRatingsUI() {
