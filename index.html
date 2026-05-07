@@ -852,11 +852,41 @@ function buildQuestionSectionMap(config) {
 
   return map;
 }
-function buildAnomaliesList(notes, photos) {
-  const keys = new Set([
-    ...Object.keys(notes || {}),
-    ...Object.keys(photos || {})
+function buildAnomaliesList(notes = {}, photos = {}) {
+  const anomalies = [];
+
+  // Collect all possible anomaly IDs
+  const allIds = new Set([
+    ...Object.keys(notes),
+    ...Object.keys(photos)
   ]);
+
+  allIds.forEach(id => {
+    // ✅ Only include actual anomaly fields
+    if (!id.startsWith('other_anomaly_')) return;
+
+    const noteText =
+      typeof notes[id] === 'string'
+        ? notes[id].trim()
+        : '';
+
+    const photoCount = Array.isArray(photos[id])
+      ? photos[id].length
+      : 0;
+
+    // ✅ Only include anomalies that have content
+    if (noteText !== '' || photoCount > 0) {
+      anomalies.push({
+        id: id,
+        notes: noteText,        // ✅ notes are now guaranteed here
+        photoCount: photoCount
+      });
+    }
+  });
+
+  return anomalies;
+}
+``
 
   return Array.from(keys)
     .map(id => ({
