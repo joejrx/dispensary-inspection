@@ -217,21 +217,29 @@ let photos = {};
   photos = {};
 
   selectedStore = '';
-  storeManagers = '';
-  personVisiting = '';
-  visitDate = '';
+storeManagers = '';
+personVisiting = '';
+visitDate = '';
 
-  // ✅ Re-enable all inputs (safety)
-  document
-    .querySelectorAll('input, textarea, select, button')
-    .forEach(el => (el.disabled = false));
+// ✅ Re-enable all inputs (safety)
+document
+  .querySelectorAll('input, textarea, select, button')
+  .forEach(el => (el.disabled = false));
 
-  // ✅ Reload clean
-  location.reload();
+// ✅ Reload clean
+location.reload();
 }
+
+// ===============================
+// STATE
+// ===============================
 let answers = {};
 let ratings = {};
-  function rehydrateRatingsUI() {
+
+// ===============================
+// REHYDRATE RATINGS UI
+// ===============================
+function rehydrateRatingsUI() {
   Object.entries(ratings).forEach(([id, value]) => {
 
     // ✅ YES / NO / NA radios
@@ -250,7 +258,9 @@ let ratings = {};
     }
   });
 }
+
 // ✅ Header field listeners (REGISTER ONCE)
+
 
 document.getElementById('storeSelect').addEventListener('change', e => {
   selectedStore = e.target.value;
