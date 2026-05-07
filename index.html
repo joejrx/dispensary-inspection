@@ -705,6 +705,11 @@ function showReviewScreen() {
     alert('Please enter the Person Visiting.');
     return;
   }
+  
+// ✅ Question validation (THIS WAS MISSING)
+  if (!allQuestionsHaveRatings()) {
+    return;
+  }
 
   // ✅ ADD THIS BLOCK RIGHT HERE
 const reviewDiv = document.getElementById('reviewScreen');  if (!reviewDiv) {
