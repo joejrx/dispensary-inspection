@@ -855,14 +855,12 @@ function buildQuestionSectionMap(config) {
 function buildAnomaliesList(notes = {}, photos = {}) {
   const anomalies = [];
 
-  // Collect all possible anomaly IDs
   const allIds = new Set([
     ...Object.keys(notes),
     ...Object.keys(photos)
   ]);
 
   allIds.forEach(id => {
-    // ✅ Only include actual anomaly fields
     if (!id.startsWith('other_anomaly_')) return;
 
     const noteText =
@@ -874,19 +872,18 @@ function buildAnomaliesList(notes = {}, photos = {}) {
       ? photos[id].length
       : 0;
 
-    // ✅ Only include anomalies that have content
     if (noteText !== '' || photoCount > 0) {
       anomalies.push({
-        id: id,
-        notes: noteText,        // ✅ notes are now guaranteed here
-        photoCount: photoCount
+        id,
+        notes: noteText,
+        photoCount
       });
     }
   });
 
   return anomalies;
 }
-``
+
 
   return Array.from(keys)
     .map(id => ({
@@ -956,8 +953,10 @@ ratingsList: Object.entries(ratings).map(([id, value]) => ({
    =============================== */
 
 function openInspectionUploadFolder() {
-window.open("https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming",
-"_blank");
+  window.open(
+    "https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming",
+    "_blank"
+  );
 }
 
 /* ===============================
