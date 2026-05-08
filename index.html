@@ -670,7 +670,8 @@ const photoSummary =
     section.questions.forEach(q => {
       const value = ratings[q.id];
    // ✅ NA (null) is allowed
-if (value === undefined || value === null || value === '') {  missing.push({
+if (value === undefined || value === '') {
+  missing.push({
     section: section.title,
     label: q.label
   });
