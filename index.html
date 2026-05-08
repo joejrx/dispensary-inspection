@@ -357,6 +357,12 @@ function renderSummary(summaryConfig) {
     textarea.style.width = '100%';
     textarea.style.minHeight = '100px';
     if (field.maxLength) textarea.maxLength = field.maxLength;
+    // ✅ Save summary/anomaly notes
+textarea.addEventListener('input', e => {
+  notes[field.id] = e.target.value;
+  saveDraft();
+});
+
 
     wrapper.appendChild(label);
     wrapper.appendChild(textarea);
