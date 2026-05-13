@@ -914,55 +914,63 @@ function buildAnomaliesList(notes = {}, photos = {}) {
 }
 
 function submitInspection() {
-  // ✅ 1️⃣ Validate required header fields
   if (!selectedStore) {
     alert('Please select a store before submitting.');
     return;
   }
 
-  // ✅ 2️⃣ Build payload
   const avgRating = calculateAverageRating();
 
+  // ✅ FLATTEN PHOTOS FOR EMAIL / POWER AUTOMATE
+  const emailPhotos = [];
+
+  Object.entries(photos || {}).forEach(([questionId, fileList]) => {
+    if (!Array.isArray(fileList)) return;
+
+    fileList.forEach((file, index) => {
+      if (!file?.data) return;
+
+      emailPhotos.push({
+        questionId,
+        fileName: file.name || `photo_${questionId}_${index + 1}.jpg`,
+        contentType: file.type || 'image/jpeg',
+        base64: file.data
+      });
+    });
+  });
+
   const payload = {
+    // ✅ HEADER
     store: selectedStore,
-    storeManagers: storeManagers,
-    personVisiting: personVisiting,
-    visitDate: visitDate,
+    storeManagers,
+    personVisiting,
+    visitDate,
 
+    // ✅ SCORING
     complianceScore: calculateBaseScore(),
-    bonusScore: 0,
     totalScore: calculateBaseScore(),
-
     performanceRating: avgRating,
-    ratedQuestionCount: Object.values(ratings)
-      .filter(v => typeof v === 'number').length,
     performanceLabel: performanceLabelFromRating(avgRating),
 
-    ratings: ratings,
-    
-ratingsList: Object.entries(ratings).map(([id, value]) => ({
-    id,
-    value
-  })),
+    // ✅ QUESTION DATA
+    ratings,
+    ratingsList: Object.entries(ratings).map(([id, value]) => ({
+      id,
+      value
+    })),
+    questionLabels: buildQuestionLabelMap(currentConfig),
+    questionSections: buildQuestionSectionMap(currentConfig),
 
-// ✅ NEW — label lookup
-  questionLabels: buildQuestionLabelMap(currentConfig),
-     questionSections: buildQuestionSectionMap(currentConfig),
+    // ✅ EVIDENCE
+    notes,
+    emailPhotos, // ✅ POWER AUTOMATE TARGET ARRAY
 
-    notes: notes,
-    photos: photos,
-    anomaliesList: buildAnomaliesList(notes, photos),
-    anomalyLabels: buildAnomalyLabelMap(currentConfig.summary),
+    // ✅ META
     submittedAt: new Date().toISOString()
   };
 
-  // ✅ 3️⃣ Download JSON
   downloadInspectionJSON(payload);
-
-  // ✅ 4️⃣ Open SharePoint upload folder
   setTimeout(openInspectionUploadFolder, 500);
-
-  // ✅ 5️⃣ Lock inspection
   lockInspection();
   localStorage.removeItem(DRAFT_KEY);
 }
