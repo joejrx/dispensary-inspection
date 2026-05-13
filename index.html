@@ -193,7 +193,8 @@ const DRAFT_KEY = 'dispensary_inspection_draft_v1';
 
 const QA_MODE = true; // 🔴 set to false before prod
 const COMPLIANCE_PASS_SCORE = 85;
-let photos = {};
+
+let photos = {}; // { [questionId]: [{ name, type, data }] }
   let notes = {};
   let positiveExperiences = [];
   let opportunities = [];
@@ -388,24 +389,34 @@ textarea.addEventListener('input', e => {
       photoCount.style.marginTop = '4px';
       photoCount.innerText = 'No photos attached';
 
-      photoInput.addEventListener('change', e => {
-        const newFiles = Array.from(e.target.files);
+photoInput.addEventListener('change', e => {
+  const newFiles = Array.from(e.target.files);
 
-        if (!photos[field.id]) {
-          photos[field.id] = [];
-        }
+  if (!photos[field.id]) {
+    photos[field.id] = [];
+  }
 
-        photos[field.id].push(...newFiles);
-
-        const count = photos[field.id].length;
-        photoCount.innerText =
-          count === 1
-            ? '1 photo attached'
-            : `${count} photos attached`;
-
-        // allow incremental uploads
-        photoInput.value = '';
+  newFiles.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      photos[field.id].push({
+        name: file.name,
+        type: file.type,
+        data: reader.result
       });
+      saveDraft();
+
+      const count = photos[field.id].length;
+      photoCount.innerText =
+        count === 1
+          ? '1 photo attached'
+          : `${count} photos attached`;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  photoInput.value = '';
+});
 
       photoContainer.appendChild(photoLabel);
       photoContainer.appendChild(photoInput);
