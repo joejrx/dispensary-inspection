@@ -392,21 +392,21 @@ textarea.addEventListener('input', e => {
 photoInput.addEventListener('change', e => {
   const newFiles = Array.from(e.target.files);
 
-  if (!photos[field.id]) {
-    photos[field.id] = [];
+  if (!photos[q.id]) {
+    photos[q.id] = [];
   }
 
   newFiles.forEach(file => {
     const reader = new FileReader();
     reader.onload = () => {
-      photos[field.id].push({
+      photos[q.id].push({
         name: file.name,
         type: file.type,
         data: reader.result
       });
       saveDraft();
 
-      const count = photos[field.id].length;
+      const count = photos[q.id].length;
       photoCount.innerText =
         count === 1
           ? '1 photo attached'
