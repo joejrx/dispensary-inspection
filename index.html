@@ -115,7 +115,7 @@ const POWER_AUTOMATE_URL = '';
 // ⚠️ SharePoint upload folder — already set correctly for your environment
 const SHAREPOINT_UPLOAD_URL = 'https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming';
 
-const QA_MODE = false; // set true for testing
+const QA_MODE = true; // 🔴 set to false before production
 const COMPLIANCE_PASS_SCORE = 85;
 const DRAFT_KEY = 'dispensary_inspection_draft_v1';
 
@@ -679,10 +679,11 @@ function buildEmailHTML(payload) {
 // REVIEW SCREEN
 // ===============================
 function showReviewScreen() {
-  if (!selectedStore)        { alert('Please select a store before reviewing.'); return; }
-  if (!storeManagers.trim()) { alert('Please enter the Store Manager(s).'); return; }
-  if (!personVisiting.trim()){ alert('Please enter the Person Visiting.'); return; }
-  if (!inspectorEmail.trim()){ alert('Please enter your email address for the confirmation copy.'); return; }
+  if (!selectedStore)        { alert('⚠️ Please select a store before reviewing.'); window.scrollTo(0,0); return; }
+  if (!storeManagers.trim()) { alert('⚠️ Please enter the Store Manager(s).'); window.scrollTo(0,0); return; }
+  if (!personVisiting.trim()){ alert('⚠️ Please enter the Person Visiting.'); window.scrollTo(0,0); return; }
+  if (!inspectorEmail.trim()){ alert('⚠️ Please enter your email address for the confirmation copy.'); window.scrollTo(0,0); return; }
+  if (!visitDate)            { alert('⚠️ Please enter the Date of Visit.'); window.scrollTo(0,0); return; }
   if (!allQuestionsHaveRatings()) return;
 
   const reviewDiv = document.getElementById('reviewScreen');
@@ -852,6 +853,30 @@ function renderQAModeButton() {
 
 function qaFillAllYes() {
   if (!currentConfig) return;
+
+  // ✅ Fill header fields if empty so QA can reach the review screen
+  if (!selectedStore) {
+    selectedStore = 'Cuyahoga Falls';
+    document.getElementById('storeSelect').value = selectedStore;
+  }
+  if (!storeManagers.trim()) {
+    storeManagers = 'QA Manager';
+    document.getElementById('storeManagers').value = storeManagers;
+  }
+  if (!personVisiting.trim()) {
+    personVisiting = 'QA Inspector';
+    document.getElementById('personVisiting').value = personVisiting;
+  }
+  if (!inspectorEmail.trim()) {
+    inspectorEmail = 'qa@frxdispensaries.com';
+    document.getElementById('inspectorEmail').value = inspectorEmail;
+  }
+  if (!visitDate) {
+    visitDate = new Date().toISOString().slice(0, 10);
+    document.getElementById('visitDate').value = visitDate;
+  }
+
+  // ✅ Fill all questions
   currentConfig.sections.forEach(section => {
     section.questions.forEach(q => {
       if (q.type === 'yesno') {
@@ -866,8 +891,10 @@ function qaFillAllYes() {
       }
     });
   });
+
   saveDraft();
   updateScore(currentConfig);
+  alert('✅ QA: All fields filled. You can now click Review & Submit.');
 }
 </script>
 </body>
