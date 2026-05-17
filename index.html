@@ -105,8 +105,15 @@
 
 <script>
 // ===============================
-// CONFIGURATION
+// CONFIGURATION — ✏️ EDIT THESE IF NEEDED
 // ===============================
+
+// ⚠️ Paste your Power Automate HTTP trigger URL here once you have it.
+// Leave empty for now — app will still work via download + SharePoint upload.
+const POWER_AUTOMATE_URL = '';
+
+// ⚠️ SharePoint upload folder — already set correctly for your environment
+const SHAREPOINT_UPLOAD_URL = 'https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming';
 
 const QA_MODE = false; // set true for testing
 const COMPLIANCE_PASS_SCORE = 85;
@@ -793,10 +800,7 @@ function submitInspection() {
 
   // Open SharePoint upload folder after short delay
   setTimeout(() => {
-    window.open(
-      'https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Incoming',
-      '_blank'
-    );
+    window.open(SHAREPOINT_UPLOAD_URL, '_blank');
   }, 500);
 
   // Update UI
