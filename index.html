@@ -118,16 +118,6 @@ const SHAREPOINT_UPLOAD_URL = 'https://frxohio.sharepoint.com/sites/DispensaryOp
 const QA_MODE = true; // 🔴 set to false before production
 const COMPLIANCE_PASS_SCORE = 85;
 const DRAFT_KEY = 'dispensary_inspection_draft_v1';
-  // Per-location recipient routing
-const LOCATION_RECIPIENTS = {
-  'East Liverpool':  ['jwinters@frxdispensaries.com', 'tsilver@frxdispensaries.com'],
-  'Elyria':          ['rhorn@frxdispensaries.com', 'dbrown@frxdispensaries.com'],
-  'Cuyahoga Falls':  ['tjohnson@frxdispensaries.com', 'marnold@frxdispensaries.com'],
-  'Harrison':        ['MWilks@queenccanna.com', 'AChaillet@queenccanna.com'],
-  'Norwood':         ['mgilb@queenccanna.com'],
-  'New Paris':       ['pheon@frxdispensaries.com', 'aheindl@frxdispensaries.com'],
-  'Keowee':          ['JZile@queenccanna.com']
-};
 
 // ===============================
 // STATE
@@ -610,11 +600,20 @@ function buildEmailHTML(payload) {
       }
       const scoreDisplay = item.value === 'no' ? 'NO' : `${item.value}/5`;
       const critBadge    = item.critical ? ' <span style="background:#b00020;color:white;font-size:10px;padding:1px 4px;border-radius:3px;">CRITICAL</span>' : '';
-      const photoNote    = item.photoCount > 0 ? ` 📷 ${item.photoCount} photo${item.photoCount > 1 ? 's' : ''}` : '';
+
+      // Build inline photo images for this flagged item
+      let inlinePhotos = '';
+      const itemPhotos = photos[item.id] || [];
+      itemPhotos.forEach(p => {
+        if (p && p.data) {
+          inlinePhotos += `<div style="margin-top:6px;"><img src="${p.data}" style="max-width:320px;max-height:240px;border:1px solid #ddd;border-radius:4px;display:block;" /></div>`;
+        }
+      });
+
       flaggedHTML += `<tr style="border-bottom:1px solid #eee;">
         <td style="padding:6px;">${item.label}${critBadge}</td>
         <td style="padding:6px;text-align:center;font-weight:bold;color:#b00020;">${scoreDisplay}</td>
-        <td style="padding:6px;color:#555;">${item.note || '—'}${photoNote}</td>
+        <td style="padding:6px;color:#555;">${item.note || '—'}${inlinePhotos}</td>
       </tr>`;
     });
     flaggedHTML += '</table>';
@@ -634,13 +633,17 @@ function buildEmailHTML(payload) {
 
   let anomaliesHTML = '';
   [1,2,3].forEach(i => {
-    const key  = `other_anomaly_${i}`;
-    const val  = notes[key];
-    const pCnt = (photos[key] || []).length;
-    if ((val && val.trim()) || pCnt > 0) {
-      anomaliesHTML += `<p><strong>Observation #${i}:</strong> ${val || '(no notes)'}`;
-      if (pCnt > 0) anomaliesHTML += ` 📷 ${pCnt} photo${pCnt > 1 ? 's' : ''}`;
-      anomaliesHTML += '</p>';
+    const key       = `other_anomaly_${i}`;
+    const val       = notes[key];
+    const photoList = photos[key] || [];
+    if ((val && val.trim()) || photoList.length > 0) {
+      anomaliesHTML += `<div style="margin-bottom:16px;"><p><strong>Observation #${i}:</strong> ${val || '(no notes)'}</p>`;
+      photoList.forEach(p => {
+        if (p && p.data) {
+          anomaliesHTML += `<div style="margin-top:6px;"><img src="${p.data}" style="max-width:320px;max-height:240px;border:1px solid #ddd;border-radius:4px;display:block;" /></div>`;
+        }
+      });
+      anomaliesHTML += '</div>';
     }
   });
 
