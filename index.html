@@ -660,6 +660,75 @@ function buildEmailHTML(payload) {
     }
   });
 
+  // ===============================
+  // FULL SECTION-BY-SECTION REPORT
+  // ===============================
+  let fullReportHTML = `
+    <h2 style="border-top:2px solid #000;padding-top:12px;margin-top:24px;">Full Inspection Results</h2>
+    <table style="width:100%;border-collapse:collapse;">
+      <tr>
+        <th style="text-align:left;border-bottom:2px solid #000;padding:6px;">Question</th>
+        <th style="text-align:left;border-bottom:2px solid #000;padding:6px;">Answer</th>
+        <th style="text-align:left;border-bottom:2px solid #000;padding:6px;">Notes</th>
+      </tr>`;
+
+  if (currentConfig) {
+    currentConfig.sections.forEach(section => {
+      // Check if section has any issues
+      const sectionIssues = section.questions.filter(q => {
+        const value = ratings[q.id];
+        if (value === null || value === undefined) return false;
+        return (q.type === 'yesno' && value === 'no') ||
+               (q.type === 'graded' && typeof value === 'number' && value <= 2);
+      });
+
+      fullReportHTML += `<tr><td colspan="3" style="padding:10px 6px;font-weight:bold;background:#f4f6f8;border-top:2px solid #000;">${section.title}</td></tr>`;
+
+      if (sectionIssues.length === 0) {
+        fullReportHTML += `<tr><td colspan="3" style="padding:8px 6px;border-bottom:1px solid #ddd;color:#2e7d32;font-style:italic;">✓ No findings in this section</td></tr>`;
+      } else {
+        sectionIssues.forEach(q => {
+          const value = ratings[q.id];
+          const scoreDisplay = value === 'no' ? 'NO' : `${value}/5`;
+          const note = notes[q.id] || '';
+          const critBadge = q.critical ? ' <span style="background:#b00020;color:white;font-size:10px;padding:1px 4px;border-radius:3px;">CRITICAL</span>' : '';
+
+          let inlinePhotos = '';
+          const itemPhotos = photos[q.id] || [];
+          itemPhotos.forEach(p => {
+            if (p && p.data) {
+              inlinePhotos += `<div style="margin-top:6px;"><img src="${p.data}" style="max-width:280px;max-height:200px;border:1px solid #ddd;border-radius:4px;display:block;" /></div>`;
+            }
+          });
+
+          fullReportHTML += `<tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:6px;">${q.label}${critBadge}</td>
+            <td style="padding:6px;font-weight:bold;color:#b00020;">${scoreDisplay}</td>
+            <td style="padding:6px;color:#555;">${note}${inlinePhotos}</td>
+          </tr>`;
+        });
+      }
+    });
+  }
+
+  fullReportHTML += `</table>`;
+
+  // Signature lines
+  const sigHTML = `
+    <hr style="margin-top:32px;border:none;border-top:2px solid #000;" />
+    <div style="margin-top:20px;font-size:14px;text-align:center;">
+      <strong>Inspector:</strong> ${payload.personVisiting}<br/>
+      <strong>Date:</strong> ${visitDateFormatted}
+    </div>
+    <div style="margin-top:36px;text-align:center;">
+      <strong>Inspector Signature:</strong><br/>
+      <div style="margin:20px auto 0 auto;border-bottom:1px solid #000;width:300px;"></div>
+    </div>
+    <div style="margin-top:36px;text-align:center;">
+      <strong>Store Manager Acknowledgment:</strong><br/>
+      <div style="margin:20px auto 0 auto;border-bottom:1px solid #000;width:300px;"></div>
+    </div>`;
+
   const visitDateFormatted = payload.visitDate
     ? new Date(payload.visitDate + 'T12:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })
     : '—';
@@ -710,6 +779,9 @@ function buildEmailHTML(payload) {
 
     ${summaryHTML ? `<h2 style="border-top:2px solid #000;padding-top:12px;">Summary</h2>${summaryHTML}` : ''}
     ${anomaliesHTML ? `<h2 style="border-top:2px solid #000;padding-top:12px;">Observations &amp; Anomalies</h2>${anomaliesHTML}` : ''}
+
+    ${fullReportHTML}
+    ${sigHTML}
 
     <hr style="margin-top:32px;border:none;border-top:1px solid #ddd;"/>
     <div style="margin-top:12px;font-size:12px;color:#999;text-align:center;">
