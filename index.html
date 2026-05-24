@@ -734,10 +734,6 @@ function buildEmailHTML(payload) {
       <div style="margin:20px auto 0 auto;border-bottom:1px solid #000;width:300px;"></div>
     </div>`;
 
-  const visitDateFormatted = payload.visitDate
-    ? new Date(payload.visitDate + 'T12:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })
-    : '—';
-
   return `
 <div style="font-family:Arial,sans-serif;max-width:700px;margin:0 auto;">
   <div style="background:#1a1a2e;color:white;padding:20px 24px;border-radius:6px 6px 0 0;">
