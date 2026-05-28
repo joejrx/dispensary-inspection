@@ -614,14 +614,11 @@ function buildEmailHTML(payload) {
       const scoreDisplay = item.value === 'no' ? 'NO' : `${item.value}/5`;
       const critBadge    = item.critical ? ' <span style="background:#b00020;color:white;font-size:10px;padding:1px 4px;border-radius:3px;">CRITICAL</span>' : '';
 
-      // Build inline photo images for this flagged item
-      let inlinePhotos = '';
+  // Photo badge — photos are sent as attachments, not embedded
       const itemPhotos = photos[item.id] || [];
-      itemPhotos.forEach(p => {
-        if (p && p.data) {
-          inlinePhotos += `<div style="margin-top:6px;"><img src="${p.data}" style="max-width:320px;max-height:240px;border:1px solid #ddd;border-radius:4px;display:block;" /></div>`;
-        }
-      });
+      const inlinePhotos = itemPhotos.length > 0
+        ? `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${itemPhotos.length} photo(s) attached</div>`
+        : '';
 
       flaggedHTML += `<tr style="border-bottom:1px solid #eee;">
         <td style="padding:6px;">${item.label}${critBadge}</td>
@@ -651,14 +648,9 @@ function buildEmailHTML(payload) {
     const photoList = photos[key] || [];
     if ((val && val.trim()) || photoList.length > 0) {
       anomaliesHTML += `<div style="margin-bottom:16px;"><p><strong>Observation #${i}:</strong> ${val || '(no notes)'}</p>`;
-      photoList.forEach(p => {
-        if (p && p.data) {
-          anomaliesHTML += `<div style="margin-top:6px;"><img src="${p.data}" style="max-width:320px;max-height:240px;border:1px solid #ddd;border-radius:4px;display:block;" /></div>`;
-        }
-      });
-      anomaliesHTML += '</div>';
-    }
-  });
+  if (photoList.length > 0) {
+        anomaliesHTML += `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${photoList.length} photo(s) attached</div>`;
+      }
 
   // Define visitDateFormatted BEFORE fullReportHTML uses it
   const visitDateFormatted = payload.visitDate
@@ -698,13 +690,10 @@ function buildEmailHTML(payload) {
           const note = notes[q.id] || '';
           const critBadge = q.critical ? ' <span style="background:#b00020;color:white;font-size:10px;padding:1px 4px;border-radius:3px;">CRITICAL</span>' : '';
 
-          let inlinePhotos = '';
-          const itemPhotos = photos[q.id] || [];
-          itemPhotos.forEach(p => {
-            if (p && p.data) {
-              inlinePhotos += `<div style="margin-top:6px;"><img src="${p.data}" style="max-width:280px;max-height:200px;border:1px solid #ddd;border-radius:4px;display:block;" /></div>`;
-            }
-          });
+      const itemPhotos = photos[q.id] || [];
+          const inlinePhotos = itemPhotos.length > 0
+            ? `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${itemPhotos.length} photo(s) attached</div>`
+            : '';
 
           fullReportHTML += `<tr style="border-bottom:1px solid #ddd;">
             <td style="padding:6px;">${q.label}${critBadge}</td>
