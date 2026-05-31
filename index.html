@@ -667,7 +667,7 @@ function buildEmailHTML(payload) {
       const critBadge    = item.critical ? ' <span style="background:#b00020;color:white;font-size:10px;padding:1px 4px;border-radius:3px;">CRITICAL</span>' : '';
       const itemPhotos   = photos[item.id] || [];
       const inlinePhotos = itemPhotos.length > 0
-        ? `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${itemPhotos.length} photo(s) attached</div>`
+        ? `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${itemPhotos.map((p,i) => { const ext = p.name.split('.').pop() || 'jpg'; const safeName = item.id.replace(/[^a-z0-9_]/gi,'_').toLowerCase(); return `${safeName}_${i+1}.${ext}`; }).join(', ')}</div>`
         : '';
 
       flaggedHTML += `<tr style="border-bottom:1px solid #eee;">
@@ -696,7 +696,7 @@ function buildEmailHTML(payload) {
     const photoList = photos[key] || [];
     if ((val && val.trim()) || photoList.length > 0) {
       anomaliesHTML += `<div style="margin-bottom:16px;"><p><strong>Observation #${i}:</strong> ${val || '(no notes)'}</p>`;
-      if (photoList.length > 0) anomaliesHTML += `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${photoList.length} photo(s) attached</div>`;
+      if (photoList.length > 0) anomaliesHTML += `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${photoList.map((p,i) => { const ext = p.name.split('.').pop() || 'jpg'; const safeName = key.replace(/[^a-z0-9_]/gi,'_').toLowerCase(); return `${safeName}_${i+1}.${ext}`; }).join(', ')}</div>`;
       anomaliesHTML += '</div>';
     }
   });
@@ -741,7 +741,7 @@ function buildEmailHTML(payload) {
           const critBadge = q.critical ? ' <span style="background:#b00020;color:white;font-size:10px;padding:1px 4px;border-radius:3px;">CRITICAL</span>' : '';
           const itemPhotos = photos[q.id] || [];
           const inlinePhotos = itemPhotos.length > 0
-            ? `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${itemPhotos.length} photo(s) attached</div>`
+            ? `<div style="margin-top:4px;font-size:12px;color:#555;">📎 ${itemPhotos.map((p,i) => { const ext = p.name.split('.').pop() || 'jpg'; const safeName = q.id.replace(/[^a-z0-9_]/gi,'_').toLowerCase(); return `${safeName}_${i+1}.${ext}`; }).join(', ')}</div>`
             : '';
 
           fullReportHTML += `<tr style="border-bottom:1px solid #ddd;">
