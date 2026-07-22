@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +110,6 @@
 const POWER_AUTOMATE_URL = '';
 const SHAREPOINT_UPLOAD_URL = 'https://frxohio.sharepoint.com/sites/DispensaryOperationsInspections/Inspection%20Submissions/Forms/AllItems.aspx?id=%2Fsites%2FDispensaryOperationsInspections%2FInspection%20Submissions%2FIncoming&viewid=7fd54ebd%2Dc6d0%2D45fe%2D9012%2Df18864e1e8ea&newTargetListUrl=%2Fsites%2FDispensaryOperationsInspections%2FInspection%20Submissions&viewpath=%2Fsites%2FDispensaryOperationsInspections%2FInspection%20Submissions%2FForms%2FAllItems%2Easpx';
 
-// ✏️ Paste your PA Photo Upload Handler URL here:
 const PHOTO_UPLOAD_URL = 'https://defaulted1b912b5ff6456b8eb226a6bf7251.d0.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/46191bdca02945728403f0d4accbdf45/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bqXJ-tXpt1O33lTuS5CCLAod-m3g2QZQujbTEufmNJQ';
 
 const QA_MODE = true;
@@ -118,12 +118,12 @@ const DRAFT_KEY = 'dispensary_inspection_draft_v1';
 
 const LOCATION_RECIPIENTS = {
   'East Liverpool':  ['jwinters@frxdispensaries.com', 'tsilver@frxdispensaries.com'],
-  'Elyria':          ['rhorn@frxdispensaries.com', 'dbrown@frxdispensaries.com'],
+  'Elyria':          ['dbrown@frxdispensaries.com'],
   'Cuyahoga Falls':  ['tjohnson@frxdispensaries.com', 'marnold@frxdispensaries.com'],
   'Harrison':        ['MWilks@queenccanna.com', 'AChaillet@queenccanna.com'],
   'Norwood':         ['mgilb@queenccanna.com'],
-  'New Paris':       ['pheon@frxdispensaries.com', 'aheindl@frxdispensaries.com'],
-  'Keowee':          ['JZile@queenccanna.com']
+  'New Paris':       ['bjones@frxdispensaries.com', 'aheindl@frxdispensaries.com'],
+  'Keowee':          ['jzile@frxdispensaries.com']
 };
 
 // ===============================
@@ -589,7 +589,6 @@ function buildPhotoList() {
         fieldId,
         filename: `${safeName}_${index + 1}.${ext}`,
         mimeType: photo.type,
-        // Strip the data:image/jpeg;base64, prefix
         fileData: photo.data.split(',')[1]
       });
     });
@@ -627,7 +626,6 @@ async function uploadPhotos(store, date, onProgress) {
       throw new Error(`Photo upload failed for ${photo.filename}: ${response.status}`);
     }
 
-    // Capture folder URL from the last response
     const text = await response.text();
     if (text && text.startsWith('http')) folderUrl = text.trim();
   }
@@ -894,18 +892,15 @@ async function submitInspection() {
   const perfLabel = performanceLabelFromRating(avgRating);
   const flagged   = buildFlaggedItems(currentConfig);
 
-  // Count photos
   const photoSummary = {};
   Object.entries(photos).forEach(([questionId, fileList]) => {
     if (Array.isArray(fileList) && fileList.length > 0) photoSummary[questionId] = fileList.length;
   });
   const totalPhotoCount = Object.values(photoSummary).reduce((sum, n) => sum + n, 0);
 
-  // Disable buttons during upload
   const confirmBtn = document.querySelector('#reviewScreen button');
   if (confirmBtn) confirmBtn.disabled = true;
 
-  // Upload photos if any
   let photoFolderUrl = null;
   if (totalPhotoCount > 0) {
     const reviewDiv = document.getElementById('reviewScreen');
@@ -974,8 +969,7 @@ async function submitInspection() {
   document.getElementById('reviewScreen').innerHTML = `
     <h2>✅ Inspection Submitted</h2>
     <p>Your inspection JSON for <strong>${selectedStore}</strong> has been downloaded.</p>
-    <p>The SharePoint upload folder has opened in a new tab.</p>
-    <p><strong>Drag the downloaded file into that folder</strong> to trigger the email flow.</p>
+    <p><strong>Drag the downloaded file into the SharePoint folder</strong> that opened in a new tab to trigger the email flow.</p>
     <p style="font-size:13px;color:#555;">
       File: Inspection_${selectedStore}_${payload.visitDate}_${payload.submittedAt.slice(0,10)}.json
     </p>
