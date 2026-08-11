@@ -112,6 +112,8 @@ const SHAREPOINT_UPLOAD_URL = 'https://frxohio.sharepoint.com/sites/DispensaryOp
 
 const PHOTO_UPLOAD_URL = 'https://defaulted1b912b5ff6456b8eb226a6bf7251.d0.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/46191bdca02945728403f0d4accbdf45/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bqXJ-tXpt1O33lTuS5CCLAod-m3g2QZQujbTEufmNJQ';
 
+const JSON_SUBMIT_URL = 'https://defaulted1b912b5ff6456b8eb226a6bf7251.d0.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/02/workflows/a94cec9e10c940f8959cabe94425242f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Foy4Bk7kVD7JeH_BAnB_PYRgfMHJP-rE4S5oh4i0RTw';
+
 const QA_MODE = true;
 const COMPLIANCE_PASS_SCORE = 85;
 const DRAFT_KEY = 'dispensary_inspection_draft_v1';
@@ -961,28 +963,41 @@ async function submitInspection() {
     submittedAt: new Date().toISOString()
   };
 
-  downloadInspectionJSON(payload);
+  // Submit JSON directly to PA
+  const submitMsg = document.createElement('p');
+  submitMsg.id = 'submitProgress';
+  submitMsg.style.cssText = 'background:#e3f2fd;border:1px solid #1565c0;padding:10px;border-radius:4px;font-weight:bold;margin-top:10px;';
+  submitMsg.innerText = '⬆️ Submitting inspection…';
+  document.getElementById('reviewScreen').appendChild(submitMsg);
 
-  setTimeout(() => {
-    window.open(SHAREPOINT_UPLOAD_URL, '_blank');
-  }, 500);
+  try {
+    const submitResponse = await fetch(JSON_SUBMIT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
 
-  document.getElementById('reviewScreen').innerHTML = `
-    <h2>✅ Inspection Submitted</h2>
-    <p>Your inspection JSON for <strong>${selectedStore}</strong> has been downloaded.</p>
-    <p><strong>Drag the downloaded file into the SharePoint folder</strong> that opened in a new tab to trigger the email flow.</p>
-    <p style="font-size:13px;color:#555;">
-      File: Inspection_${selectedStore}_${payload.visitDate}_${payload.submittedAt.slice(0,10)}.json
-    </p>
-    ${photoFolderUrl ? `
-      <p style="background:#e8f5e9;border:1px solid #2e7d32;padding:10px;border-radius:4px;">
-        📁 <strong>Photos uploaded:</strong> <a href="${photoFolderUrl}" target="_blank">View photo folder in SharePoint</a>
-      </p>` : ''}
-    ${totalPhotoCount > 0 && !photoFolderUrl ? `
-      <p style="background:#fff3e0;border:1px solid #e65100;padding:10px;border-radius:4px;font-size:13px;">
-        ⚠️ Photos could not be uploaded. Please upload manually to SharePoint.
-      </p>` : ''}
-  `;
+    if (!submitResponse.ok) throw new Error(`Submit failed: ${submitResponse.status}`);
+
+    document.getElementById('reviewScreen').innerHTML = `
+      <h2>✅ Inspection Submitted</h2>
+      <p>Your inspection for <strong>${selectedStore}</strong> has been submitted and the email has been sent automatically.</p>
+      ${photoFolderUrl ? `
+        <p style="background:#e8f5e9;border:1px solid #2e7d32;padding:10px;border-radius:4px;">
+          📁 <strong>Photos uploaded:</strong> <a href="${photoFolderUrl}" target="_blank">View photo folder in SharePoint</a>
+        </p>` : ''}
+      ${totalPhotoCount > 0 && !photoFolderUrl ? `
+        <p style="background:#fff3e0;border:1px solid #e65100;padding:10px;border-radius:4px;font-size:13px;">
+          ⚠️ Photos could not be uploaded. Please upload manually to SharePoint.
+        </p>` : ''}
+    `;
+  } catch (err) {
+    document.getElementById('reviewScreen').innerHTML = `
+      <h2>⚠️ Submission Failed</h2>
+      <p>The inspection could not be submitted automatically. Error: ${err.message}</p>
+      <p>Please try again or contact support.</p>
+    `;
+  }
 
   localStorage.removeItem(DRAFT_KEY);
   lockInspection();
