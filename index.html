@@ -63,7 +63,21 @@
     <option value="New Paris">New Paris</option>
     <option value="Keowee">Keowee</option>
     <option value="Third St. Dayton">Third St. Dayton</option>
-    <option value="Test Dispensary">Test Dispensary (training/demo only)</option>
+    <option value="PA – Cove - Lititz">PA – Cove - Lititz</option>
+    <option value="PA – Cove - Quakertown">PA – Cove - Quakertown</option>
+    <option value="PA – Cove - York">PA – Cove - York</option>
+    <option value="PA – Fluent - Annville">PA – Fluent - Annville</option>
+    <option value="PA – Fluent - Hanover">PA – Fluent - Hanover</option>
+    <option value="PA – Fluent - Mechanicsburg">PA – Fluent - Mechanicsburg</option>
+    <option value="PA – Hive - Shamokin Dam">PA – Hive - Shamokin Dam</option>
+    <option value="PA – Hive - State College">PA – Hive - State College</option>
+    <option value="PA – Hive - Williamsport">PA – Hive - Williamsport</option>
+    <option value="PA – Maitri - East Liberty">PA – Maitri - East Liberty</option>
+    <option value="PA – Maitri - New Stanton">PA – Maitri - New Stanton</option>
+    <option value="PA – Maitri - Uniontown">PA – Maitri - Uniontown</option>
+    <option value="PA – Mari Mart - Brairsville">PA – Mari Mart - Brairsville</option>
+    <option value="PA – Mari Mart (DBA Hive) - Bellevue">PA – Mari Mart (DBA Hive) - Bellevue</option>
+    <option value="PA – PharmX (DBA Phyto) - Exton">PA – PharmX (DBA Phyto) - Exton</option>
   </select>
 
   <label for="storeManagers" style="font-weight:bold; margin-top:10px; display:block;">Store Manager(s)</label>
@@ -120,15 +134,29 @@ const COMPLIANCE_PASS_SCORE = 85;
 const DRAFT_KEY = 'dispensary_inspection_draft_v1';
 
 const LOCATION_RECIPIENTS = {
-  'East Liverpool':  ['jwinters@frxdispensaries.com', 'tsilver@frxdispensaries.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Elyria':          ['dbrown@frxdispensaries.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Cuyahoga Falls':  ['tjohnson@frxdispensaries.com', 'marnold@frxdispensaries.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Harrison':        ['MWilks@queenccanna.com', 'AChaillet@queenccanna.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Norwood':         ['mgilb@queenccanna.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'New Paris':       ['bjones@frxdispensaries.com', 'aheindl@frxdispensaries.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Keowee':          ['jzile@frxdispensaries.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Third St. Dayton': ['jjeffries@frxdispensaries.com', 'AXenakis@frxohio.com', 'daltland@frxohio.com', 'jgarner@frxdispensaries.com'],
-  'Test Dispensary':  ['daltland@frxohio.com', 'jgarner@frxdispensaries.com', 'AXenakis@frxohio.com', 'jjeffries@frxdispensaries.com']
+  'East Liverpool':  ['jwinters@frxdispensaries.com', 'tsilver@frxdispensaries.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'Elyria':          ['dbrown@frxdispensaries.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'Cuyahoga Falls':  ['tjohnson@frxdispensaries.com', 'marnold@frxdispensaries.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'Harrison':        ['MWilks@queenccanna.com', 'AChaillet@queenccanna.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'Norwood':         ['mgilb@queenccanna.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'New Paris':       ['bjones@frxdispensaries.com', 'aheindl@frxdispensaries.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'Keowee':          ['jzile@frxdispensaries.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'Third St. Dayton': ['jjeffries@frxdispensaries.com', 'AXenakis@frxohio.com', 'jgarner@frxdispensaries.com'],
+  'PA – Cove - Lititz':                    ['AXenakis@frxohio.com'],
+  'PA – Cove - Quakertown':               ['AXenakis@frxohio.com'],
+  'PA – Cove - York':                      ['AXenakis@frxohio.com'],
+  'PA – Fluent - Annville':               ['AXenakis@frxohio.com'],
+  'PA – Fluent - Hanover':                ['AXenakis@frxohio.com'],
+  'PA – Fluent - Mechanicsburg':          ['AXenakis@frxohio.com'],
+  'PA – Hive - Shamokin Dam':             ['AXenakis@frxohio.com'],
+  'PA – Hive - State College':            ['AXenakis@frxohio.com'],
+  'PA – Hive - Williamsport':             ['AXenakis@frxohio.com'],
+  'PA – Maitri - East Liberty':           ['AXenakis@frxohio.com'],
+  'PA – Maitri - New Stanton':            ['AXenakis@frxohio.com'],
+  'PA – Maitri - Uniontown':              ['AXenakis@frxohio.com'],
+  'PA – Mari Mart - Brairsville':         ['AXenakis@frxohio.com'],
+  'PA – Mari Mart (DBA Hive) - Bellevue': ['AXenakis@frxohio.com'],
+  'PA – PharmX (DBA Phyto) - Exton':     ['AXenakis@frxohio.com']
 };
 
 // ===============================
