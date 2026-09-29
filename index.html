@@ -940,7 +940,10 @@ async function submitInspection() {
   const totalPhotoCount = Object.values(photoSummary).reduce((sum, n) => sum + n, 0);
 
   const confirmBtn = document.querySelector('#reviewScreen button');
-  if (confirmBtn) confirmBtn.disabled = true;
+  if (confirmBtn) {
+    confirmBtn.disabled = true;
+    confirmBtn.innerHTML = '<span class="spinner"></span> Submitting…';
+  }
 
   let photoFolderUrl = null;
   if (totalPhotoCount > 0) {
